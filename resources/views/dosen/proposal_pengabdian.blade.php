@@ -78,6 +78,11 @@
                   </div>
 
                   <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Abstrak</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="abstrak" required="required"></textarea>
+                  </div>
+
+                  <div class="form-group">
                     <label for="file">File</label>
                     <input type="file" class="form-control" name="">
                   </div>

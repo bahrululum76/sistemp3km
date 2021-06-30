@@ -34,6 +34,7 @@ class UserController extends Controller
         $user->alamat = $request->alamat;
         $user->no_hp = $request->no_hp;
         $user->roles_id = $request->roles_id;
+        $user->status_id=2;
         $user->save();
         // 'name' => $request->nama,
         // 'email' => $request->email,

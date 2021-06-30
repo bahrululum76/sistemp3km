@@ -13,8 +13,9 @@ class PilihReviewPengabdianController extends Controller
     {
 
         $user = User::where('roles_id', '=', 4)->get();
-        $proposal = Proposal::where('category_id', '=', 2)->get();
-
+        $proposal = Proposal::where( 'category_id','=',2 )
+        ->where('status_id','=',2)
+        ->get();
         return view("lppm.pilih_review_pengabdian", compact('proposal', 'user'));
     }
 
@@ -40,11 +41,11 @@ class PilihReviewPengabdianController extends Controller
         return redirect('lppm/pilih_review_pengabdian')->with(['success' => 'Proposal Ditolak']);
     }
 
-    public function pilih(Request $request, $id)
+    public function pilih1(Request $request, $id)
     {
         $proposal = Proposal::find($id);
-        $proposal->reviewer_id = $request->reviewer_id;
-
+        $proposal->reviewer_id=$request->reviewer_id;
+        $proposal->status_id=3;
         $proposal->save();
 
         return redirect('lppm/pilih_review_pengabdian')->with(['success' => 'Reviewer Telah Dipilih']);

@@ -59,7 +59,7 @@ Route::middleware(['is_lppm'])->prefix('/lppm')->group(function () {
     //pilihreviewpengabdian
     Route::get('pilih_review_pengabdian', [App\Http\Controllers\PilihReviewPengabdianController::class, 'index'])->name('pilih_review_pengabdian');
     Route::post('pilih_review_pengabdian/tolak{id}', [App\Http\Controllers\PilihReviewPengabdianController::class, 'tolak'])->name('pilih_review/tolak');
-    Route::post('pilih_rev{id}', [App\Http\Controllers\PilihReviewPengabdianController::class, 'pilih'])->name('pilih_rev');
+    Route::post('pilih_review_pengabdian/pilih_{id}', [App\Http\Controllers\PilihReviewPengabdianController::class, 'pilih1'])->name('pilih_review_pengabdian/pilih_');
 
 
     //lapKemajuanPenlitian

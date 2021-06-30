@@ -36,6 +36,7 @@
                     <td align="center">{{ $p->file }}</td>
                     <td align="center">@if($p->pengaju){{ $p->pengaju->name }}@endif</td>
                     
+
                     <td align="center">@if($p->reviewer){{ $p->reviewer->name}}@endif</td>
 
 					<td align="center">
@@ -77,6 +78,7 @@
 
 
 
+
 <!-- Modal pilih_review -->
 @foreach ( $proposal as $p )
 
@@ -93,14 +95,14 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
-            <form action="{{ url('lppm/pilih_rev'.$p->id) }}"method="POST" enctype="multipart/form-data">
+            <form action="{{ url('lppm/pilih_review_pengabdian/pilih_'.$p->id) }}"method="POST" enctype="multipart/form-data">
                   @csrf
 
                 <div class="form-group" hidden>
                     <label >id</label>
-                    @foreach($proposal as $p)
+                   
                         <input type="text" class="form-control" name="id" value="{{$p->id}}" required="required" >
-                    @endforeach
+                   
                 </div>
 
                 <div class="form-group">

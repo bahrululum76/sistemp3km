@@ -36,6 +36,7 @@ class ProposalPengabdianController extends Controller
 
         $proposal = new Proposal;
         $proposal->judul = $request->get('judul');
+        $proposal->abstrak = $request->abstrak;
 
         if ($request->hasFile('file')) {
 

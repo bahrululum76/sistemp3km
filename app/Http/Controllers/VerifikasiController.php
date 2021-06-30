@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Revisi;
+use App\Models\User;
+use Mail;
 use Auth;
 
 class VerifikasiController extends Controller
@@ -43,17 +46,22 @@ class VerifikasiController extends Controller
     public function revisi(Request $request, $id){
         $proposal = Proposal::find($id);
         
-        $revisi = new Revisi;
-        $revisi->revisi=$request->revisi;
-        $revisi->detail=$request->detail;
-        $revisi->status_id= 3;
-        $revisi->proposal_id= $proposal->id;
-        $revisi->save();
+        
+        $proposal->detail_revisi=$request->detail_revisi;
+        $proposal->status_id=3;
+        $proposal->save();
 
-        $proposal->update([
-            'status_id' => 3
+        $user = DB::table('users')->pluck('email')->all();
+        $detail =[
+            'title'=>'Revisi Proposal',
+            'body'=>'Proposal Penelitian dan pengabdian anda mendapat beberapa koreksi , silahkan cek website'
+        ];
+        
+        Mail::to($user)->send(new RevMail($detail));
+        // $proposal->update([
+        //     'status_id' => 3
             
-        ]);
+        // ]);
         return redirect('reviewer/verifikasi_proposal')->with(['success' => 'Proposal Direvisi']);
     }
 }

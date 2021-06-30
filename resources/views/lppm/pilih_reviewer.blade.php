@@ -145,14 +145,11 @@
             <form action="{{ url('lppm/pilih_review/tolak'.$p->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
 
-                <div class="form-group">
-                    <label >Revisi</label>
-                        <input type="text" class="form-control" name="revisi"  required="required" >
-                </div>
+                
 
                 <div class="form-group">
-                    <label >Detail</label>
-                        <input type="text" class="form-control" name="detail"  required="required" >
+                    <label >Detail Revisi</label>
+                        <input type="text" class="form-control" name="detail_revisi" rows="3"  required="required" >
                 </div>
 
 

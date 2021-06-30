@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Informasi;
 use Illuminate\Support\Facades\DB;
+use Mail;
+use App\Mail\InfoMail;
+use Storage;
+
 class KelolaInformasiController extends Controller
 {   
     public function index(){
@@ -31,8 +35,19 @@ class KelolaInformasiController extends Controller
           
             $informasi->file=$filename;
         }
+        $informasi->status_id=2;
         $informasi->save();
+
+        $user = DB::table('users')->pluck('email')->all();
+        $detail =[
+            'title'=>'Informasi Baru',
+            'body'=>'Informasi Penelitian dan pengabdian telah ada , silahkan cek website'
+        ];
+        
+        Mail::to($user)->send(new InfoMail($detail));
        
+
+
         return redirect('admin/kelolainformasi')->with(['success' => 'Data Berhasil ditambahkan']);
     }
 
@@ -68,6 +83,8 @@ class KelolaInformasiController extends Controller
     {
         $informasi = Informasi::find($id);
         $informasi->delete();
+
+        Storage::delete('public/informasi'.$informasi->file);
         return redirect('admin/kelolainformasi');
     }
     

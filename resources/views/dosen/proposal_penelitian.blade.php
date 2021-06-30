@@ -6,6 +6,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 
 
+
+ 
+
 <div class="card shadow ">
     <div class="card-body">
         @if ($message = Session::get('success'))
@@ -14,8 +17,25 @@
                     <strong>{{ $message }}</strong>
             </div>
         @endif
-        <button class="btn btn-sm btn-primary mt-4 mb-2" id="createNewItem" data-toggle="modal" data-target="#ModalTambah"  >Tambah</button>
+
+        @if($proposal_kosong_1 == null)
+            <button class="btn btn-sm btn-primary mt-4 mb-2 " id="createNewItem" data-toggle="modal" data-target="#ModalTambah"  > Tambah Proposal </button>    
+        @endif
+        
+        @foreach($proposal_kosong as $data_kosong)
+        @if ($data_kosong->status_id == 2 || $data_kosong->status_id == 4) 
+        <button class="btn btn-sm btn-primary mt-4 mb-2 " id="createNewItem" data-toggle="modal" data-target="#ModalTambah"  > Tambah Proposal </button>
+        @elseif ($data_kosong->status_id == 3 || $data_kosong->status_id == 1)
+        <button class="btn btn-sm btn-primary mt-4 mb-2" id="createNewItem" data-toggle="modal" data-target="#ModalTambah2" > Tambah </button>
+       
+       
+        @endif
+
+        @endforeach
+       
+        
       <div class="table-responsive">
+      
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead class="thead">
                 <tr class="tbody">
@@ -23,7 +43,7 @@
                     <th>File</th>
                     <!-- <th>Kategori</th> -->
                     <th>Status</th>
-                    {{-- <th>Action</th> --}}
+                    <th>Action</th> 
                 </tr>
             </thead>
 
@@ -42,7 +62,10 @@
                     @elseif ($p->status_id == 4)
                     <span style="background-color:red;padding:5px;border-radius:5px;color:white;">{{'Ditolak'}}</span>
                     @endif</td>
+                    <td><button class="btn btn-warning" data-toggle="modal" data-target="#ModalRevisi-{{$p->id}}"> Revisi </button>
+                    </td>
                 </tr>
+
                 @endforeach
             </tbody>
 
@@ -50,18 +73,18 @@
 
 
       </div>
-      <button class="btn btn-warning" data-toggle="modal" data-target="#ModalRevisi"> Revisi </button>
-    </div>
+      </div>
 </div>
 
 <!-- Modal tambah -->
-<div id="ModalRevisi" class="modal fade" role="dialog">
+@foreach ($proposal as $p)
+<div id="ModalRevisi-{{$p->id}}" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- konten modal-->
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Proposal</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> Detail Revisi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -74,21 +97,19 @@
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead class="thead">
                 <tr class="tbody">
-                    <th>Revisi</th>
-                    <th>Detail</th>
+                    <th>Detail Revisi</th>
                     <!-- <th>Status</th> -->
                 </tr>
             </thead>
 
             <tbody class="tbody">
-                @foreach ( $revisi as $p )
+                
                 <tr class="thead">
-                    <td >{{ $p->revisi}}</td>
-                    <td >{{ $p->detail }}</td>
+                    <td >{{ $p->detail_revisi }}</td>
                     <!-- <td align="center">{{$p->category_id}}</td> -->
 
                 </tr>
-                @endforeach
+                
             </tbody>
 
         </table>
@@ -104,8 +125,7 @@
         </div>
     </div>
 </div>
-
-
+@endforeach
 
 <!-- Modal tambah -->
 <div id="ModalTambah" class="modal fade" role="dialog">
@@ -122,6 +142,56 @@
             <!-- body modal -->
             <div class="modal-body">
             <form action="{{ url('dosen/proposal/store') }}" method="POST" enctype="multipart/form-data">
+                  @csrf
+
+                  <div class="form-group">
+                    <label >Judul</label>
+                        <input type="text" class="form-control" name="judul" required="required" >
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Abstrak</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="abstrak" required="required"></textarea>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="file">File</label>
+                    <input type="file" class="form-control" name="">
+                  </div>
+                  <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="file">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                    </div>
+
+
+
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+            </form>
+            </div>
+            <!-- footer modal -->
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal tambah2 -->
+<div id="ModalTambah2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Proposal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+            <form action="{{ url('dosen/proposal/store2') }}" method="POST" enctype="multipart/form-data">
                   @csrf
 
                   <div class="form-group">
