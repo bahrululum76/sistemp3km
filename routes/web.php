@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth/login');
 });
+
+Route::get('/formdana', function () {
+    return view('dosen/formdana');
+});
+
 Auth::routes();
 
 
@@ -45,6 +50,10 @@ Route::middleware(['is_admin'])->prefix('/admin')->group(function () {
     Route::get('kelolapenelitian', [App\Http\Controllers\PenelitianController::class, 'index_adm'])->name('kelolapenelitian');
     Route::get('kelolapengabdian', [App\Http\Controllers\PengabdianController::class, 'index_adm'])->name('kelolapengabdian');
     
+    Route::get('editprofil', [App\Http\Controllers\EditProfilController::class, 'index_admin'])->name('editprofil');
+    Route::post('editprofil/edit{id}', [App\Http\Controllers\EditProfilController::class, 'edit1'])->name('editprofil/edit');
+
+
 });
 
 Route::middleware(['is_lppm'])->prefix('/lppm')->group(function () {
@@ -74,6 +83,16 @@ Route::middleware(['is_lppm'])->prefix('/lppm')->group(function () {
      //lapakhirPengabdian
      Route::get('laporanakhirpengabdian', [App\Http\Controllers\PengabdianController::class, 'index_lap'])->name('laporanakhirpengabdian');
     
+    Route::get('detailpilihreview/{id}', [App\Http\Controllers\PilihReviewController::class, 'detailpilihreview'])->name('detailpilihreview');
+    Route::get('detailpilihreview_/{id}', [App\Http\Controllers\PilihReviewPengabdianController::class, 'detailpilihreview_'])->name('detailpilihreview_');
+    
+     
+    Route::get('kelolaadmin', [App\Http\Controllers\UserController::class, 'index_adm'])->name('kelolaadmin');
+    Route::post('kelolaadmin/store', [App\Http\Controllers\UserController::class, 'store2'])->name('kelolaadmin/store');
+    Route::post('kelolaadmin/edit{id}', [App\Http\Controllers\UserController::class, 'edit2'])->name('kelolaadmin/edit');
+    Route::delete('kelolaadmin/delete{id}', [App\Http\Controllers\UserController::class, 'delete2']);
+    Route::get('dana', [App\Http\Controllers\DanaController::class, 'index'])->name('dana');
+    
 
 });
 
@@ -83,14 +102,17 @@ Route::middleware(['is_dosen'])->prefix('/dosen')->group(function () {
     //proposal_penelitian
     Route::get('proposal', [App\Http\Controllers\ProposalController::class, 'index'])->name('proposal');
     Route::post('proposal/store', [App\Http\Controllers\ProposalController::class, 'store'])->name('proposal/store');
+    Route::post('proposal/store2', [App\Http\Controllers\ProposalController::class, 'store2'])->name('proposal/store2');
+    
     //proposal_pengabdian
     Route::get('proposal_pengabdian', [App\Http\Controllers\ProposalPengabdianController::class, 'index'])->name('proposal_pengabdian');
     // Route::post('proposal_pengabdian/store', [App\Http\Controllers\ProposalPengabdianController::class, 'store1'])->name('proposal_pengabdian/store');
     Route::post('proposal_pengabdian/store', [App\Http\Controllers\ProposalPengabdianController::class, 'store'])->name('proposal_pengabdian/store');
+    Route::post('proposal_pengabdian/store2', [App\Http\Controllers\ProposalPengabdianController::class, 'store2'])->name('proposal_pengabdian/store2');
 
     // kemajuanpeneitian
     Route::get('unggahkemajuanpenelitian', [App\Http\Controllers\UnggahKemajuanPenelitianController::class, 'index'])->name('unggahkemajuanpenelitian');
-    Route::post('store', [App\Http\Controllers\UnggahKemajuanPenelitianController::class, 'store'])->name('unggahkemajuanpenelitian/store');
+    Route::post('unggahkemajuanpenelitian/store', [App\Http\Controllers\UnggahKemajuanPenelitianController::class, 'store'])->name('unggahkemajuanpenelitian/store');
 
     // kemajuanpengabdian
     Route::get('unggahkemajuanpengabdian', [App\Http\Controllers\UnggahKemajuanPengabdianController::class, 'index'])->name('unggahkemajuanpengabdian');
@@ -108,6 +130,21 @@ Route::middleware(['is_dosen'])->prefix('/dosen')->group(function () {
     Route::get('pengabdian', [App\Http\Controllers\PengabdianController::class, 'index'])->name('pengabdian');
     Route::post('pengabdian/store', [App\Http\Controllers\PengabdianController::class, 'store'])->name('pengabdian/store');
     
+
+    Route::get('/formdana', [App\Http\Controllers\ProposalController::class, 'dana_index'])->name('formdana');
+    Route::post('formdana/store', [App\Http\Controllers\ProposalController::class, 'dana_store'])->name('formdana/store');
+    
+    Route::get('/formdanapengabdian', [App\Http\Controllers\ProposalPengabdianController::class, 'dana_index'])->name('formdanapengabdian');
+    Route::post('formdanapengabdian/store', [App\Http\Controllers\ProposalPengabdianController::class, 'dana_store'])->name('formdanapengabdian/store');
+    
+    
+    //unduhpenelitian
+    Route::get('informasi', [App\Http\Controllers\InformasiController::class, 'index'])->name('informasi');
+    
+    Route::get('editprofil', [App\Http\Controllers\EditProfilController::class, 'index_dosen'])->name('editprofil');
+    Route::post('editprofil/edit{id}', [App\Http\Controllers\EditProfilController::class, 'edit2'])->name('editprofil/edit');
+
+
 });
 
 Route::middleware(['is_reviewer'])->prefix('/reviewer')->group(function () {
@@ -124,5 +161,6 @@ Route::middleware(['is_reviewer'])->prefix('/reviewer')->group(function () {
     
     //detailreview
     Route::get('reviewproposal/{id}', [App\Http\Controllers\VerifikasiController::class, 'detail'])->name('reviewproposal');
+    Route::get('reviewproposalpengabdian/{id}', [App\Http\Controllers\VerifikasiProposalPengabdianController::class, 'detail'])->name('reviewproposalpengabdian');
     
 });

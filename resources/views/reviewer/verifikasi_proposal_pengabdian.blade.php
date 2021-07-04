@@ -18,22 +18,22 @@
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead class="thead">
                 <tr class="tbody">
-                    <th>Judul</th>
-                    <th>File</th>
+                    <!-- <th>Judul</th>
+                    <th>File</th> -->
                     <th>Pengaju</th>
-                    <th>Kategori</th>
+                    <!-- <th>Kategori</th>
                     <th>Status</th>
-                    <th>Action</th> 
+                    <th>Action</th>  -->
                 </tr>
             </thead>
 
             <tbody class="tbody">
                 @foreach ( $proposal as $p )
                 <tr class="thead">
-                    <td align="center">{{ $p->judul}}</td>
-                    <td align="center">{{ $p->file }}</td>
-                    <td align="center">{{ $p->User->name }}</td>
-                    <td align="center">{{$p->category_id}}</td>
+                    <!-- <td align="center">{{ $p->judul}}</td>
+                    <td align="center">{{ $p->file }}</td> -->
+                    <td align="center"><a href="{{url('reviewer/reviewproposalpengabdian/'.$p->id)}}">{{ $p->User->name }} </a> </td>
+                    <!-- <td align="center">{{$p->category_id}}</td>
 					<td align="center">
                         @if ($p->status_id == 1)
                             <span style="background-color:green;padding:5px;border-radius:5px;color:white;">{{'Diterima'}}</span>
@@ -53,11 +53,10 @@
                          
                             <button type="button" class="btn btn-success btn-sm" onclick="confirmDelete('delete-obat-{{$p->id}}')">Terima</button>
                         </form>
-                        <!-- <a  href="{{url ('lppm/pilih_review/tolak'.$p->id) }}" class="btn btn-danger btn-sm">Tolak </a>  -->
-                        
+                       
                         
 
-                     </td>
+                     </td> -->
                 </tr>
                 @endforeach
             </tbody>

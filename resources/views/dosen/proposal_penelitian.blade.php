@@ -17,9 +17,11 @@
                     <strong>{{ $message }}</strong>
             </div>
         @endif
-
+        
         @if($proposal_kosong_1 == null)
-            <button class="btn btn-sm btn-primary mt-4 mb-2 " id="createNewItem" data-toggle="modal" data-target="#ModalTambah"  > Tambah Proposal </button>    
+            
+            <button class="btn btn-sm btn-primary mt-4 mb-2 " id="createNewItem" data-toggle="modal" data-target="#ModalTambah" > Tambah Proposal </button>    
+            
         @endif
         
         @foreach($proposal_kosong as $data_kosong)
@@ -62,7 +64,7 @@
                     @elseif ($p->status_id == 4)
                     <span style="background-color:red;padding:5px;border-radius:5px;color:white;">{{'Ditolak'}}</span>
                     @endif</td>
-                    <td><button class="btn btn-warning" data-toggle="modal" data-target="#ModalRevisi-{{$p->id}}"> Revisi </button>
+                    <td><button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalRevisi-{{$p->id}}"> Revisi </button>
                     </td>
                 </tr>
 
@@ -127,6 +129,7 @@
 </div>
 @endforeach
 
+
 <!-- Modal tambah -->
 <div id="ModalTambah" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -141,6 +144,7 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
+            
             <form action="{{ url('dosen/proposal/store') }}" method="POST" enctype="multipart/form-data">
                   @csrf
 
@@ -150,7 +154,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleFormControlTextarea1">Abstrak</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="abstrak" required="required"></textarea>
+                    <textarea class="ckeditor" id="ckeditor" name="abstrak" required="required"></textarea>
                   </div>
 
                   <div class="form-group">
@@ -168,6 +172,7 @@
 
                   <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
+            
             </div>
             <!-- footer modal -->
             <div class="modal-footer">
@@ -191,12 +196,18 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
+            
             <form action="{{ url('dosen/proposal/store2') }}" method="POST" enctype="multipart/form-data">
                   @csrf
 
                   <div class="form-group">
                     <label >Judul</label>
                         <input type="text" class="form-control" name="judul" required="required" >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Abstrak</label>
+                    <textarea class="ckeditor" id="ckeditor" name="abstrak" required="required"></textarea>
                   </div>
 
                   <div class="form-group">
@@ -258,5 +269,6 @@ Swal.fire({
 
 </script>
 
+<script type="text/javascript" src="{{asset('ckeditor/ckeditor.js')}}"></script>
 
 @endsection

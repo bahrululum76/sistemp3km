@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Kemajuan;
 use Illuminate\Http\Request;
-
+use Auth;
 class UnggahKemajuanPengabdianController extends Controller
 {
     public function index(){
@@ -36,7 +36,7 @@ class UnggahKemajuanPengabdianController extends Controller
         $kemajuan->progres=$request->progres;
 
         $kemajuan->category_id='2';
-    
+        $kemajuan->user_id= Auth::user()->id;
 
         $kemajuan->save();
 

@@ -61,7 +61,7 @@ The above copyright notice and this permission notice shall be included in all c
                         </a>
                     </li>
                     <li class="nav-item{{ (Route::current()->uri === 'Keloladosen') ? ' active' : '' }}">
-                        <a class="nav-link" href="keloladosen">
+                        <a class="nav-link" href="{{Route('informasi')}}">
                             <i class="material-icons">person</i>
                             <p class="teks-sidebar">Unduh Informasi</p>
                         </a>
@@ -143,12 +143,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">
-                            <i class="material-icons">library_books</i>
-                            <p class="teks-sidebar">Unggah Laporan Akhir</p>
-                        </a>
-                    </li>
+                   
 
                 </ul>
             </div>
@@ -177,6 +172,7 @@ The above copyright notice and this permission notice shall be included in all c
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                               
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -251,9 +247,14 @@ The above copyright notice and this permission notice shall be included in all c
                                     </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" href="{{url('dosen/editprofil')}}">Profile</a>
                                     <a class="dropdown-item" href="#">Settings</a>
                                     <div class="dropdown-divider"></div>
+                                    @if ( Auth::user()->roles_id == 2)    
+                                    <a class="dropdown-item" href="{{ route('lppm_home') }}">Halaman Lppm</a>
+                                    @elseif ( Auth::user()->roles_id == 4) 
+                                    <a class="dropdown-item" href="{{ route('reviewer_home') }}">Halaman Reviewer</a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">

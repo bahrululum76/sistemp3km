@@ -19,9 +19,11 @@
             <thead class="thead">
                 <tr class="tbody">
                     <th>Judul</th>
-                    <th>File</th>
                     <th>Pengaju</th>
-                    <th>Kategori</th>
+                    <th>Prodi</th>
+                    <th>File</th>
+                    
+                    <!-- <th>Kategori</th> -->
                     <th>Status</th>
                     <th>Action</th> 
                 </tr>
@@ -31,9 +33,11 @@
                 @foreach ( $proposal as $p )
                 <tr class="thead">
                     <td align="center">{{ $p->judul}}</td>
-                    <td align="center">{{ $p->file }}</td>
                     <td align="center">{{ $p->User->name }}</td>
-                    <td align="center">{{$p->category_id}}</td>
+                    <td align="center">{{ $p->User->prodi }}</td>
+                    <td align="center"><a href="{{Storage::url('public/proposal/'.$p->file)}}">{{ $p->file }}</a></td>
+                   
+                    <!-- <td align="center">{{$p->category_id}}</td> -->
 					<td align="center">
                         @if ($p->status_id == 1)
                             <span style="background-color:green;padding:5px;border-radius:5px;color:white;">{{'Diterima'}}</span>
@@ -89,14 +93,14 @@
             <form action="{{ url('reviewer/verifikasi_proposal/revisi'.$p->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label >Revisi</label>
                         <input type="text" class="form-control" name="revisi"  required="required" >
-                </div>
+                </div> -->
 
                 <div class="form-group">
-                    <label >Detail</label>
-                        <input type="text" class="form-control" name="detail"  required="required" >
+                    <label >Detail Revisi</label>
+                        <input type="text" class="form-control" name="detail_revisi"  required="required" >
                 </div>
 
 
@@ -127,7 +131,7 @@
     function confirmDelete(item_id){
 Swal.fire({
   title: 'Yakin dengan pilihan anda?',
-  text: "Setelah melakukan penolakan, proposal tidak akan ditampilkan!",
+  text: "Setelah melakukan penerimaan, proposal tidak akan ditampilkan!",
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
@@ -138,8 +142,8 @@ Swal.fire({
   if (result.isConfirmed) {
     $('#'+item_id).submit();
     Swal.fire(
-      'Ditolak!',
-      'Proposal ditolak.',
+      'Diterima!',
+      'Proposal diterima.',
       'success'
     )
   }

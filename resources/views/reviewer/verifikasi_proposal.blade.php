@@ -18,23 +18,23 @@
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead class="thead">
                 <tr class="tbody">
-                    <th>Judul</th>
-                    <th>File</th>
+                    <!-- <th>Judul</th>
+                    <th>File</th> -->
                     <th>Pengaju</th>
-                    <th>Kategori</th>
+                    <!-- <th>Kategori</th>
                     <th>Status</th>
-                    <th>Action</th> 
+                    <th>Action</th>  -->
                 </tr>
             </thead>
 
             <tbody class="tbody">
                 @foreach ( $proposal as $p )
                 <tr class="thead">
-                    <td align="center"><a href="{{url('reviewer/reviewproposal/'.$p->id)}}">{{ $p->judul}}</button></td>
+                    <!-- <td align="center">{{ $p->judul}}</button></td>
                     
-                    <td align="center">{{ $p->file }}</td>
-                    <td align="center">{{ $p->User->name }}</td>
-                    <td align="center">{{$p->category_id}}</td>
+                    <td align="center">{{ $p->file }}</td> -->
+                    <td align="center"><a href="{{url('reviewer/reviewproposal/'.$p->id)}}">{{ $p->User->name }} </a></td>
+                    <!-- <td align="center">{{$p->category_id}}</td>
 					<td align="center">
                         @if ($p->status_id == 1)
                             <span style="background-color:green;padding:5px;border-radius:5px;color:white;">{{'Diterima'}}</span>
@@ -45,20 +45,20 @@
                         @elseif ($p->status_id == 4)
                             <span style="background-color:red;padding:5px;border-radius:5px;color:white;">{{'Ditolak'}}</span>
                         @endif
-                    </td>
+                    </td> -->
                     
-                    <td > 
+                    <!-- <td > 
                         <button   class="btn btn-danger btn-sm " data-toggle="modal" data-target="#Revisi-{{ $p->id }}" value="">Revisi</button> 
                         <form id="delete-obat-{{$p->id}}" action=" {{ url('reviewer/verifikasi_proposal/terima'.$p->id) }}" method="POST" style="display: inline" data-id="{{$p->id}}">
                             @csrf
                          
                             <button type="button" class="btn btn-success btn-sm" onclick="confirmDelete('delete-obat-{{$p->id}}')">Terima</button>
-                        </form>
+                        </form> -->
                         <!-- <a  href="{{url ('lppm/pilih_review/tolak'.$p->id) }}" class="btn btn-danger btn-sm">Tolak </a>  -->
                         
                         
 
-                     </td>
+                     <!-- </td> -->
                 </tr>
                 @endforeach
             </tbody>

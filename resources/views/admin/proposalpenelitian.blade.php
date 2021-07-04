@@ -19,8 +19,10 @@
             <thead class="thead">
                 <tr class="tbody">
                     <th>Judul</th>
-                    <th>File</th>
                     <th>Pengaju</th>
+                    <th>Prodi</th>
+                    <th>File</th>
+                    
                     
                     <th>Reviewer</th>
                     <th>Status</th>
@@ -33,8 +35,10 @@
                 @foreach ( $proposal as $p )
                 <tr class="thead">
                     <td align="center">{{ $p->judul}}</td>
-                    <td align="center">{{ $p->file }}</td>
                     <td align="center">@if($p->pengaju){{ $p->pengaju->name }}@endif</td>
+                    <td align="center">{{$p->user->prodi}}
+                    <td align="center">{{ $p->file }}</td>
+                    
                     
 
                     <td align="center">@if($p->reviewer){{ $p->reviewer->name}}@endif</td>
@@ -52,8 +56,8 @@
                     </td>
 
                     <td >
-                        <button   class="btn btn-primary btn-sm " data-toggle="modal" data-target="#PilihReviewer-{{$p->id}}" value="">Pilih Reviewer</button>
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#TolakProposal" >Tolak</button>
+                        <!-- <button   class="btn btn-primary btn-sm " data-toggle="modal" data-target="#PilihReviewer-{{$p->id}}" value="">Pilih Reviewer</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#TolakProposal" >Tolak</button> -->
                         <!-- <form id="delete-obat-{{$p->id}}" action=" {{ url('lppm/pilih_review/tolak'.$p->id) }}" method="POST" style="display: inline" data-id="{{$p->id}}">
                             @csrf
 

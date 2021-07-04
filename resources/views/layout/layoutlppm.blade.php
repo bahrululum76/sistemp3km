@@ -55,7 +55,7 @@ The above copyright notice and this permission notice shall be included in all c
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="nav-item{{ (Route::current()->uri === 'Dashboard') ? ' active' : '' }}">
-                        <a class="nav-link" href="Home">
+                        <a class="nav-link" href="{{route('lppm_home')}}">
                             <i class="material-icons">dashboard</i>
                             <p class="teks-sidebar">Dashboard</p>
                         </a>
@@ -81,8 +81,8 @@ The above copyright notice and this permission notice shall be included in all c
                                     </p>
                                 </a>
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="pilih_review"><p class="teks-sidebar"> Penelitian </p> </a>
-                                    <a class="dropdown-item" href="pilih_review_pengabdian"><p class="teks-sidebar"> Pengabdian</p> </a>
+                                    <a class="dropdown-item" href="{{route('pilih_review')}}"><p class="teks-sidebar"> Penelitian </p> </a>
+                                    <a class="dropdown-item" href="{{route('pilih_review_pengabdian')}}"><p class="teks-sidebar"> Pengabdian</p> </a>
                                    
                                 </div> 
                     </li>
@@ -94,9 +94,9 @@ The above copyright notice and this permission notice shall be included in all c
                                     </p>
                                 </a>
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="laporankemajuanpenelitian"><p class="teks-sidebar">Penelitian</p> </a>
-                                    <a class="dropdown-item" href="laporankemajuanpengabdian"><p class="teks-sidebar">Pengabdian</p> </a>
-                                   
+                                    <a class="dropdown-item" href="{{route('laporankemajuanpenelitian')}}"><p class="teks-sidebar">Penelitian</p> </a>
+                                    <a class="dropdown-item" href="{{route('laporankemajuanpengabdian')}}"><p class="teks-sidebar">Pengabdian</p> </a>
+                                    
                                 </div> 
                     </li>   
                     <!-- <li class="nav-item ">
@@ -115,19 +115,26 @@ The above copyright notice and this permission notice shall be included in all c
                                     </p>
                                 </a>
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="laporanakhirpenelitian"><p class="teks-sidebar">Penelitian</p> </a>
-                                    <a class="dropdown-item" href="laporanakhirpengabdian"><p class="teks-sidebar">Pengabdian</p> </a>
-                                   
+                                    <a class="dropdown-item" href="{{route('laporanakhirpenelitian')}}"><p class="teks-sidebar">Penelitian</p> </a>
+                                    <a class="dropdown-item" href="{{route('laporanakhirpengabdian')}}"><p class="teks-sidebar">Pengabdian</p> </a>
+                                    
                                 </div> 
                     </li>                        
                    
-                    <!-- <li class="nav-item ">
-                        <a class="nav-link" href="laporanakhirpengabdian">
-                            <i class="material-icons">library_books</i>
-                            <p class="teks-sidebar"> laporan akhir pengabdian</p>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{route('kelolaadmin')}}">
+                            <i class="material-icons">person</i>
+                            <p class="teks-sidebar"> Kelola Admin</p>
                         </a>
                         
-                    </li> -->
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{route('dana')}}">
+                            <i class="material-icons">money</i>
+                            <p class="teks-sidebar">Dana</p>
+                        </a>
+                        
+                    </li>
 
                 </ul>
             </div>
@@ -233,15 +240,17 @@ The above copyright notice and this permission notice shall be included in all c
                                     <a class="dropdown-item" href="#">Profile</a>
                                     <a class="dropdown-item" href="#">Settings</a>
                                     <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('dosen_home') }}"> Halaman Dosen </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">
                                      {{ __('Logout') }}
                                  </a>
-
+                                 
                                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                      @csrf
                                  </form>
+                                 
                                 </div>
                             </li>
                         </ul>

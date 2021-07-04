@@ -17,7 +17,7 @@ class isDosen
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->roles_id == 3) {
+        if (Auth::user()->roles_id == 3 || Auth::user()->roles_id == 2 || Auth::user()->roles_id == 4) {
             return $next($request);
         }
 

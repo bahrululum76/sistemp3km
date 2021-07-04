@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Revisi;
+use App\Mail\RevMail;
 use App\Models\User;
 use Mail;
 use Auth;
@@ -40,7 +40,19 @@ class VerifikasiController extends Controller
 
         $proposal->save();
 
+        $prop =DB::table('proposals')->where('id','=',$proposal->id)->pluck('judul');
+        $user2 =DB::table('users')->where('id','=',$proposal->user_id)->pluck('name');
+        $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('name');
+        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
+        // ->where('id','=',$proposal->user_id);
+        $detail =[
+            'title'=>'Review Proposal',
+            'body'=>  ' Proposal Pengabdian, atas nama'.$user2.' dengan judul'.$prop.'sudaah tersedia untuk di koreksi oleh anda , silahkan cek website'
+        ];
         
+        Mail::to($user)->send(new RevMail($detail));
+
+        return redirect('reviewer/verifikasi_proposal')->with(['success' => 'Proposal Direvisi']);
     }
 
     public function revisi(Request $request, $id){
@@ -51,10 +63,12 @@ class VerifikasiController extends Controller
         $proposal->status_id=3;
         $proposal->save();
 
-        $user = DB::table('users')->pluck('email')->all();
+        $user1 =DB::table('users')->where('id','=',$proposal->user_id)->pluck('name');
+        $user =DB::table('users')->where('id','=',$proposal->user_id)->pluck('email');   
+        // ->where('id','=',$proposal->user_id);
         $detail =[
             'title'=>'Revisi Proposal',
-            'body'=>'Proposal Penelitian dan pengabdian anda mendapat beberapa koreksi , silahkan cek website'
+            'body'=>  $user1.' Proposal Penelitian  anda mendapat beberapa koreksi , silahkan cek website'
         ];
         
         Mail::to($user)->send(new RevMail($detail));
@@ -63,5 +77,6 @@ class VerifikasiController extends Controller
             
         // ]);
         return redirect('reviewer/verifikasi_proposal')->with(['success' => 'Proposal Direvisi']);
+        // dd($user);
     }
 }

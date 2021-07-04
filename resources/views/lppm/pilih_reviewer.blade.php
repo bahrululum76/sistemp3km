@@ -18,23 +18,26 @@
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead class="thead">
                 <tr class="tbody">
-                    <th>Judul</th>
-                    <th>File</th>
+                    <!-- <th>Judul</th> -->
                     <th>Pengaju</th>
-                    
+                    <!-- <th>Prodi</th>
+                    <th>Jabtan</th>
+                    <th>File</th>
                     <th>Reviewer</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Action</th> -->
                 </tr>
             </thead>
 
             <tbody class="tbody">
-
                 @foreach ( $proposal as $p )
                 <tr class="thead">
-                    <td align="center">{{ $p->judul}}</td>
-                    <td align="center">{{ $p->file }}</td>
-                    <td align="center">@if($p->pengaju){{ $p->pengaju->name }}@endif</td>
+                    <!-- <td align="center">{{ $p->judul}}</td> -->
+                    
+                    <td align="center"><a href="{{url('lppm/detailpilihreview/'.$p->id)}}">@if($p->pengaju){{ $p->pengaju->name }}@endif</a></td>
+                    <!-- <th align="center">{{$p->user->prodi}}</th>
+                    <th align="center">{{$p->user->jabatan}}</th>
+                    <td align="center"><a href="{{Storage::url('public/proposal/'.$p->file)}}">{{ $p->file }}</a></td>
                     
 
                     <td align="center">@if($p->reviewer){{ $p->reviewer->name}}@endif</td>
@@ -53,7 +56,7 @@
 
                     <td >
                         <button   class="btn btn-primary btn-sm " data-toggle="modal" data-target="#PilihReviewer-{{$p->id}}" value="">Pilih Reviewer</button>
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#TolakProposal" >Tolak</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#TolakProposal" >Tolak</button> -->
                         <!-- <form id="delete-obat-{{$p->id}}" action=" {{ url('lppm/pilih_review/tolak'.$p->id) }}" method="POST" style="display: inline" data-id="{{$p->id}}">
                             @csrf
 
@@ -63,7 +66,7 @@
 
 
 
-                     </td>
+                     <!-- </td> -->
                 </tr>
 
                 @endforeach

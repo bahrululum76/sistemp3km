@@ -18,13 +18,13 @@
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead class="thead">
                 <tr class="tbody">
-                    <th>Judul</th>
-                    <th>File</th>
+                    <!-- <th>Judul</th>
+                    <th>File</th> -->
                     <th>Pengaju</th>
                     
-                    <th>Reviewer</th>
+                    <!-- <th>Reviewer</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Action</th> -->
                 </tr>
             </thead>
 
@@ -32,12 +32,12 @@
 
                 @foreach ( $proposal as $p )
                 <tr class="thead">
-                    <td align="center">{{ $p->judul}}</td>
-                    <td align="center">{{ $p->file }}</td>
-                    <td align="center">@if($p->pengaju){{ $p->pengaju->name }}@endif</td>
+                    <!-- <td align="center">{{ $p->judul}}</td>
+                    <td align="center">{{ $p->file }}</td> -->
+                    <td align="center"><a href="{{url('lppm/detailpilihreview_/'.$p->id)}}">@if($p->pengaju){{ $p->pengaju->name }}@endif</td>
                     
 
-                    <td align="center">@if($p->reviewer){{ $p->reviewer->name}}@endif</td>
+                    <!-- <td align="center">@if($p->reviewer){{ $p->reviewer->name}}@endif</td>
 
 					<td align="center">
                         @if ($p->status_id == 1)
@@ -59,11 +59,11 @@
 
                             <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('delete-obat-{{$p->id}}')">Tolak</button>
                         </form> -->
-                        <!-- <a  href="{{url ('lppm/pilih_review/tolak'.$p->id) }}" class="btn btn-danger btn-sm">Tolak </a>  -->
+                        <!-- <a  href="{{url ('lppm/pilih_review/tolak'.$p->id) }}" class="btn btn-danger btn-sm">Tolak </a>  --> -->
 
 
 
-                     </td>
+                     <!-- </td> -->
                 </tr>
 
                 @endforeach

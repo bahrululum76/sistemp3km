@@ -16,7 +16,7 @@ class CreateProposalsTable extends Migration
         Schema::create('proposals', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->string('abstrak');
+            $table->text('abstrak');
             $table->string('file');
             $table->foreignId('category_id')->references('id')->on('categories');
             $table->foreignId('status_id')->references('id')->on('statuses');
@@ -24,7 +24,6 @@ class CreateProposalsTable extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->integer('reviewer_id')->nullable();
             $table->integer('pengaju_id')->nullable();
-
             $table->timestamps();
         });
     }

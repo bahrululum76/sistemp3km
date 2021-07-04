@@ -45,7 +45,7 @@
                             @endif
                          {{ csrf_field() }}
 		      		<div class="form-group">
-		      			<input type="text" class="form-control rounded-left" placeholder="Email" required name="email">
+		      			<input type="text" class="form-control rounded-left" placeholder="Nidn" required name="nidn">
 		      		</div>
 	            <div class="form-group ">
 	              <input type="password" class="form-control rounded-left" placeholder="Password" required name="password">

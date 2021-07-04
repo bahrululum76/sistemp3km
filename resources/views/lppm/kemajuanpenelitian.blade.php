@@ -14,6 +14,7 @@
             <thead class="thead">
                 <tr class="tbody">
                     <th>Judul</th>
+                    <th>Nama</th>
                     <th>File</th>
                     <th>Progres</th>
                     
@@ -25,6 +26,7 @@
                 @foreach ( $kemajuan as $p )
                 <tr class="thead">
                     <td align="center">{{ $p->judul}}</td>
+                    <td align="center">{{ $p->user->name}}</td>
                     <td align="center"><a href="{{Storage::url('public/progrespenelitian/'.$p->file)}}">{{ $p->file }}</a></td>
                     <td align="center" >{{ $p->progres }} %</td>
                     

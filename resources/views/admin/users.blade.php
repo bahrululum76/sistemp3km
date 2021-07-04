@@ -27,6 +27,8 @@
                 <tr class="tbody">
                     <th>Nidn</th>
                     <th>Name</th>
+                    <th>Prodi</th>
+                    <th>Jabatan</th>
                     <th>Email</th>
                     <th>Alamat</th>
                     <th>No Hp</th>
@@ -40,6 +42,8 @@
                 <tr class="thead">
                     <td>{{ $p->nidn}}</td>
                     <td>{{ $p->name }}</td>
+                    <td>{{$p->prodi}}</td>
+                    <td>{{$p->jabatan}}</td>
 					<td>{{ $p->email }}</td>
                     <td>{{ $p->alamat}}</td>
                     <td>{{ $p->no_hp}}</td>
@@ -106,15 +110,25 @@
                         <input type="text" class="form-control" name="name" required="required" >
 
                   </div>
+
+                <label >Prodi</label>
+                    <input type="text" class="form-control" name="prodi"  required="required" >
+                </div>
+
+                <div class="form-group">
+                <label >Jabatan</label>
+                    <input type="text" class="form-control" name="jabatan"  required="required" >
+                </div>
+
                   <div class="form-group">
                     <label >Email</label>
                         <input type="text" class="form-control" name="email" required="required" >
                  </div>
 
-                 <div class="form-group">
+                 <!-- <div class="form-group">
                     <label >Password</label>
                         <input type="password" class="form-control form-control-user" name="password" required="required" >
-                 </div>
+                 </div> -->
 
                  <div class="form-group">
                     <label >Alamat</label>
@@ -131,7 +145,7 @@
                     <label >Hak Akses</label>
                     <select class="custom-select" name="roles_id" id='roles_id' required>
                         <option selected>Hak akses</option>
-                        <option value="1">admin</option>
+                        <!-- <option value="1">admin</option> -->
                         <option value="2">lppm</option>
                         <option value="3">dosen</option>
                         <option value="4">reviewer</option>
@@ -182,17 +196,26 @@
                     <label >Name</label>
                         <input type="text" class="form-control" name="name" value="{{$p->name}}" required="required">
                 </div>
+            
+                <div class="form-group">
+                <label >Prodi</label>
+                    <input type="text" class="form-control" name="prodi" value="{{$p->prodi}}" required="required" >
+                </div>
 
+                <div class="form-group">
+                <label >Jabatan</label>
+                    <input type="text" class="form-control" name="jabatan" value="{{$p->jabatan}}" required="required" >
+                </div>
 
             <div class="form-group">
               <label >Email</label>
                   <input type="text" class="form-control" name="email" value="{{$p->email}}" required="required" >
            </div>
 
-           <div class="form-group" hidden>
+           <!-- <div class="form-group" hidden>
             <label >Password</label>
                 <input type="text" class="form-control" name="password" value="{{$p->password}}" required="required" >
-         </div>
+         </div> -->
 
 
            <div class="form-group">
@@ -222,7 +245,7 @@
 
 
                         @endif</option>
-                        <option value="1" >admin</option>
+                        <!-- <option value="1" >admin</option> -->
                         <option value="2" >lppm</option>
                         <option value="3" >dosen</option>
                         <option value="4" >reviewer</option>

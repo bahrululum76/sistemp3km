@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kemajuan;
-
+use Auth;
 class UnggahKemajuanPenelitianController extends Controller
 {
     public function index(){
@@ -37,7 +37,7 @@ class UnggahKemajuanPenelitianController extends Controller
         $kemajuan->progres=$request->progres;
 
         $kemajuan->category_id='1';
-    
+        $kemajuan->user_id= Auth::user()->id;
 
         $kemajuan->save();
 

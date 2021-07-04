@@ -20,84 +20,92 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        // Category::create([
-        //     'nama' => 'penelitian',
-        // ]);
-        // Category::create([
-        //     'nama' => 'pengabdian',
-        // ]);
-        // Category::create([
-        //     'nama' => 'Category 3',
-        // ]);
+        Category::create([
+            'nama' => 'penelitian',
+        ]);
+        Category::create([
+            'nama' => 'pengabdian',
+        ]);
+        Category::create([
+            'nama' => 'Category 3',
+        ]);
 
-        // Status::create([
-        //     'nama' => 'diterima',
-        // ]);
-        // Status::create([
-        //     'nama' => 'belum diterima',
-        // ]);
-        // Status::create([
-        //     'nama' => 'revisi',
-        // ]);
-        // Status::create([
-        //     'nama' => 'ditolak',
-        // ]);
-        // Status::create([
-        //     'nama' => 'sedang revisi',
-        // ]);
-        // Status::create([
-        //     'nama' => 'selesai',
-        // ]);
-        // Role::create([
-        //     'nama' => 'Admin',
-        // ]);
-        // Role::create([
-        //     'nama' => 'LPPM',
-        // ]);
+        Status::create([
+            'nama' => 'diterima',
+        ]);
+        Status::create([
+            'nama' => 'belum diterima',
+        ]);
+        Status::create([
+            'nama' => 'revisi',
+        ]);
+        Status::create([
+            'nama' => 'ditolak',
+        ]);
+        Status::create([
+            'nama' => 'sedang revisi',
+        ]);
+        Status::create([
+            'nama' => 'selesai',
+        ]);
+        Role::create([
+            'nama' => 'Admin',
+        ]);
+        Role::create([
+            'nama' => 'LPPM',
+        ]);
 
-        // Role::create([
-        //     'nama' => 'Dosen',
-        // ]);
+        Role::create([
+            'nama' => 'Dosen',
+        ]);
 
-        // Role::create([
-        //     'nama' => 'Reviewer',
-        // ]);
+        Role::create([
+            'nama' => 'Reviewer',
+        ]);
 
         User::create([
             'nidn' => '12354',
             'name' => 'Johty charge',
+            'prodi'=> 'industri',
+            'jabatan'=> 'wd 1',
             'email' => 'email@es.com',
             'password' => Hash::make(123456),
             'alamat' => 'ok',
             'no_hp' => 'ok',
             'status_id'=> 2,
-            'roles_id' => 3,
+            'roles_id' => 1,
             
         ]);
         User::create([
             'nidn' => '12667',
             'name' => 'rose way',
+            'prodi'=> 'sipil',
+            'jabatan'=> 'wd 1',
             'email' => 'email@mail.com',
             'password' => Hash::make(123456),
             'alamat' => 'ok',
             'no_hp' => 'ok',
             'status_id'=> 2,
-            'roles_id' => 3,
+            'roles_id' => 2,
             
         ]);
         User::create([
             'nidn' => '128444',
             'name' => 'lucam',
+            'prodi'=> 'informatika',
+            'jabatan'=> 'wd 2',
             'email' => 'mochlucam@gmail.com',
             'password' => Hash::make(123456),
             'alamat' => 'ok',
             'no_hp' => 'ok',
             'status_id'=> 2,
-            'roles_id' => 4,
+            'roles_id' => 3,
         ]);
         User::create([
             'nidn' => '12844',
             'name' => 'lucam234',
+            'prodi'=> 'informatika',
+            'jabatan'=> 'wd 3',
             'email' => 'mochlucam3456@gmail.com',
             'password' => Hash::make(123456),
             'alamat' => 'ok',

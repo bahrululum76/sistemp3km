@@ -35,7 +35,7 @@ class KelolaInformasiController extends Controller
           
             $informasi->file=$filename;
         }
-        $informasi->status_id=2;
+        
         $informasi->save();
 
         $user = DB::table('users')->pluck('email')->all();

@@ -22,11 +22,11 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('nidn', 'password');
 
         try {
             $this->validate($request, [
-                'email' => 'required',
+                'nidn' => 'required',
                 'password' => 'required'
             ]);
 

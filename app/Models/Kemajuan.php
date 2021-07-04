@@ -13,7 +13,13 @@ class Kemajuan extends Model
         'judul',
         'file',
         'progres',
-        'category_id'
+        'category_id',
+        'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsto(User::class);
+    }
 
 }
