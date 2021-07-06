@@ -52,7 +52,7 @@
             </div>
 
             
-            <button type="submit" class="btn btn-primary">Pilih Reviewer</button>
+            <button type="submit" class="btn btn-primary btn-sm">Pilih Reviewer</button>
 
             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#TolakProposal" >Tolak</button> 
 

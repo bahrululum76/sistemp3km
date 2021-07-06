@@ -128,7 +128,7 @@
     function confirmDelete(item_id){
 Swal.fire({
   title: 'Yakin dengan pilihan anda?',
-  text: "Setelah melakukan penolakan, proposal tidak akan ditampilkan!",
+  text: "Setelah melakukan penerimaan, proposal tidak akan ditampilkan!",
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
@@ -139,8 +139,8 @@ Swal.fire({
   if (result.isConfirmed) {
     $('#'+item_id).submit();
     Swal.fire(
-      'Ditolak!',
-      'Proposal ditolak.',
+      'Diterima!',
+      'Proposal diterima.',
       'success'
     )
   }

@@ -60,7 +60,7 @@
 
                     <td >
                         <button   class="btn btn-primary btn-sm " data-toggle="modal" data-target="#EditModal-{{ $p->id }}" value="">Ubah</button>
-                        {{-- <a  href="kelolaobat/delete/{{ $p->id }}" class="btn btn-danger btn-sm" >Hapus</a> --}}
+                        <button class="btn btn-sm btn-warning " id="createNewItem" data-toggle="modal" data-target="#EditModalPassword-{{ $p->id }}"  >Ganti Password</button>
                         
                         <form id="delete-obat-{{$p->id}}" action=" {{ url('lppm/kelolaadmin/delete'.$p->id) }}" method="post" style="display: inline" data-id="{{$p->id}}">
                             {{csrf_field()}}
@@ -106,6 +106,17 @@
                     <label >Name</label>
                         <input type="text" class="form-control" name="name" required="required" >
                   </div>
+                  <div class="form-group">
+                    <label >Prodi</label>
+                    <select class="custom-select" name="prodi"  required="required">
+                        <option selected>Prodi</option>
+                        <option value="Informatika">Informatika</option>
+                        <option value="Industri">Industri</option>
+                        <option value="Sipil">Sipil</option>
+                    </select>
+                 </div>
+
+                 
 
                   <div class="form-group">
                     <label >Email</label>
@@ -123,7 +134,7 @@
                  </div>
                  <div class="form-group">
                     <label >No Hp</label>
-                        <input type="number" class="form-control form-control-user" name="no_hp" required="required" >
+                        <input type="number" class="form-control form-control-user" id="rupiah"  name="no_hp" required="required" >
                  </div>
 
 
@@ -190,10 +201,10 @@
                   <input type="text" class="form-control" name="email" value="{{$p->email}}" required="required" >
            </div>
 
-           <!-- <div class="form-group" hidden>
+            <div class="form-group" hidden>
             <label >Password</label>
                 <input type="text" class="form-control" name="password" value="{{$p->password}}" required="required" >
-         </div> -->
+         </div> 
 
 
            <div class="form-group">
@@ -240,18 +251,38 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
-            <form action="{{ url('admin/users/edit'.$p->id) }}" method="POST">
+            <form action="{{ url('lppm/kelolaadmin/edit'.$p->id) }}" method="POST">
                   @csrf
 
                 <div class="form-group" hidden>
                     <label >Id</label>
                         <input type="text" class="form-control" name="id" value="{{$p->id}}" required="required" >
                 </div>
+                <div class="form-group" hidden>
+                    <label >Nidn</label>
+                        <input type="text" class="form-control" name="nidn" value="{{$p->nidn}}" required="required">
+                </div>
 
-                <div class="form-group" hidden >
+                <div class="form-group" hidden>
                     <label >Name</label>
                         <input type="text" class="form-control" name="name" value="{{$p->name}}" required="required">
                 </div>
+
+
+
+ 
+
+                <div class="form-group" hidden>
+                    <label >Jabatan</label>
+                    <select class="custom-select" name="jabatan" id='jabatan' required>
+                        <option Value="{{$p->jabatan}}">{{$p->jabatan}}</option>
+                        <!-- <option value="1">admin</option> -->
+                        <option value="Asisten Ahli">Asistem Ahli</option>
+                        <option value="Lektor">Lektor</option>
+                        <option value="Loktor Kepala">Loktor Kepala</option>
+                        <option value="Profesor">Profesor</option>
+                    </select>
+                 </div>
 
                 <div class="form-group" hidden >
                     <label >Email</label>
@@ -259,19 +290,27 @@
                  </div>
 
 
-                <div class="form-group">
+                <div class="form-group" >
                     <label >Password</label>
-                        <input type="password" class="form-control form-control-user" name="password" required="required" placeholder="password" >
+                        <input type="password" class="form-control form-control-user" name="password"  required="required" placeholder="password" >
                  </div>
 
                  <div class="form-group" hidden>
-                    <label >Hak Akses</label>
-                        <select class="custom-select" name="role" id='role_' value="{{$p->role}}">
-                            <option value="{{$p->role}}" >{{$p->role}}</option>
-                            <option value="admin" >admin</option>
-                            <option value="admin" >dokter</option>
-                        </select>
-                </div>
+            <label >Alamat</label>
+                <input type="text" class="form-control" name="alamat" value="{{$p->alamat}}" required="required" >
+            </div>
+
+            <div class="form-group" hidden>
+                <label >Np Hp</label>
+                    <input type="number" class="form-control" name="no_hp" value="{{$p->no_hp}}" required="required" >
+             </div>
+
+    
+            <div class="form-group" hidden>
+                <label >Hak Akses</label>
+                    <input type="number" class="form-control" name="roles_id" value="{{$p->roles_id}}" required="required" >
+             </div>
+
 
            <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
@@ -280,7 +319,7 @@
 
             <!-- footer modal -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button>
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button> -->
             </div>
         </div>
     </div>
@@ -288,10 +327,8 @@
 @endforeach
 
 
-<script>
-        // delete
 
-</script>
+
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -320,5 +357,7 @@ Swal.fire({
     }
 
 </script>
+
+
 
 @endsection

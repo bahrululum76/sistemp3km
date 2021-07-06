@@ -24,9 +24,7 @@ class Proposal extends Model
         return $this->belongsto(User::class);
     }
 
-    public function Revisi(){
-        return $this->hasMany(Revisi::class);
-    }
+=
 
 
     /**
@@ -35,10 +33,7 @@ class Proposal extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
 
-    public function proposal_user()
-    {
-        return $this->belongsto(Proposal_user::class);
-    }
+   
 
     public function getpengajuAttribute()
     {

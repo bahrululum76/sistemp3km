@@ -16,7 +16,10 @@ class UserController extends Controller
     {
         // mengambil data dari table users
         //$user = DB::table('users')->get();
-        $user = User::all();
+        $user = User::where('roles_id','=',2)
+        ->orwhere('roles_id','=',3)
+        ->orwhere('roles_id','=',4)
+        ->orderBy('id','asc')->get();
         // mengirim data user ke view index
         //return view('admin.users', ['user' => $user]);
         return view("admin.users", compact('user'));
@@ -35,14 +38,12 @@ class UserController extends Controller
         $rules = [
             'nidn'          => 'required|unique:users',
             'name'          => 'required',
-            'password'      => 'required|min:5',
             'email'         => 'required|email|unique:users'
         ];
  
         $messages = [
             'nidn.unique'           => 'Nidn sudah terdaftar.',
             'name.required'          => 'Nama wajib diisi.',
-            'password.required'      => 'Password wajib diisi.',
             'password.min'           => 'Password minimal diisi dengan 5 karakter.',
             'email.required'         => 'Email wajib diisi.',
             'email.email'            => 'Email tidak valid.',
@@ -58,8 +59,8 @@ class UserController extends Controller
         $user = new User;
         $user->nidn = $request->nidn;
         $user->name = $request->name;
-        $user1->prodi = $request->prodi;
-        $user1->jabatan = $request->jabatan;
+        $user->prodi = $request->prodi;
+        $user->jabatan = $request->jabatan;
         $user->email = $request->email;
         $user->password = bcrypt('12345');
         $user->alamat = $request->alamat;
@@ -101,6 +102,7 @@ class UserController extends Controller
         $user1->name = $request->name;
         $user1->prodi = $request->prodi;
         $user1->email = $request->email;
+        $user1->password = bcrypt($request->password);
         $user1->alamat = $request->alamat;
         $user1->no_hp = $request->no_hp;
         $user1->save();

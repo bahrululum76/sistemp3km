@@ -91,8 +91,8 @@ Route::middleware(['is_lppm'])->prefix('/lppm')->group(function () {
     Route::post('kelolaadmin/store', [App\Http\Controllers\UserController::class, 'store2'])->name('kelolaadmin/store');
     Route::post('kelolaadmin/edit{id}', [App\Http\Controllers\UserController::class, 'edit2'])->name('kelolaadmin/edit');
     Route::delete('kelolaadmin/delete{id}', [App\Http\Controllers\UserController::class, 'delete2']);
-    Route::get('dana', [App\Http\Controllers\DanaController::class, 'index'])->name('dana');
-    
+    Route::get('dana', [App\Http\Controllers\DanaController::class, 'index1'])->name('dana');
+    Route::get('dana_', [App\Http\Controllers\DanaController::class, 'index2'])->name('dana_');
 
 });
 

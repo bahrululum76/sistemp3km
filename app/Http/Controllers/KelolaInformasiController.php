@@ -76,7 +76,7 @@ class KelolaInformasiController extends Controller
        
         return redirect('admin/kelolainformasi')->with(['success' => 'Data Berhasil diubah']);
 
-        return redirect('admin/users')->with(['success' => 'Data Berhasil Diubah']);
+        // return redirect('admin/users')->with(['success' => 'Data Berhasil Diubah']);
     }
 
     public function delete($id)

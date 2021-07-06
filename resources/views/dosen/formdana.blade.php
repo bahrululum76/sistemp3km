@@ -1,6 +1,8 @@
 @extends('layout.layoutdosen')
 
 @section('container-fluid')
+
+
 <div class="card shadow ">
       <div class="card-body">  
         <div class>
@@ -32,20 +34,20 @@
             
             <div class="form-group">
               <label for="exampleInputEmail1">Pelaksanaan</label>
-              <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pelaksanaan" placeholder="" required="requaired">
+              <input type="text" id="rupiah"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pelaksanaan" placeholder="" required="requaired">
               <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Bahan Habis Pakai</label>
-              <input type="number" class="form-control" id="exampleInputPassword1" name="bahan" required="requaired">
+              <input type="text"  class="form-control" id="exampleInputPassword1" name="bahan" required="requaired">
             </div>
             <div class="form-group">
               <label for="exampleInputText">Transport</label>
-              <input type="number" class="form-control" id="exampleInputPassword1" name="Transport" required="requaired">
+              <input type="text"  class="form-control" id="exampleInputPassword1" name="Transport" required="requaired">
             </div>
             <div class="form-group">
               <label for="exampleInputText">Sewa Peralatan</label>
-              <input type="number" class="form-control" id="exampleInputPassword1" name="sewa" required="requaired">
+              <input type="number"  class="uang" id="exampleInputPassword1" name="sewa" required="requaired">
             </div>
             
             <button type="submit" class="btn btn-primary">Simpan</button>

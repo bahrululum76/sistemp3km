@@ -82,7 +82,7 @@ The above copyright notice and this permission notice shall be included in all c
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">library_books</i>
                                     <p class="teks-sidebar">
-                                    Kelola Penelitian & Pengabdian
+                                    Penelitian & Pengabdian
                                     </p>
                                 </a>
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">

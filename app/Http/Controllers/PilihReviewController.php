@@ -21,8 +21,9 @@ class PilihReviewController extends Controller
         $user = User::where('roles_id', '=', 4)->get();
         $proposal = Proposal::where( 'category_id','=',1 )
         ->where('status_id','=',2)
+        ->limit(1)
         ->get();
-
+        // dd($proposal);
         return view("lppm.pilih_reviewer", compact('proposal', 'user'));
     }
 

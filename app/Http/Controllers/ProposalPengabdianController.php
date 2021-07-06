@@ -128,6 +128,7 @@ class ProposalPengabdianController extends Controller
         $dana->sewa = $request->sewa;
         $dana->user_id = Auth::User()->id;
         $dana->proposal_id= $request->id;
+        $dana->category_id=2;
         $dana->save();
     
         return redirect('dosen/proposal')->with(['success' => 'Data Berhasil ditambahkan']);

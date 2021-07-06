@@ -13,13 +13,27 @@
 </div>
 @endif
 
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">PENGGUNA</h1>
-</div>
+
+
+
 
 
 <div class="card shadow ">
+
     <div class="card-body">
+    <div class="d-sm-flex align-items-center justify-content-between ">
+    <h1 class="h3 mb-0 text-gray-800">PENGGUNA</h1>
+</div>
+    @if (count($errors) > 0)
+    <div class="alert alert-danger alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <button class="btn btn-sm btn-primary mt-4 mb-2" id="createNewItem" data-toggle="modal" data-target="#ModalTambah"  >Tambah</button>
       <div class="table-responsive">
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
@@ -108,18 +122,28 @@
                   <div class="form-group">
                     <label >Name</label>
                         <input type="text" class="form-control" name="name" required="required" >
-
                   </div>
+                  <div class="form-group">
+                    <label >Prodi</label>
+                    <select class="custom-select" name="prodi"  required="required">
+                        <option selected>Prodi</option>
+                        <option value="Informatika">Informatika</option>
+                        <option value="Industri">Industri</option>
+                        <option value="Sipil">Sipil</option>
+                    </select>
+                 </div>
 
-                <label >Prodi</label>
-                    <input type="text" class="form-control" name="prodi"  required="required" >
-                </div>
-
-                <div class="form-group">
-                <label >Jabatan</label>
-                    <input type="text" class="form-control" name="jabatan"  required="required" >
-                </div>
-
+                 <div class="form-group">
+                    <label >Jabatan</label>
+                    <select class="custom-select" name="jabatan" id='jabatan' required>
+                        <option selected>Jabatan</option>
+                        <!-- <option value="1">admin</option> -->
+                        <option value="Asisten Ahli">Asistem Ahli</option>
+                        <option value="Lektor">Lektor</option>
+                        <option value="Loktor Kepala">Loktor Kepala</option>
+                        <option value="Profesor">Profesor</option>
+                    </select>
+                 </div>
                   <div class="form-group">
                     <label >Email</label>
                         <input type="text" class="form-control" name="email" required="required" >
@@ -136,7 +160,7 @@
                  </div>
                  <div class="form-group">
                     <label >No Hp</label>
-                        <input type="text" class="form-control form-control-user" name="no_hp" required="required" >
+                        <input type="number" class="form-control form-control-user" name="no_hp" required="required" >
                  </div>
 
 
@@ -158,7 +182,7 @@
             </div>
             <!-- footer modal -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button>
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button> -->
             </div>
         </div>
     </div>
@@ -187,7 +211,7 @@
                         <input type="text" class="form-control" name="id" value="{{$p->id}}" required="required" >
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" hidden>
                     <label >Nidn</label>
                         <input type="text" class="form-control" name="nidn" value="{{$p->nidn}}" required="required">
                 </div>
@@ -198,18 +222,31 @@
                 </div>
             
                 <div class="form-group">
-                <label >Prodi</label>
-                    <input type="text" class="form-control" name="prodi" value="{{$p->prodi}}" required="required" >
-                </div>
+                    <label >Prodi</label>
+                    <select class="custom-select" name="prodi" id='prodi' required>
+                        <option value="{{$p->prodi}}">{{$p->prodi}}</option>
+                        <!-- <option value="1">admin</option> -->
+                        <option value="Informatika">Informatika</option>
+                        <option value="Industri">Industri</option>
+                        <option value="Sipil">Sipil</option>
+                    </select>
+                 </div>
 
                 <div class="form-group">
-                <label >Jabatan</label>
-                    <input type="text" class="form-control" name="jabatan" value="{{$p->jabatan}}" required="required" >
-                </div>
+                    <label >Jabatan</label>
+                    <select class="custom-select" name="jabatan" id='jabatan' required>
+                        <option Value="{{$p->jabatan}}">{{$p->jabatan}}</option>
+                        <!-- <option value="1">admin</option> -->
+                        <option value="Asisten Ahli">Asistem Ahli</option>
+                        <option value="Lektor">Lektor</option>
+                        <option value="Loktor Kepala">Loktor Kepala</option>
+                        <option value="Profesor">Profesor</option>
+                    </select>
+                 </div>
 
             <div class="form-group">
               <label >Email</label>
-                  <input type="text" class="form-control" name="email" value="{{$p->email}}" required="required" >
+                  <input type="email" class="form-control" name="email" value="{{$p->email}}" required="required" >
            </div>
 
            <!-- <div class="form-group" hidden>
@@ -289,11 +326,40 @@
                     <label >Id</label>
                         <input type="text" class="form-control" name="id" value="{{$p->id}}" required="required" >
                 </div>
+                <div class="form-group" hidden>
+                    <label >Nidn</label>
+                        <input type="text" class="form-control" name="nidn" value="{{$p->nidn}}" required="required">
+                </div>
 
-                <div class="form-group" hidden >
+                <div class="form-group" hidden>
                     <label >Name</label>
                         <input type="text" class="form-control" name="name" value="{{$p->name}}" required="required">
                 </div>
+
+
+
+                <div class="form-group" hidden>
+                    <label >Prodi</label>
+                    <select class="custom-select" name="prodi" id='prodi' required>
+                        <option value="{{$p->prodi}}">{{$p->prodi}}</option>
+                        <!-- <option value="1">admin</option> -->
+                        <option value="Informatika">Informatika</option>
+                        <option value="Industri">Industri</option>
+                        <option value="Sipil">Sipil</option>
+                    </select>
+                 </div>
+
+                <div class="form-group" hidden>
+                    <label >Jabatan</label>
+                    <select class="custom-select" name="jabatan" id='jabatan' required>
+                        <option Value="{{$p->jabatan}}">{{$p->jabatan}}</option>
+                        <!-- <option value="1">admin</option> -->
+                        <option value="Asisten Ahli">Asistem Ahli</option>
+                        <option value="Lektor">Lektor</option>
+                        <option value="Loktor Kepala">Loktor Kepala</option>
+                        <option value="Profesor">Profesor</option>
+                    </select>
+                 </div>
 
                 <div class="form-group" hidden >
                     <label >Email</label>
@@ -301,19 +367,27 @@
                  </div>
 
 
-                <div class="form-group">
+                <div class="form-group" >
                     <label >Password</label>
-                        <input type="password" class="form-control form-control-user" name="password" required="required" placeholder="password" >
+                        <input type="password" class="form-control form-control-user" name="password"  required="required" placeholder="password" >
                  </div>
 
                  <div class="form-group" hidden>
-                    <label >Hak Akses</label>
-                        <select class="custom-select" name="role" id='role_' value="{{$p->role}}">
-                            <option value="{{$p->role}}" >{{$p->role}}</option>
-                            <option value="admin" >admin</option>
-                            <option value="admin" >dokter</option>
-                        </select>
-                </div>
+            <label >Alamat</label>
+                <input type="text" class="form-control" name="alamat" value="{{$p->alamat}}" required="required" >
+            </div>
+
+            <div class="form-group" hidden>
+                <label >Np Hp</label>
+                    <input type="number" class="form-control" name="no_hp" value="{{$p->no_hp}}" required="required" >
+             </div>
+
+    
+            <div class="form-group" hidden>
+                <label >Hak Akses</label>
+                    <input type="number" class="form-control" name="roles_id" value="{{$p->roles_id}}" required="required" >
+             </div>
+
 
            <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
@@ -322,7 +396,7 @@
 
             <!-- footer modal -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button>
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button> -->
             </div>
         </div>
     </div>

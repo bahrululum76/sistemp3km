@@ -48,6 +48,12 @@ class DatabaseSeeder extends Seeder
         Status::create([
             'nama' => 'selesai',
         ]);
+        Status::create([
+            'nama' => 'aktif',
+        ]);
+        Status::create([
+            'nama' => 'tidak aktif',
+        ]);
         Role::create([
             'nama' => 'Admin',
         ]);

@@ -19,6 +19,7 @@ class CreateDanasTable extends Migration
             $table->integer('bahan');
             $table->integer('Transport');
             $table->integer('sewa');
+            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('proposal_id')->references('id')->on('proposals')->onDelete('cascade');
             $table->timestamps();

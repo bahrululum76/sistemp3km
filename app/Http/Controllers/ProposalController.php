@@ -139,6 +139,7 @@ class ProposalController extends Controller
         $dana->bahan = $request->bahan;
         $dana->Transport = $request->Transport;
         $dana->sewa = $request->sewa;
+        $dana->category_id= 1;
         $dana->user_id = Auth::User()->id;
         $dana->proposal_id =  $request->id;
         
