@@ -13,8 +13,8 @@ class DanaController extends Controller
         return view("lppm.dana",compact('dana'));
     }
     public function index2(){
-        $dana= Dana::where('category_id','=',1)->get();
+        $dana= Dana::where('category_id','=',2)->get();
 
-        return view("lppm.dana",compact('dana'));
+        return view("lppm.dana_",compact('dana'));
     }
 }

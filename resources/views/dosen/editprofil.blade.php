@@ -1,4 +1,4 @@
-@extends('layout.layoutadmin')
+@extends('layout.layoutdosen')
 
 @section('container-fluid')
 <div class="card shadow ">
@@ -99,7 +99,7 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
-            <form action="{{ url('dosen/editprofil/ubahpw'.$p->id) }}" method="POST">
+            <form action="{{url ('dosen/editprofil/edit'.$p->id)}}" method="POST">
                   @csrf
 
                 <div class="form-group" hidden>
@@ -151,14 +151,14 @@
                  <div class="form-group row">
                         <label >Kata Sandi Baru</label>
                         
-                            <input type="password" name="sandi_baru" class="form-control" required
+                            <input type="password"  class="form-control" required
                                  id="pass" maxlength="100">
                         
                     </div>
                     <div class="form-group row">
                         <label>Verifikasi Sandi</label>
                         
-                            <input type="password" class="form-control" name="confirm_sandi"
+                            <input type="password" class="form-control" name="password"
                                 id="confirm" required maxlength="100">
                         
                     </div>

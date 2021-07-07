@@ -21,7 +21,6 @@ class PilihReviewController extends Controller
         $user = User::where('roles_id', '=', 4)->get();
         $proposal = Proposal::where( 'category_id','=',1 )
         ->where('status_id','=',2)
-        ->limit(1)
         ->get();
         // dd($proposal);
         return view("lppm.pilih_reviewer", compact('proposal', 'user'));
@@ -62,7 +61,7 @@ class PilihReviewController extends Controller
         // ->where('id','=',$proposal->user_id);
         $detail =[
             'title'=>'Review Proposal',
-            'body'=>  $user1.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop.'sudaah tersedia untuk di koreksi oleh anda , silahkan cek website'
+            'body'=>  $user1.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop.'sudah tersedia untuk di koreksi oleh anda , silahkan cek website'
         ];
         
         Mail::to($user)->send(new RevMail($detail));

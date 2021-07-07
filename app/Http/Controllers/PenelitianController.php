@@ -51,9 +51,11 @@ class PenelitianController extends Controller
     {
         $penelitian= new Penelitian;
 
+        $penelitian->pendanaan =$request->pendanaan;
         $penelitian->judul= $request->judul;
-        $penelitian->dipublikasikan_pada=$request->dipublikasikan_pada;
-        $penelitian->tahun_publikasi=$request->tahun_publikasi;
+        $penelitian->publikasi=$request->publikasi;
+        $penelitian->tahun=$request->tahun;
+        $penelitian->url=$request->url;
 
         if ($request->hasFile('file')) {
 
@@ -75,15 +77,42 @@ class PenelitianController extends Controller
         return redirect('dosen/penelitian')->with(['success' => 'Data Berhasil ditambahkan']);
 
     }
-    public function getFile($filename){
-        $file=Storage::disk('public/penelitian')->get($filename);
-  
-        return (new Response($file, 200));
+    
+    public function edit(Request $request, $id)
+    {
+        // update data dosen
 
-              return redirect('lppm/laporanakhirpenelitian')->with(['success' => 'Data Berhasil ditambahkan']);
+        $penelitian = Penelitian::find($id);
+        
+        
+        $penelitian->pendanaan =$request->pendanaan;
+        $penelitian->judul= $request->judul;
+        $penelitian->publikasi=$request->publikasi;
+        $penelitian->tahun=$request->tahun;
+        $penelitian->url=$request->url;
 
+        if ($request->hasFile('file')) {
+
+            $filename = $request->file('file')->getClientOriginalName();
+
+
+            $request->file('file')->storeAs(
+                'public/penelitian',$filename
+            );
+          
+            $penelitian->file=$filename;
+        }
+        $penelitian->save();
+       
+        return redirect('admin/kelolapenelitian')->with(['success' => 'Data Berhasil diubah']);
     }
-
-  
+        public function delete($id)
+        {
+            $penelitian = Penelitian::find($id);
+            $penelitian->delete();
+    
+            Storage::delete('public/penelitian'.$penelitian->file);
+            return redirect('admin/kelolapenelitian');
+        }
 
 }

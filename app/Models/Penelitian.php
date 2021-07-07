@@ -10,11 +10,13 @@ class Penelitian extends Model
     use HasFactory;
     protected $fillable = [
         'judul',
-        'dipublikasikan_pada',
-        'tahun_publikasi',
+        'pendanaan',
+        'publikasi',
+        'tahun',
+        'url',
         'file',
         'user_id',
-    ];   
+    ];               
 
 
     protected $appends = ['pengaju'];

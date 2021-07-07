@@ -28,7 +28,7 @@
         @if ($data_kosong->status_id == 2 || $data_kosong->status_id == 4) 
         <button class="btn btn-sm btn-primary mt-4 mb-2 " id="createNewItem" data-toggle="modal" data-target="#ModalTambah"  > Tambah Proposal </button>
         @elseif ($data_kosong->status_id == 3 || $data_kosong->status_id == 1)
-        <button class="btn btn-sm btn-primary mt-4 mb-2" id="createNewItem" data-toggle="modal" data-target="#ModalTambah2" > Tambah </button>
+        <button class="btn btn-sm btn-primary mt-4 mb-2" id="createNewItem" data-toggle="modal" data-target="#ModalTambah2" > Tambah Proposal </button>
        
        
         @endif
@@ -103,20 +103,13 @@
                     <!-- <th>Status</th> -->
                 </tr>
             </thead>
-
-            <tbody class="tbody">
-                
+            <tbody class="tbody">               
                 <tr class="thead">
                     <td >{{ $p->detail_revisi }}</td>
                     <!-- <td align="center">{{$p->category_id}}</td> -->
-
-                </tr>
-                
+                </tr>                
             </tbody>
-
         </table>
-
-
       </div>
 
             </form>
@@ -205,10 +198,10 @@
                         <input type="text" class="form-control" name="judul" required="required" >
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="exampleFormControlTextarea1">Abstrak</label>
                     <textarea class="ckeditor" id="ckeditor" name="abstrak" required="required"></textarea>
-                  </div>
+                  </div> -->
 
                   <div class="form-group">
                     <label for="file">File</label>

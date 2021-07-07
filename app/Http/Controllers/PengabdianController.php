@@ -50,9 +50,11 @@ class PengabdianController extends Controller
     {
         $pengabdian= new Pengabdian;
 
+        $pengabdian->pendanaan =$request->pendanaan;
         $pengabdian->judul= $request->judul;
-        $pengabdian->dipublikasikan_pada=$request->dipublikasikan_pada;
-        $pengabdian->tahun_publikasi=$request->tahun_publikasi;
+        $pengabdian->publikasi=$request->publikasi;
+        $pengabdian->tahun=$request->tahun;
+        $pengabdian->url=$request->url;
 
         if ($request->hasFile('file')) {
 
@@ -74,4 +76,42 @@ class PengabdianController extends Controller
         return redirect('dosen/pengabdian')->with(['success' => 'Data Berhasil ditambahkan']);
 
     }
+
+    public function edit(Request $request, $id)
+    {
+        // update data dosen
+
+        $pengabdian = Penelitian::find($id);
+        
+        
+        $pengabdian->pendanaan =$request->pendanaan;
+        $pengabdian->judul= $request->judul;
+        $pengabdian->publikasi=$request->publikasi;
+        $pengabdian->tahun=$request->tahun;
+        $pengabdian->url=$request->url;
+
+        if ($request->hasFile('file')) {
+
+            $filename = $request->file('file')->getClientOriginalName();
+
+
+            $request->file('file')->storeAs(
+                'public/pengabdian',$filename
+            );
+          
+            $pengabdian->file=$filename;
+        }
+        $pengabdian->save();
+       
+        return redirect('admin/kelolapengabdian')->with(['success' => 'Data Berhasil diubah']);
+    }
+        public function delete($id)
+        {
+            $pengabdian = Pengabdian::find($id);
+            $pengabdian->delete();
+    
+            Storage::delete('public/pengabdian'.$pengabdian->file);
+            return redirect('admin/kelolapengabdian');
+        }
+
 }

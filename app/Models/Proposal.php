@@ -24,7 +24,7 @@ class Proposal extends Model
         return $this->belongsto(User::class);
     }
 
-=
+
 
 
     /**

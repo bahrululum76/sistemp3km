@@ -16,8 +16,10 @@ class CreatePengabdiansTable extends Migration
         Schema::create('pengabdians', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->string('dipublikasikan_pada');
-            $table->integer('tahun_publikasi');
+            $table->string('pendanaan');
+            $table->string('publikasi');
+            $table->integer('tahun');
+            $table->string('url');
             $table->string('file');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();

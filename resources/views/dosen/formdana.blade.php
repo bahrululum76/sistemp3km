@@ -47,7 +47,7 @@
             </div>
             <div class="form-group">
               <label for="exampleInputText">Sewa Peralatan</label>
-              <input type="number"  class="uang" id="exampleInputPassword1" name="sewa" required="requaired">
+              <input type="number"  class="form-control"  id="exampleInputPassword1" name="sewa" required="requaired">
             </div>
             
             <button type="submit" class="btn btn-primary">Simpan</button>

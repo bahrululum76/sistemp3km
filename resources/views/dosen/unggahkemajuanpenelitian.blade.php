@@ -84,7 +84,7 @@
 
                   <div class="form-group">
                     <label for="file">File</label>
-                    <input type="file" class="form-control" name="">
+                    <!-- <input type="file" class="form-control" name=""> -->
                   </div>
                   <div class="input-group">
                     <div class="custom-file">

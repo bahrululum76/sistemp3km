@@ -75,8 +75,8 @@
 
                     <td >
                         <button   class="btn btn-primary btn-sm " data-toggle="modal" data-target="#EditModal-{{ $p->id }}" value="">Ubah</button>
-                        {{-- <a  href="kelolaobat/delete/{{ $p->id }}" class="btn btn-danger btn-sm" >Hapus</a> --}}
-                        <button class="btn btn-sm btn-warning " id="createNewItem" data-toggle="modal" data-target="#EditModalPassword-{{ $p->id }}"  >Ganti Password</button>
+                        
+                        <button class="btn btn-sm btn-warning " id="createNewItem" data-toggle="modal" data-target="#EditModalPassword-{{ $p->id }}"  >Ubah Password</button>
                         <form id="delete-obat-{{$p->id}}" action=" {{ url('admin/users/delete'.$p->id) }}" method="post" style="display: inline" data-id="{{$p->id}}">
                             {{csrf_field()}}
                             {{method_field('delete')}}
@@ -367,10 +367,20 @@
                  </div>
 
 
-                <div class="form-group" >
-                    <label >Password</label>
-                        <input type="password" class="form-control form-control-user" name="password"  required="required" placeholder="password" >
-                 </div>
+                 <div class="form-group row">
+                        <label >Kata Sandi Baru</label>
+                        
+                            <input type="password"  class="form-control" required
+                                 id="pass" maxlength="100">
+                        
+                    </div>
+                    <div class="form-group row">
+                        <label>Verifikasi Sandi</label>
+                        
+                            <input type="password" class="form-control" name="password"
+                                id="confirm" required maxlength="100">
+                        
+                    </div>
 
                  <div class="form-group" hidden>
             <label >Alamat</label>
@@ -389,7 +399,7 @@
              </div>
 
 
-           <button type="submit" class="btn btn-primary">Simpan</button>
+           <button type="submit" id="btn_ubah_pw" class="btn btn-secondary">Simpan</button>
         </form>
 
         </div>
@@ -411,6 +421,33 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+$('#pass, #confirm').on('keyup', function() {
+    if (($('#pass').val() == '') && ($('#confirm').val() == '')) {
+        $('#confirm').removeClass('is-invalid');
+        $('#confirm').removeClass('is-valid');
+        $('#btn_ubah_pw').removeClass('btn-success');
+        $('#btn_ubah_pw').removeClass('btn-danger');
+        $('#btn_ubah_pw').prop('disabled', false);
+        console.log("test");
+    } else if ($('#pass').val() == $('#confirm').val()) {
+        $('#confirm').addClass('is-valid');
+        $('#confirm').removeClass('is-invalid');
+        $('#btn_ubah_pw').removeClass('btn-danger');
+        $('#btn_ubah_pw').prop('disabled', false);
+        $('#btn_ubah_pw').addClass('btn-success');
+        console.log("test1");
+    } else {
+        $('#confirm').addClass('is-invalid');
+        $('#btn_ubah_pw').addClass('btn-danger');
+        $('#btn_ubah_pw').prop('disabled', true);
+        console.log("test2");
+    }
+});
+
+</script>
+
 
 <script>
     function confirmDelete(item_id){

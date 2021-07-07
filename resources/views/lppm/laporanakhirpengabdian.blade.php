@@ -14,9 +14,11 @@
             <thead class="thead">
                 <tr class="tbody">
                     <th>Judul</th>
+                    <th>Pendanaan</th>
                     <th>Nama</th>
-                    <th>Dipublikasikan pada</th>
-                    <th>Tahun Publikasi</th>
+                    <th>Publikasi</th>
+                    <th>Tahun</th>
+                    <th>Url</th>
                     <th>File</th>
                     
                     
@@ -27,10 +29,12 @@
             <tbody class="tbody">
                 @foreach ( $pengabdian as $p )
                 <tr class="thead">
-                    <td align="center">{{ $p->judul}}</td>
+                     <td align="center">{{ $p->judul}}</td>
+                    <td align="center">{{ $p->pendanaan}}</td>
                     <td align="center">@if($p->pengaju){{ $p->pengaju->name }}@endif</td>
-                    <td align="center" >{{ $p->dipublikasikan_pada }} </td>
-                    <td align="center" >{{ $p->tahun_publikasi }} </td>
+                    <td align="center" >{{ $p->publikasi }} </td>
+                    <td align="center" >{{ $p->tahun }} </td>
+                    <td align="center">{{ $p->url}}</td>
                     <td align="center" ><a href="{{Storage::url('public/pengabdian/'.$p->file)}}">{{ $p->file }}</a> </td>
                     
                     

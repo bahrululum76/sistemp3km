@@ -20,8 +20,10 @@
             <thead class="thead">
                 <tr class="tbody">
                     <th>Judul</th>
-                    <th>Dipublikasikan pada</th>
-                    <th>Tahun Publikasi</th>
+                    <th>Pendanaan</th>
+                    <th>Publikasi</th>
+                    <th>Tahun</th>
+                    <th>Url</th>
                     <th>File</th>
                     
                     
@@ -33,8 +35,10 @@
                 @foreach ( $penelitian as $p )
                 <tr class="thead">
                     <td align="center">{{ $p->judul}}</td>
-                    <td align="center" >{{ $p->dipublikasikan_pada }} </td>
-                    <td align="center" >{{ $p->tahun_publikasi }} </td>
+                    <td align="center">{{ $p->pendanaan}}</td>
+                    <td align="center" >{{ $p->publikasi}} </td>
+                    <td align="center" >{{ $p->tahun }} </td>
+                    <td align="center">{{ $p->url}}</td>
                     <td align="center" >{{ $p->file }} </td>
                     
                     
@@ -61,7 +65,7 @@
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Proposal</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Unggah Laporan Penelitian</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -77,17 +81,31 @@
                   </div>
 
                   <div class="form-group">
-                    <label >Dipublikasikan Pada</label>
-                        <input type="text" class="form-control" name="dipublikasikan_pada" required="required" >
+                    <label >Pendanaan</label>
+                    <select class="custom-select" name="pendanaan"  required="required">
+                        <option selected>Pendanaan</option>
+                        <option value="Hibah">Hibah</option>
+                        <option value="Non Hibah">Non Hibah</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label >Publikasi</label>
+                        <input type="text" class="form-control" name="publikasi" required="required" >
                   </div>
                   <div class="form-group">
-                    <label >Tahun Publikasi</label>
-                        <input type="text" class="form-control" name="tahun_publikasi" required="required" >
+                    <label >Tahun</label>
+                        <input type="text" class="form-control" name="tahun" required="required" >
                   </div>
                   
                   <div class="form-group">
+                    <label >Url</label>
+                        <input type="text" class="form-control" name="url" required="required" >
+                  </div>
+
+                  <div class="form-group">
                     <label for="file">File</label>
-                    <!-- <input type="file" class="form-control" name="file"> -->
+                    <input type="file" class="form-control" name="file">
                   </div>
                   <div class="input-group">
                     <div class="custom-file">

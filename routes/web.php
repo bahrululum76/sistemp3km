@@ -46,10 +46,17 @@ Route::middleware(['is_admin'])->prefix('/admin')->group(function () {
     Route::get('proposalpenelitian', [App\Http\Controllers\ProposalController::class, 'index_adm'])->name('proposalpenelitian');
     Route::get('proposalpengabdian', [App\Http\Controllers\ProposalPengabdianController::class, 'index_adm'])->name('proposalpengabdian');
     
+
     //kelola penelitian dan pengabdian
     Route::get('kelolapenelitian', [App\Http\Controllers\PenelitianController::class, 'index_adm'])->name('kelolapenelitian');
+    Route::post('kelolapenelitian/edit{id}', [App\Http\Controllers\PenelitianController::class, 'edit'])->name('kelolapenelitian/edit');
+    Route::delete('kelolapenelitian/delete{id}', [App\Http\Controllers\PenelitianController::class, 'delete']);
+
     Route::get('kelolapengabdian', [App\Http\Controllers\PengabdianController::class, 'index_adm'])->name('kelolapengabdian');
-    
+    Route::post('kelolapengabdian/edit{id}', [App\Http\Controllers\PengabdianController::class, 'edit'])->name('kelolapengabdian/edit');
+    Route::delete('kelolapengabdian/delete{id}', [App\Http\Controllers\PengabdianController::class, 'delete']);
+
+    //editprofil
     Route::get('editprofil', [App\Http\Controllers\EditProfilController::class, 'index_admin'])->name('editprofil');
     Route::post('editprofil/edit{id}', [App\Http\Controllers\EditProfilController::class, 'edit1'])->name('editprofil/edit');
 
@@ -143,6 +150,9 @@ Route::middleware(['is_dosen'])->prefix('/dosen')->group(function () {
     
     Route::get('editprofil', [App\Http\Controllers\EditProfilController::class, 'index_dosen'])->name('editprofil');
     Route::post('editprofil/edit{id}', [App\Http\Controllers\EditProfilController::class, 'edit2'])->name('editprofil/edit');
+
+    // ubahpassword
+    // Route::post('editprofil/password{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('editprofil/password');
 
 
 });

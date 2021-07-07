@@ -16,11 +16,11 @@ class CreateProposalsTable extends Migration
         Schema::create('proposals', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->text('abstrak');
+            $table->text('abstrak')->nullable();
             $table->string('file');
             $table->foreignId('category_id')->references('id')->on('categories');
             $table->foreignId('status_id')->references('id')->on('statuses');
-            $table->string('detail_revisi');
+            $table->string('detail_revisi')->nullable();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->integer('reviewer_id')->nullable();
             $table->integer('pengaju_id')->nullable();

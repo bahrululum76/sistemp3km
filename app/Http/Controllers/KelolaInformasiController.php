@@ -57,7 +57,7 @@ class KelolaInformasiController extends Controller
 
         $informasi = Informasi::find($id);
         
-        $user1->nidn = $request->nidn;
+        
         $informasi->judul = $request->judul;
         $informasi->keterangan = $request->keterangan;
 
