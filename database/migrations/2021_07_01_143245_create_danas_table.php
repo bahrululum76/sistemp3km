@@ -15,10 +15,10 @@ class CreateDanasTable extends Migration
     {
         Schema::create('danas', function (Blueprint $table) {
             $table->id();
-            $table->integer('pelaksanaan');
-            $table->integer('bahan');
-            $table->integer('Transport');
-            $table->integer('sewa');
+            $table->string('pelaksanaan',12);
+            $table->string('bahan',12);
+            $table->string('Transport',12);
+            $table->string('sewa',12);
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('proposal_id')->references('id')->on('proposals')->onDelete('cascade');

@@ -61,7 +61,7 @@ class PilihReviewController extends Controller
         // ->where('id','=',$proposal->user_id);
         $detail =[
             'title'=>'Review Proposal',
-            'body'=>  $user1.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop.'sudah tersedia untuk di koreksi oleh anda , silahkan cek website'
+            'body'=>  $user1.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop.'sudah diterima untuk direview oleh saudara , silahkan cek website'
         ];
         
         Mail::to($user)->send(new RevMail($detail));

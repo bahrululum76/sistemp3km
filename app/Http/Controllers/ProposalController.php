@@ -7,7 +7,7 @@ use App\Models\Proposal;
 use App\Models\Dana;
 use Mail;
 use App\Mail\RevMail;
-
+use Validator;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -44,9 +44,37 @@ class ProposalController extends Controller
 
     public function store(Request $request)
     {
-        $proposal2 = Proposal::where('user_id','=',Auth::User()->id);
+        $rules = [
+            'judul'          => 'unique:proposals',
+            'file'          => 'required|mimes:docx,pdf|max:2048'
+        ];
+ 
+        $messages = [
+            'judul.unique'           => 'judul ini sudah ada sebelumnya.',
+            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx dan Pdf',
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+         
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         $proposal = new Proposal;
+        $proposal2 = Proposal::where('user_id','=',Auth::User()->id);
+
+        $prop1 =DB::table('proposals')->where('id','=',$proposal->id)->pluck('judul')->first();
+        $user2 =DB::table('users')->where('roles_id','=',2)->pluck('name');
+        $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('name');
+        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
+        // ->where('id','=',$proposal->user_id);
+        $detail =[
+            'title'=>'Pilih Reviewer',
+            'body'=>  $user.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop1.'sudah tersedia untuk di ditentukan reviewer oleh anda , silahkan cek website'
+        ];
+        
+        Mail::to($user)->send(new RevMail($detail));
+        
 
         $proposal->id;
         $proposal->judul = $request->get('judul');
@@ -76,23 +104,27 @@ class ProposalController extends Controller
         // $proposal_user->user_id= Auth::User()->id;
         // $proposal_user->proposal_id = $proposal->id;
         // $proposal_user->save();
-        $prop1 =DB::table('proposals')->where('id','=',$proposal->id)->pluck('judul')->first();
-        $user2 =DB::table('users')->where('roles_id','=',2)->pluck('name');
-        $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('name');
-        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
-        // ->where('id','=',$proposal->user_id);
-        $detail =[
-            'title'=>'Pilih Reviewer',
-            'body'=>  $user.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop1.'sudah tersedia untuk di ditentukan reviewer oleh anda , silahkan cek website'
-        ];
-        
-        Mail::to($user)->send(new RevMail($detail));
+
 
         return redirect('dosen/formdana');
     }
 
     public function store2(Request $request)
     {
+        $rules = [
+            
+            'file'          => 'required|mimes:docx,pdf|max:2048'
+        ];
+ 
+        $messages = [
+            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx dan Pdf',
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+         
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         $prop=Proposal::Where('user_id','=',Auth::User()->id)->pluck('reviewer_id')->first();
         $proposal = new Proposal;

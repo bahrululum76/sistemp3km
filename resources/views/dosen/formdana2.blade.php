@@ -31,20 +31,20 @@
           
             <div class="form-group">
               <label for="exampleInputEmail1">Pelaksanaan</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pelaksanaan" placeholder="" required="requaired">
+              <input type="text" class="form-control" onkeyup="convertToRupiah(this);" aria-describedby="emailHelp" name="pelaksanaan" placeholder="" required="requaired">
               <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Bahan Habis Pakai</label>
-              <input type="text" class="form-control" id="exampleInputPassword1" name="bahan" required="requaired">
+              <input type="text" class="form-control" onkeyup="convertToRupiah(this);" name="bahan" required="requaired">
             </div>
             <div class="form-group">
               <label for="exampleInputText">Transport</label>
-              <input type="text"  class="form-control" id="exampleInputPassword1" name="Transport" required="requaired">
+              <input type="text"  class="form-control" onkeyup="convertToRupiah(this);" name="Transport" required="requaired">
             </div>
             <div class="form-group">
               <label for="exampleInputText">Sewa Peralatan</label>
-              <input type="text"  class="form-control" id="exampleInputPassword1" name="sewa" required="requaired">
+              <input type="text"  class="form-control" onkeyup="convertToRupiah(this);" name="sewa" required="requaired">
             </div>
             
             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -53,30 +53,36 @@
 </div>
 <script type="text/javascript">
 		
-		var rupiah = document.getElementById('rupiah');
-		rupiah.addEventListener('keyup', function(e){
-			// tambahkan 'Rp.' pada saat form di ketik
-			// gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-			rupiah.value = formatRupiah(this.value, 'Rp. ');
-		});
- 
-		/* Fungsi formatRupiah */
-		function formatRupiah(angka, prefix){
-			var number_string = angka.replace(/[^,\d]/g, '').toString(),
-			split   		= number_string.split(','),
-			sisa     		= split[0].length % 3,
-			rupiah     		= split[0].substr(0, sisa),
-			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
- 
-			// tambahkan titik jika yang di input sudah menjadi angka ribuan
-			if(ribuan){
-				separator = sisa ? '.' : '';
-				rupiah += separator + ribuan.join('.');
-			}
- 
-			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-		}
+		function convertToRupiah(objek) {
+	  separator = ".";
+	  a = objek.value;
+	  b = a.replace(/[^\d]/g,"");
+	  c = "";
+	  panjang = b.length; 
+	  j = 0; 
+	  for (i = panjang; i > 0; i--) {
+	    j = j + 1;
+	    if (((j % 3) == 1) && (j != 1)) {
+	      c = b.substr(i-1,1) + separator + c;
+	    } else {
+	      c = b.substr(i-1,1) + c;
+	    }
+	  }
+	  objek.value = c;
+
+	}       
+
+	function convertToAngka()
+	{	var nominal= document.getElementById("nominal").value;
+		var angka = parseInt(nominal.replace(/,.*|[^0-9]/g, ''), 10);
+		document.getElementById("angka").innerHTML= angka;
+	}       
+
+	function convertToAngka()
+	{	var nominal1= document.getElementById("nominal1").value;
+		var angka1 = parseInt(nominal.replace(/,.*|[^0-9]/g, ''), 10);
+		document.getElementById("angka1").innerHTML= angka;
+	}
 	</script>
 
 @endsection

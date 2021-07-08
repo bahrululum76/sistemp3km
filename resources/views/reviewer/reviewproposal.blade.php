@@ -19,7 +19,7 @@
             <thead class="thead">
                 <tr class="tbody">
                     <th>Judul</th>
-                    <th>Pengaju</th>
+                    <th>Dosen</th>
                     <th>Prodi</th>
                     <th>File</th>
                     

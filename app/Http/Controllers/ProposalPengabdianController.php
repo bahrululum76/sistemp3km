@@ -41,9 +41,21 @@ class ProposalPengabdianController extends Controller
 
     public function store(Request $request)
     {
-
-
         $proposal = new Proposal;
+
+        $prop1 =DB::table('proposals')->where('id','=',$proposal->id)->pluck('judul')->first();
+        $user2 =DB::table('users')->where('roles_id','=',2)->pluck('name');
+        $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('name');
+        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
+        // ->where('id','=',$proposal->user_id);
+        $detail =[
+            'title'=>'Pilih Reviewer',
+            'body'=>  $user.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop1.'sudah tersedia untuk di ditentukan reviewer oleh anda , silahkan cek website'
+        ];
+        
+        Mail::to($user)->send(new RevMail($detail));
+
+        
         $proposal->judul = $request->get('judul');
         $proposal->abstrak = $request->abstrak;
 
@@ -65,17 +77,7 @@ class ProposalPengabdianController extends Controller
         $proposal->pengaju_id = Auth::User()->id;
         $proposal->save();
 
-        $prop1 =DB::table('proposals')->where('id','=',$proposal->id)->pluck('judul')->first();
-        $user2 =DB::table('users')->where('roles_id','=',2)->pluck('name');
-        $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('name');
-        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
-        // ->where('id','=',$proposal->user_id);
-        $detail =[
-            'title'=>'Pilih Reviewer',
-            'body'=>  $user.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop1.'sudah tersedia untuk di ditentukan reviewer oleh anda , silahkan cek website'
-        ];
-        
-        Mail::to($user)->send(new RevMail($detail));
+
 
         return redirect('dosen/formdanapengabdian');
     }

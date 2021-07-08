@@ -76,6 +76,27 @@ class UserController extends Controller
         return redirect('admin/users')->with(['success' => 'Data Berhasil ditambahkan']);
     }
     public function store2(){
+
+        $rules = [
+            'nidn'          => 'required|unique:users',
+            'name'          => 'required',
+            'email'         => 'required|email|unique:users'
+        ];
+ 
+        $messages = [
+            'nidn.unique'           => 'Nik sudah terdaftar.',
+            'name.required'          => 'Nama wajib diisi.',
+            'password.min'           => 'Password minimal diisi dengan 5 karakter.',
+            'email.required'         => 'Email wajib diisi.',
+            'email.email'            => 'Email tidak valid.',
+            'email.unique'           => 'Email sudah terdaftar.',
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+         
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
         $user = new User;
         $user->nidn = $request->nidn;
         $user->name = $request->name;
