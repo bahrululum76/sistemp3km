@@ -303,6 +303,9 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="../assets/demo/demo.js"></script>
 
+    <script type="text/javascript" src="{{asset('ckeditor/ckeditor.js')}}"></script>
+
+
     {{-- <script>
         $(document).ready(function () {
             // Javascript method's body can be found in assets/js/demos.js

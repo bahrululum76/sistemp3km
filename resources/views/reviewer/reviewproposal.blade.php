@@ -18,9 +18,10 @@
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead class="thead">
                 <tr class="tbody">
-                    <th>Judul</th>
-                    <th>Dosen</th>
+                    <th>Nidn</th>
+                    <th>Nama Dosen</th>
                     <th>Prodi</th>
+                    <th>Judul</th>
                     <th>File</th>
                     
                     <!-- <th>Kategori</th> -->
@@ -32,9 +33,10 @@
             <tbody class="tbody">
                 @foreach ( $proposal as $p )
                 <tr class="thead">
-                    <td align="center">{{ $p->judul}}</td>
+                <td align="center">{{ $p->user->nidn}}</td>
                     <td align="center">{{ $p->User->name }}</td>
                     <td align="center">{{ $p->User->prodi }}</td>
+                    <td align="center">{{ $p->judul}}</td>
                     <td align="center"><a href="{{Storage::url('public/proposal/'.$p->file)}}">{{ $p->file }}</a></td>
                    
                     <!-- <td align="center">{{$p->category_id}}</td> -->
@@ -93,14 +95,33 @@
             <form action="{{ url('reviewer/verifikasi_proposal/revisi'.$p->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
 
-                <!-- <div class="form-group">
-                    <label >Revisi</label>
-                        <input type="text" class="form-control" name="revisi"  required="required" >
-                </div> -->
+                <div class="form-group">
+                    <label >Nidn</label>
+                        <input type="text" class="form-control" value="{{$p->user->nidn}}"  required="required" readonly >
+                </div>
+                <div class="form-group">
+                    <label >Nama</label>
+                        <input type="text" class="form-control" value="{{$p->user->name}}"  required="required" readonly >
+                </div>
+
+                <div class="form-group">
+                    <label >Prodi</label>
+                        <input type="text" class="form-control" value="{{$p->user->prodi}}"  required="required" readonly >
+                </div>
+                <div class="form-group">
+                    <label >Judul</label>
+                        <input type="text" class="form-control" value="{{$p->judul}}"  required="required" readonly >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Abstrak</label>
+                    <textarea class="ckeditor" id="ckeditor" name="abstrak" value="{{$p->abstrak}}" required="required" readonly>{{$p->abstrak}}</textarea>
+                  </div>
 
                 <div class="form-group">
                     <label >Detail Revisi</label>
-                        <input type="text" class="form-control" name="detail_revisi"  required="required" >
+                    <textarea class="ckeditor" id="ckeditor" name="detail_revisi" value="{{$p->detail_revisi}}" required="required" >{{$p->detail_revisi}}</textarea>
                 </div>
 
 

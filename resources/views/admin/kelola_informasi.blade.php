@@ -64,7 +64,7 @@
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Proposal</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Informasi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -81,7 +81,7 @@
 
                   <div class="form-group">
                     <label >Keterangan</label>
-                        <input type="text" class="form-control" name="keterangan" required="required" >
+                    <textarea class="ckeditor" id="ckeditor" name="keterangan" required="required"></textarea>
                   </div>
 
                   <div class="form-group">

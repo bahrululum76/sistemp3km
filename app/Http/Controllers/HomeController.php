@@ -39,7 +39,8 @@ class HomeController extends Controller
     }
     public function HomeDosen()
     {
-        return view('dosen.home');
+        $informasi = Informasi::all();
+        return view('dosen.home',compact('informasi'));
     }
     public function HomeLppm()
     {   

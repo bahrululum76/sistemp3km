@@ -333,6 +333,7 @@ The above copyright notice and this permission notice shall be included in all c
     <script src="{{ asset('assets/js/material-dashboard.js?v=2.1.2') }}"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="../assets/demo/demo.js"></script>
+    <script type="text/javascript" src="{{asset('ckeditor/ckeditor.js')}}"></script>
 
     {{-- <script>
         $(document).ready(function () {

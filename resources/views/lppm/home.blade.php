@@ -4,84 +4,34 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+      <div class="container-fluid">
+      <div class="row">
+		<div class="col-sm-8">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Informasi</h3>
+			</div>
+				
+			<div class="list-group">
+			<ul class="media-list events">							
+							<li class="media">
+					<div class="media-left">
+						<div class="media-object">
+							<span>16</span>
+							<small>Jun</small>
+						</div>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading"><a href="http://ft.unsur.ac.id/info/jadwal-pelaksanaan-seminar-tugas-akhir_2.html">Jadwal Pelaksanaan Seminar Tugas Akhir Periode Juni 2021</a></h4>
+						<p>
+						Pengumuman... Berikut dilampirkan Jadwal Seminar dan Sidang Tugas Akhir Periode&#8230;						</p>
+					</div>
+				</li>
 
 
-
-                    <!-- Content Row -->
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                          <div class="card card-stats">
-                            <div class="card-header card-header-warning card-header-icon">
-                              <div class="card-icon">
-                                <i class="material-icons">books</i>
-                              </div>
-                              <p class="card-category">Proposal Penelitian & Pengabdian</p>
-                              <h3 class="card-title"><?php echo $proposal1->count() ?>
-                                <small></small>
-                              </h3>
-                            </div>
-                            <div class="card-footer">
-                              <div class="stats">
-                                <!-- <i class="material-icons text-danger">warning</i>
-                                <a href="javascript:;">Get More Space...</a> -->
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                          <div class="card card-stats">
-                            <div class="card-header card-header-success card-header-icon">
-                              <div class="card-icon">
-                                <i class="material-icons">library_books</i>
-                              </div>
-                              <p class="card-category">Laporan Kemajuan</p>
-                              <h3 class="card-title"><?php echo $kemajuan->count() ?></h3>
-                            </div>
-                            <div class="card-footer">
-                              <div class="stats">
-                                <!-- <i class="material-icons">date_range</i> Last 24 Hours -->
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                          <div class="card card-stats">
-                            <div class="card-header card-header-danger card-header-icon">
-                              <div class="card-icon">
-                                <i class="material-icons">library_books</i>
-                              </div>
-                              <p class="card-category">Laporan Akhir Penelitian</p>
-                              <h3 class="card-title"><?php echo $penelitian->count() ?></h3>
-                            </div>
-                            <div class="card-footer">
-                              <div class="stats">
-                                <!-- <i class="material-icons">local_offer</i> Tracked from Github -->
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                          <div class="card card-stats">
-                            <div class="card-header card-header-info card-header-icon">
-                              <div class="card-icon">
-                                <i class="fa fa-twitter"></i>
-                              </div>
-                              <p class="card-category">Laporan Akhir Pengabdian</p>
-                              <h3 class="card-title"><?php echo $pengabdian->count() ?></h3>
-                            </div>
-                            <div class="card-footer">
-                              <div class="stats">
-                                <!-- <i class="material-icons">update</i> Just Updated -->
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                    <!-- Content Row -->
+                    
 
 
-                </div>
+      </div>
                 <!-- /.container-fluid -->
 @endsection
