@@ -209,10 +209,10 @@
                         <input type="text" class="form-control" name="judul" required="required" >
                   </div>
 
-                  <!-- <div class="form-group">
+                  <div class="form-group">
                     <label for="exampleFormControlTextarea1">Abstrak</label>
                     <textarea class="ckeditor" id="ckeditor" name="abstrak" required="required"></textarea>
-                  </div> -->
+                  </div>
 
                   <div class="form-group">
                     <label for="file">File</label>

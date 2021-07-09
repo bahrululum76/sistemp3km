@@ -41,6 +41,22 @@ class ProposalPengabdianController extends Controller
 
     public function store(Request $request)
     {
+        $rules = [
+            'judul'          => 'unique:proposals',
+            'file'          => 'required|mimes:docx,pdf|max:2048'
+        ];
+ 
+        $messages = [
+            'judul.unique'           => 'judul ini sudah ada sebelumnya.',
+            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx dan Pdf',
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+         
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
         $proposal = new Proposal;
 
         $prop1 =DB::table('proposals')->where('id','=',$proposal->id)->pluck('judul')->first();
@@ -84,6 +100,21 @@ class ProposalPengabdianController extends Controller
 
     public function store2(Request $request)
     {
+        $rules = [
+            
+            'file'          => 'required|mimes:docx,pdf|max:2048'
+        ];
+ 
+        $messages = [
+            
+            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx dan Pdf',
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+         
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         $prop=Proposal::Where('user_id','=',Auth::User()->id)->pluck('reviewer_id')->first();
         $proposal = new Proposal;

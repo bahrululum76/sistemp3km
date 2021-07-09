@@ -43,11 +43,11 @@
             </div>
             <div class="form-group">
               <label for="exampleInputText">Transport</label>
-              <input type="text"  class="form-control" id="exampleInputPassword1" name="Transport" required="requaired">
+              <input type="text"  class="form-control" onkeyup="convertToRupiah(this);" name="Transport" required="requaired">
             </div>
             <div class="form-group">
               <label for="exampleInputText">Sewa Peralatan</label>
-              <input type="number"  class="form-control"  id="exampleInputPassword1" name="sewa" required="requaired">
+              <input type="number"  class="form-control"  onkeyup="convertToRupiah(this);" name="sewa" required="requaired">
             </div>
             
             <button type="submit" class="btn btn-primary">Simpan</button>

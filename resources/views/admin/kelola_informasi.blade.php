@@ -33,7 +33,7 @@
                 @foreach ( $informasi as $p )
                 <tr class="thead">
                     <td>{{ $p->judul}}</td>
-                    <td>{{ $p->keterangan }}</td>
+                    <td>{!! $p->keterangan !!}</td>
 					<td>{{ $p->file }}</td>
                     <td >
                         <button   class="btn btn-primary btn-sm " data-toggle="modal" data-target="#EditModal-{{ $p->id }}" >Ubah</button>

@@ -22,7 +22,7 @@ class KelolaInformasiController extends Controller
         // insert data ke table user
         $informasi = new Informasi;
         $informasi->judul = $request->judul;
-        $informasi->keterangan = $request->keterangan;
+        $informasi-> keterangan =htmlspecialchars_decode($request->keterangan);
 
         if ($request->hasFile('file')) {
 
