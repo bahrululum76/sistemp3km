@@ -18,7 +18,7 @@ class Proposal extends Model
         'user_id',
     ];
 
-    protected $appends = ['pengaju', 'reviewer'];
+    protected $appends = ['pengaju', 'reviewer','name'];
     public function user()
     {
         return $this->belongsto(User::class);
@@ -35,6 +35,7 @@ class Proposal extends Model
 
    
 
+ 
     public function getpengajuAttribute()
     {
         return $this->User::where('id', $this->pengaju_id)->first();

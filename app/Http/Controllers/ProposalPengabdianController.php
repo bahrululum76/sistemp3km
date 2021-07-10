@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Proposal;
 use App\Models\Dana;
-
+use Validator;
 use Auth;
+use Mail;
+use App\Mail\RevMail;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class ProposalPengabdianController extends Controller
 {
     public function index()
@@ -43,7 +45,7 @@ class ProposalPengabdianController extends Controller
     {
         $rules = [
             'judul'          => 'unique:proposals',
-            'file'          => 'required|mimes:docx,pdf|max:2048'
+            'file'          => 'required|mimes:docx,pdf'
         ];
  
         $messages = [
@@ -102,7 +104,7 @@ class ProposalPengabdianController extends Controller
     {
         $rules = [
             
-            'file'          => 'required|mimes:docx,pdf|max:2048'
+            'file'          => 'required|mimes:docx,pdf'
         ];
  
         $messages = [
@@ -135,7 +137,7 @@ class ProposalPengabdianController extends Controller
 
             $proposal->file = $filename;
         }
-        $proposal->category_id = '1';
+        $proposal->category_id = '2';
         $proposal->status_id = '3';
         $proposal->user_id = Auth::User()->id;
         $proposal->pengaju_id = Auth::User()->id;
@@ -173,6 +175,25 @@ class ProposalPengabdianController extends Controller
     }
 
     public function dana_store(Request $request){
+        $rules = [
+            'pelaksanaan'          => 'max:10',
+            'bahan'                => 'max:10',
+            'Transport'                => 'max:10',
+            'sewa'                => 'max:10'
+        ];
+ 
+        $messages = [
+            'pelaksanaan.max'           => 'Input angka dibatasi 10 digit',
+            'bahan.max'             => 'Input angka dibatasi 10 digit',
+            'Transfort.max'             => 'Input angka dibatasi 10 digit',
+            'sewa.max'             => 'Input angka dibatasi 10 digit',
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+         
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
         $proposal = new Proposal;
         $dana= new Dana;
 
@@ -185,7 +206,7 @@ class ProposalPengabdianController extends Controller
         $dana->category_id=2;
         $dana->save();
     
-        return redirect('dosen/proposal')->with(['success' => 'Data Berhasil ditambahkan']);
+        return redirect('dosen/proposal_pengabdian')->with(['success' => 'Data Berhasil ditambahkan']);
     
     }
 }

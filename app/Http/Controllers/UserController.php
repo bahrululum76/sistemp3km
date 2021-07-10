@@ -14,13 +14,11 @@ class UserController extends Controller
 
     public function index()
     {
-        // mengambil data dari table users
-        //$user = DB::table('users')->get();
+        
         $user = User::where('roles_id','=',2)
         ->orwhere('roles_id','=',3)
         ->orwhere('roles_id','=',4)
         ->orderBy('id','asc')->get();
-        // mengirim data user ke view index
         //return view('admin.users', ['user' => $user]);
         return view("admin.users", compact('user'));
     }
@@ -40,9 +38,8 @@ class UserController extends Controller
             'name'          => 'required',
             'email'         => 'required|email|unique:users'
         ];
- 
         $messages = [
-            'nidn.unique'           => 'Nidn sudah terdaftar.',
+            'nidn.unique'            => 'Nidn sudah terdaftar.',
             'name.required'          => 'Nama wajib diisi.',
             'password.min'           => 'Password minimal diisi dengan 5 karakter.',
             'email.required'         => 'Email wajib diisi.',
@@ -116,6 +113,22 @@ class UserController extends Controller
     public function edit2(Request $request, $id)
     {
         // update data dosen
+        $rules = [
+            'nidn'          => 'required|unique:users',
+            'name'          => 'required',
+            'email'         => 'required|email|unique:users'
+        ];
+ 
+        $messages = [
+            'nidn.unique'           => 'Nidn sudah terdaftar.',
+            'name.required'          => 'Nama wajib diisi.',
+            'email.required'         => 'Email wajib diisi.',
+            'email.email'            => 'Email tidak valid.',
+            'email.unique'           => 'Email sudah terdaftar.',
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
 
         $user1 = User::find($id);
         

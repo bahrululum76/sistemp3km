@@ -30,6 +30,13 @@ Auth::routes();
 Route::middleware(['is_admin'])->prefix('/admin')->group(function () {
     Route::get('/Home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin_home');
 
+    //kegiatan
+    Route::get('kegiatan', [App\Http\Controllers\KegiatanController::class, 'index'])->name('kegiatan');
+    Route::post('kegiatan/store', [App\Http\Controllers\KegiatanController::class, 'store'])->name('kegiatan/store');
+    Route::post('kegiatan/edit{id}', [App\Http\Controllers\KegiatanController::class, 'edit'])->name('kegiatan/edit');
+    Route::delete('kegiatan/delete{id}', [App\Http\Controllers\KegiatanController::class, 'delete'])->name('kegiatan/delete');
+    
+
     //user
     Route::get('users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
     Route::post('users/store', [App\Http\Controllers\UserController::class, 'store'])->name('users/store');
@@ -146,7 +153,7 @@ Route::middleware(['is_dosen'])->prefix('/dosen')->group(function () {
     
     
     //unduhpenelitian
-    Route::get('informasi', [App\Http\Controllers\InformasiController::class, 'index'])->name('informasi');
+    Route::get('informasi{id}', [App\Http\Controllers\InformasiController::class, 'index'])->name('informasi');
     
     Route::get('editprofil', [App\Http\Controllers\EditProfilController::class, 'index_dosen'])->name('editprofil');
     Route::post('editprofil/edit{id}', [App\Http\Controllers\EditProfilController::class, 'edit2'])->name('editprofil/edit');

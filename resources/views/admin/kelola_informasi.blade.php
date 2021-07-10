@@ -137,7 +137,7 @@
 
                   <div class="form-group">
                     <label >Keterangan</label>
-                        <input type="text" class="form-control" name="keterangan" required="required" value="{{$p->keterangan}}" >
+                    <textarea class="ckeditor" id="ckeditor" name="keterangan" value="{{$p->keterangan}}" required="required">{{$p->keterangan}}</textarea>
                   </div>
 
                   <div class="form-group">

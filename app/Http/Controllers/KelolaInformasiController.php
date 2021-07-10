@@ -19,10 +19,20 @@ class KelolaInformasiController extends Controller
     }
     public function store(Request $request)
     {
+        $rules = [
+            'file'          => 'required|mimes:docx,pdf,xls'
+        ];
+ 
+        $messages = [
+            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx, Pdfdan Xls',
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+
         // insert data ke table user
         $informasi = new Informasi;
         $informasi->judul = $request->judul;
-        $informasi-> keterangan =htmlspecialchars_decode($request->keterangan);
+        $informasi-> keterangan =$request->keterangan;
 
         if ($request->hasFile('file')) {
 
@@ -54,7 +64,13 @@ class KelolaInformasiController extends Controller
     public function edit(Request $request, $id)
     {
         // update data dosen
-
+        $rules = [
+            'file'          => 'required|mimes:docx,pdf,xls'
+        ];
+ 
+        $messages = [
+            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx, Pdfdan Xls',
+        ];
         $informasi = Informasi::find($id);
         
         

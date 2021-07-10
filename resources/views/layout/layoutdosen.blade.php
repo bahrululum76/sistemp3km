@@ -60,12 +60,7 @@ The above copyright notice and this permission notice shall be included in all c
                             <p class="teks-sidebar">Dashboard</p>
                         </a>
                     </li>
-                    <!-- <li class="nav-item{{ (Route::current()->uri === 'Keloladosen') ? ' active' : '' }}">
-                        <a class="nav-link" href="{{Route('informasi')}}">
-                            <i class="material-icons">person</i>
-                            <p class="teks-sidebar">Unduh Informasi</p>
-                        </a>
-                    </li> -->
+                  
                     <!-- <li class="nav-item{{ (Route::current()->uri === 'proposal') ? ' active' : 'proposal' }}">
                         <a class="nav-link" href="{{route('proposal')}}">
                             <i class="material-icons">content_paste</i>

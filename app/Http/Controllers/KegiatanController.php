@@ -14,7 +14,9 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        //
+        $kegiatan=Kegiatan::all();
+
+        return view("admin.kegiatan",compact('kegiatan'));
     }
 
     /**
@@ -35,7 +37,32 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'foto'          => 'required|mimes:jpg,png,jpeg,gif,svg'
+        ];
+ 
+        $messages = [
+            'file.mimes'             => 'Format Foto tidak mendukung',
+        ];
+
+        $kegiatan = new Kegiatan;
+        $kegiatan->nama = $request->nama;
+        $kegiatan-> detail =$request->detail;
+
+        if ($request->hasFile('foto')) {
+
+            $filename = $request->file('foto')->getClientOriginalName();
+
+
+            $request->file('foto')->storeAs(
+                'public/kegiatan',$filename
+            );
+          
+            $kegiatan->foto=$filename;
+        }
+        
+        $kegiatan->save();
+        return redirect('admin/kegiatan')->with(['success' => 'Data Berhasil ditambahkan']);
     }
 
     /**
@@ -55,21 +82,30 @@ class KegiatanController extends Controller
      * @param  \App\Models\Kegiatan  $kegiatan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kegiatan $kegiatan)
+   
+    public function edit(Request $request, $id)
     {
-        //
-    }
+        
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Kegiatan  $kegiatan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Kegiatan $kegiatan)
-    {
-        //
+        $kegiatan = Kegiatan::find($id);
+        
+        
+        $kegiatan->nama =$request->nama;
+        $kegiatan->detail= $request->detail;
+        if ($request->hasFile('foto')) {
+
+            $filename = $request->file('foto')->getClientOriginalName();
+
+
+            $request->file('foto')->storeAs(
+                'public/kegiatan',$filename
+            );
+          
+            $kegiatan->foto=$filename;
+        }
+        $kegiatan->save();
+       
+        return redirect('admin/kegiatan')->with(['success' => 'Data Berhasil diubah']);
     }
 
     /**
@@ -78,8 +114,12 @@ class KegiatanController extends Controller
      * @param  \App\Models\Kegiatan  $kegiatan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kegiatan $kegiatan)
+    public function delete($id)
     {
-        //
+        $kegiatan = Kegiatan::find($id);
+        $kegiatan->delete();
+
+        Storage::delete('public/kegiatan'.$kegiatan->foto);
+        return redirect('admin/kegiatan');
     }
 }

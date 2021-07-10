@@ -116,7 +116,7 @@
             </thead>
             <tbody class="tbody">               
                 <tr class="thead">
-                    <td >{{ $p->detail_revisi }}</td>
+                    <td >{!! $p->detail_revisi !!}</td>
                     <!-- <td align="center">{{$p->category_id}}</td> -->
                 </tr>                
             </tbody>

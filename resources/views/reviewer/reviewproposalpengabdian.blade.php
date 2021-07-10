@@ -49,7 +49,7 @@
                     
                     <td > 
                         <button   class="btn btn-danger btn-sm " data-toggle="modal" data-target="#Revisi-{{ $p->id }}" value="">Revisi</button> 
-                        <form id="delete-obat-{{$p->id}}" action=" {{ url('reviewer/verifikasi_proposal/terima'.$p->id) }}" method="POST" style="display: inline" data-id="{{$p->id}}">
+                        <form id="delete-obat-{{$p->id}}" action=" {{ url('reviewer/verifikasi_proposal_pengabdian/terima'.$p->id) }}" method="POST" style="display: inline" data-id="{{$p->id}}">
                             @csrf
                          
                             <button type="button" class="btn btn-success btn-sm" onclick="confirmDelete('delete-obat-{{$p->id}}')">Terima</button>
@@ -87,19 +87,41 @@
             <!-- body modal -->
             <div class="modal-body">
 
-            <form action="{{ url('reviewer/reviewproposalpengabdian/'.$p->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('reviewer/verifikasi_proposal_pengabdian/revisi'.$p->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
 
                 <!-- <div class="form-group">
                     <label >Revisi</label>
                         <input type="text" class="form-control" name="revisi"  required="required" >
                 </div> -->
+                <div class="form-group">
+                <label >Nidn</label>
+                        <input type="text" class="form-control" value="{{$p->user->nidn}}"  required="required" readonly >
+                </div>
+                <div class="form-group">
+                    <label >Nama</label>
+                        <input type="text" class="form-control" value="{{$p->user->name}}"  required="required" readonly >
+                </div>
+
+                <div class="form-group">
+                    <label >Prodi</label>
+                        <input type="text" class="form-control" value="{{$p->user->prodi}}"  required="required" readonly >
+                </div>
+                <div class="form-group">
+                    <label >Judul</label>
+                        <input type="text" class="form-control" value="{{$p->judul}}"  required="required" readonly >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Abstrak</label>
+                    <textarea class="ckeditor" id="ckeditor" name="abstrak" value="{{$p->abstrak}}" required="required" readonly>{{$p->abstrak}}</textarea>
+                </div>
 
                 <div class="form-group">
                     <label >Detail Revisi</label>
-                        <input type="text" class="form-control" name="detail_revisi"  required="required" >
+                    <textarea class="ckeditor" id="ckeditor" name="detail_revisi"  required="required" ></textarea>
                 </div>
-
 
                   <button type="submit" class="btn btn-primary">Simpan</button>
             </form>

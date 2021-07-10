@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('alamat');
             $table->char('no_hp');
-            $table->foreignId('status_id')->references('id')->on('statuses');
             $table->foreignId('roles_id')->references('id')->on('roles');
             $table->rememberToken();
             $table->timestamps();

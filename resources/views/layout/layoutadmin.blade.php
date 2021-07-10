@@ -72,12 +72,12 @@ The above copyright notice and this permission notice shall be included in all c
                             <p class="teks-sidebar">Kelola Informasi</p>
                         </a>
                     </li>
-                    <!-- <li class="nav-item ">
-                        <a class="nav-link" href="#">
-                            <i class="material-icons">library_books</i>
-                            <p class="teks-sidebar">Penelitian & pengabdian</p>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{route('kegiatan')}}">
+                            <i class="material-icons">article</i>
+                            <p class="teks-sidebar">Kelola Kegiatan</p>
                         </a>
-                    </li> -->
+                    </li>
                     <li class="nav-item dropdown">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">library_books</i>
@@ -335,13 +335,7 @@ The above copyright notice and this permission notice shall be included in all c
     <script src="../assets/demo/demo.js"></script>
     <script type="text/javascript" src="{{asset('ckeditor/ckeditor.js')}}"></script>
 
-    {{-- <script>
-        $(document).ready(function () {
-            // Javascript method's body can be found in assets/js/demos.js
-            md.initDashboardPageCharts();
 
-        });
-    </script> --}}
 
     {{-- <script>//<![CDATA[
         $("#Night").click(function(){

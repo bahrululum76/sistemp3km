@@ -121,7 +121,7 @@
 
                 <div class="form-group">
                     <label >Detail Revisi</label>
-                    <textarea class="ckeditor" id="ckeditor" name="detail_revisi" value="{{$p->detail_revisi}}" required="required" >{{$p->detail_revisi}}</textarea>
+                    <textarea class="ckeditor" id="ckeditor" name="detail_revisi"  required="required" ></textarea>
                 </div>
 
 

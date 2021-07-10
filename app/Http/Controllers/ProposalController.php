@@ -7,8 +7,9 @@ use App\Models\Proposal;
 use App\Models\Dana;
 use Mail;
 use App\Mail\RevMail;
-use Validator;
+
 use Auth;
+use Validator;
 use Illuminate\Support\Facades\DB;
 
 class ProposalController extends Controller
@@ -46,7 +47,7 @@ class ProposalController extends Controller
     {
         $rules = [
             'judul'          => 'unique:proposals',
-            'file'          => 'required|mimes:docx,pdf|max:2048'
+            'file'          => 'required|mimes:docx,pdf'
         ];
  
         $messages = [
@@ -113,7 +114,7 @@ class ProposalController extends Controller
     {
         $rules = [
             
-            'file'          => 'required|mimes:docx,pdf|max:2048'
+            'file'          => 'required|mimes:docx,pdf'
         ];
  
         $messages = [
@@ -183,7 +184,25 @@ class ProposalController extends Controller
     }
 
     public function dana_store(Request $request){
-        
+        $rules = [
+            'pelaksanaan'          => 'max:10',
+            'bahan'                => 'max:10',
+            'Transport'                => 'max:10',
+            'sewa'                => 'max:10'
+        ];
+ 
+        $messages = [
+            'pelaksanaan.max'           => 'Input angka dibatasi 10 digit',
+            'bahan.max'             => 'Input angka dibatasi 10 digit',
+            'Transfort.max'             => 'Input angka dibatasi 10 digit',
+            'sewa.max'             => 'Input angka dibatasi 10 digit',
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+         
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
         $proposal = new Proposal;
 
         

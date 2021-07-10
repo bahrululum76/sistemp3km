@@ -13,18 +13,23 @@ class VerifikasiController extends Controller
 {
     public function index()
     {
-        // $proposal= DB::table('proposals')->where('user_id', '=',Auth::User()->id)->get();
-        $proposal = Proposal::where('status_id','=',3)
+    
+        
+        $user=User::all();
+        $proposal= DB::table('proposals')
+        ->select('user_id','reviewer_id','category_id')
+        ->where('reviewer_id','=',Auth::user()->id)
         ->where('category_id','=',1)
-        ->where('reviewer_id','=',Auth::User()->id)
-        ->get(); 
-
-        return view("reviewer.verifikasi_proposal", compact('proposal'));
+        ->where('status_id','=',3)
+        ->distinct()->get();
+        
+        // dd($proposal);
+        return view("reviewer.verifikasi_proposal", compact('proposal','user'));
     }
     public function detail(Request $request, $id){
         $proposal= Proposal::find($id);
 
-        $proposal = Proposal::where('id','=',$id)
+        $proposal = Proposal::where('user_id','=',$id)
         ->where('status_id','=',3)
         ->where('category_id','=',1)
         ->get();
@@ -35,16 +40,21 @@ class VerifikasiController extends Controller
 
     public function terima(Request $request, $id){
         $proposal= Proposal::find($id);
+        if ($proposal->id= $id){
 
-        $proposal->status_id= 1;
+            $proposal1= Proposal::where('user_id','=',$proposal->user_id)
+            ->update(['status_id' => 1]);
 
-        $proposal->save();
+        }
+        
+        
+
 
         $prop =DB::table('proposals')->where('id','=',$proposal->id)->pluck('judul');
         $user2 =DB::table('users')->where('id','=',$proposal->user_id)->pluck('name');
         $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('name');
         $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
-        // ->where('id','=',$proposal->user_id);
+        
         $detail =[
             'title'=>'Review Proposal',
             'body'=>  ' Proposal Pengabdian, atas nama'.$user2.' dengan judul'.$prop.'sudaah tersedia untuk di koreksi oleh anda , silahkan cek website'
@@ -52,7 +62,7 @@ class VerifikasiController extends Controller
         
         Mail::to($user)->send(new RevMail($detail));
 
-        return redirect('reviewer/verifikasi_proposal')->with(['success' => 'Proposal Direvisi']);
+        return redirect('reviewer/verifikasi_proposal');
     }
 
     public function revisi(Request $request, $id){

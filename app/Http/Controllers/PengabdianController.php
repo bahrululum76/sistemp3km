@@ -81,7 +81,7 @@ class PengabdianController extends Controller
     {
         // update data dosen
 
-        $pengabdian = Penelitian::find($id);
+        $pengabdian = Pengabdian::find($id);
         
         
         $pengabdian->pendanaan =$request->pendanaan;

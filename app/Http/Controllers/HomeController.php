@@ -11,6 +11,7 @@ use App\Models\Proposal;
 use App\Models\Penelitian;
 use App\Models\Pengabdian;
 use App\Models\Kemajuan;
+use App\Models\Kegiatan;
 
 class HomeController extends Controller
 {
@@ -40,7 +41,8 @@ class HomeController extends Controller
     public function HomeDosen()
     {
         $informasi = Informasi::all();
-        return view('dosen.home',compact('informasi'));
+        $kegiatan =Kegiatan::all();
+        return view('dosen.home',compact('informasi','kegiatan'));
     }
     public function HomeLppm()
     {   

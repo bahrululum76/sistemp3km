@@ -7,9 +7,9 @@ use App\Models\Informasi;
 
 class InformasiController extends Controller
 {
-    public function index(){
+    public function index($id){
         // $informasi = DB::table('informasies')->get();
-        $informasi = Informasi::all();
+        $informasi = Informasi::where('id',$id)->get();
 
         return view("dosen.unduhinformasi", compact('informasi'));
     }

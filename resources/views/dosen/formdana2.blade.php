@@ -31,58 +31,26 @@
           
             <div class="form-group">
               <label for="exampleInputEmail1">Pelaksanaan</label>
-              <input type="text" class="form-control" onkeyup="convertToRupiah(this);" aria-describedby="emailHelp" name="pelaksanaan" placeholder="" required="requaired">
+              <input type="number"  class="form-control"  aria-describedby="emailHelp" name="pelaksanaan" placeholder="" required="requaired">
               <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Bahan Habis Pakai</label>
-              <input type="text" class="form-control" onkeyup="convertToRupiah(this);" name="bahan" required="requaired">
+              <input type="number"  class="form-control"  name="bahan" required="requaired">
             </div>
             <div class="form-group">
               <label for="exampleInputText">Transport</label>
-              <input type="text"  class="form-control" onkeyup="convertToRupiah(this);" name="Transport" required="requaired">
+              <input type="number"    class="form-control"  name="Transport" required="requaired">
             </div>
             <div class="form-group">
               <label for="exampleInputText">Sewa Peralatan</label>
-              <input type="text"  class="form-control" onkeyup="convertToRupiah(this);" name="sewa" required="requaired">
+              <input type="number"    class="form-control"  name="sewa" required="requaired">
             </div>
             
             <button type="submit" class="btn btn-primary">Simpan</button>
           </form>
         </div>
 </div>
-<script type="text/javascript">
-		
-		function convertToRupiah(objek) {
-	  separator = ".";
-	  a = objek.value;
-	  b = a.replace(/[^\d]/g,"");
-	  c = "";
-	  panjang = b.length; 
-	  j = 0; 
-	  for (i = panjang; i > 0; i--) {
-	    j = j + 1;
-	    if (((j % 3) == 1) && (j != 1)) {
-	      c = b.substr(i-1,1) + separator + c;
-	    } else {
-	      c = b.substr(i-1,1) + c;
-	    }
-	  }
-	  objek.value = c;
 
-	}       
-
-	function convertToAngka()
-	{	var nominal= document.getElementById("nominal").value;
-		var angka = parseInt(nominal.replace(/,.*|[^0-9]/g, ''), 10);
-		document.getElementById("angka").innerHTML= angka;
-	}       
-
-	function convertToAngka()
-	{	var nominal1= document.getElementById("nominal1").value;
-		var angka1 = parseInt(nominal.replace(/,.*|[^0-9]/g, ''), 10);
-		document.getElementById("angka1").innerHTML= angka;
-	}
-	</script>
 
 @endsection
