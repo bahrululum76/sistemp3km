@@ -12,6 +12,7 @@ use App\Models\Penelitian;
 use App\Models\Pengabdian;
 use App\Models\Kemajuan;
 use App\Models\Kegiatan;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -33,7 +34,9 @@ class HomeController extends Controller
     public function index()
     {
         $informasi = Informasi::all();
-        $user =User::all();
+        $user =User::where('roles_id','=',2)
+        ->where('roles_id','=',3)
+        ->where('roles_id','=',4)->get();
         $pengabdian=Pengabdian::all();
         $penelitian=Penelitian::all();
         return view('admin.home', compact('informasi','user','penelitian','pengabdian'));
@@ -50,12 +53,20 @@ class HomeController extends Controller
         $kemajuan2=Kemajuan::where('category_id','=',2)->get();
         $pengabdian=Pengabdian::all();
         $penelitian=Penelitian::all();
-        $proposal1=Proposal::all();
+        $proposal1=Proposal::where('reviewer_id','=',null);
         // $proposal2=Proposal::where('category_id','=',2)->get();
         return view('lppm.home',compact('proposal1','penelitian','kemajuan','pengabdian'));
     }
     public function HomeReviewer()
-    {
-        return view('reviewer.home');
+    {   
+        $proposal =Proposal::where('category_id','=',1)
+        ->where('reviewer_id','=',Auth::user()->id)
+        ->where('status_id','=',3)
+        ->get();
+        $proposal2 =Proposal::where('category_id','=',2)
+        ->where('reviewer_id','=',Auth::user()->id)
+        ->where('status_id','=',3)
+        ->get();
+        return view("reviewer.home", compact('proposal', 'proposal2'));
     }
 }

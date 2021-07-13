@@ -18,9 +18,7 @@
 
 <div class="card shadow ">
     <div class="card-body">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Kelola Admin</h1>
-        </div>
+       
         <button class="btn btn-sm btn-primary mt-4 mb-2" id="createNewItem" data-toggle="modal" data-target="#ModalTambah"  >Tambah</button>
       <div class="table-responsive">
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
@@ -60,7 +58,7 @@
 
                     <td >
                         <button   class="btn btn-primary btn-sm " data-toggle="modal" data-target="#EditModal-{{ $p->id }}" value="">Ubah</button>
-                        <button class="btn btn-sm btn-warning " id="createNewItem" data-toggle="modal" data-target="#EditModalPassword-{{ $p->id }}"  >Ganti Password</button>
+                        <button class="btn btn-sm btn-warning " id="createNewItem" data-toggle="modal" data-target="#EditModalPassword-{{ $p->id }}"  >Ubah Password</button>
                         
                         <form id="delete-obat-{{$p->id}}" action=" {{ url('lppm/kelolaadmin/delete'.$p->id) }}" method="post" style="display: inline" data-id="{{$p->id}}">
                             {{csrf_field()}}
@@ -195,6 +193,15 @@
                         <input type="text" class="form-control" name="name" value="{{$p->name}}" required="required">
                 </div>
 
+                  <div class="form-group">
+                    <label >Prodi</label>
+                    <select class="custom-select" name="prodi"  required="required">
+                        <option value="{{$p->prodi}}">{{$p->prodi}}</option>
+                        <option value="Informatika">Informatika</option>
+                        <option value="Industri">Industri</option>
+                        <option value="Sipil">Sipil</option>
+                    </select>
+                 </div>
 
             <div class="form-group">
               <label >Email</label>

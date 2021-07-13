@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Dana;
 use App\Models\Proposal;
 use Mail;
 use App\Mail\RevMail;
@@ -20,6 +21,7 @@ class PilihReviewController extends Controller
 
         $user = User::where('roles_id', '=', 4)->get();
         $proposal = Proposal::where( 'category_id','=',1 )
+        ->where('reviewer_id','=', null )
         ->where('status_id','=',2)
         ->get();
         // dd($proposal);
@@ -83,13 +85,14 @@ class PilihReviewController extends Controller
         
         $user= User::
         where('roles_id','=',4)->get();
+        $dana=Dana::where('proposal_id','=',$proposal->id)->get();
         $proposal = Proposal::where('id','=',$id)
         ->where('category_id','=',1)
         ->where('status_id','=',2)
         
         ->get();
 
-        return view("lppm.detailpilihreviewproposal", compact('proposal', 'user'));
+        return view("lppm.detailpilihreviewproposal", compact('proposal', 'user','dana'));
 
     }
 }

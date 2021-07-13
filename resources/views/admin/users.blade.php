@@ -21,9 +21,7 @@
 <div class="card shadow ">
 
     <div class="card-body">
-    <div class="d-sm-flex align-items-center justify-content-between ">
-    <h1 class="h3 mb-0 text-gray-800">PENGGUNA</h1>
-</div>
+
     @if (count($errors) > 0)
     <div class="alert alert-danger alert-block">
     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -104,7 +102,7 @@
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah data User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah data Dosen</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -126,7 +124,7 @@
                   <div class="form-group">
                     <label >Prodi</label>
                     <select class="custom-select" name="prodi"  required="required">
-                        <option selected>Prodi</option>
+                        <option value="" >Prodi</option>
                         <option value="Informatika">Informatika</option>
                         <option value="Industri">Industri</option>
                         <option value="Sipil">Sipil</option>
@@ -136,7 +134,7 @@
                  <div class="form-group">
                     <label >Jabatan</label>
                     <select class="custom-select" name="jabatan" id='jabatan' required>
-                        <option selected>Jabatan</option>
+                        <option value="" >Jabatan</option>
                         <!-- <option value="1">admin</option> -->
                         <option value="Asisten Ahli">Asistem Ahli</option>
                         <option value="Lektor">Lektor</option>
@@ -168,7 +166,7 @@
                  <div class="form-group">
                     <label >Hak Akses</label>
                     <select class="custom-select" name="roles_id" id='roles_id' required>
-                        <option selected>Hak akses</option>
+                        <option value="" >Hak akses</option>
                         <!-- <option value="1">admin</option> -->
                         <option value="2">lppm</option>
                         <option value="3">dosen</option>
@@ -196,7 +194,7 @@
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ubah data User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ubah data Dosen</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -213,7 +211,7 @@
 
                 <div class="form-group" hidden>
                     <label >Nidn</label>
-                        <input type="text" class="form-control" name="nidn" value="{{$p->nidn}}" required="required">
+                        <input type="number" class="form-control" name="nidn" value="{{$p->nidn}}" required="required">
                 </div>
 
                   <div class="form-group">
@@ -391,7 +389,6 @@
                 <label >Np Hp</label>
                     <input type="number" class="form-control" name="no_hp" value="{{$p->no_hp}}" required="required" >
              </div>
-
     
             <div class="form-group" hidden>
                 <label >Hak Akses</label>
@@ -454,7 +451,7 @@ $('#pass, #confirm').on('keyup', function() {
 Swal.fire({
   title: 'Are you sure?',
   text: "You won't be able to revert this!",
-  type: 'warning',
+  icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',

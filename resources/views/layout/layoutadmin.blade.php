@@ -19,7 +19,7 @@ The above copyright notice and this permission notice shall be included in all c
     <meta charset="utf-8" />
 
 
-
+    
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/logo-teknik.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -40,6 +40,7 @@ The above copyright notice and this permission notice shall be included in all c
     <link rel="stylesheet" href="{{ asset('assets/css/dark-mode.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    @livewireStyles
 </head>
 <body id="main">
     <div class="wrapper ">
@@ -54,31 +55,31 @@ The above copyright notice and this permission notice shall be included in all c
                 </a></div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item">
+                    <li class="nav-item {{Request::path() ==='admin/Home'  ? 'active': ''}}" >
                         <a class="nav-link" href="{{route ('admin_home')}}">
                             <i class="material-icons">dashboard</i>
                             <p class="teks-sidebar">Dashboard</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{Request::path() ==='admin/users'  ? 'active': ''}}">
                         <a class="nav-link" href="{{route ('users')}}">
                             <i class="material-icons">person</i>
                             <p class="teks-sidebar">Kelola Data Dosen</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{Request::path() ==='admin/kelolainformasi'  ? 'active': ''}}" >
                         <a class="nav-link" href="{{route('kelolainformasi')}}">
                             <i class="material-icons">content_paste</i>
                             <p class="teks-sidebar">Kelola Informasi</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{route('kegiatan')}}">
+                    <li class="nav-item {{Request::path() ==='admin/kegiatan'? 'active': ''}} ">
+                        <a class="nav-link "  href="{{route('kegiatan')}}">
                             <i class="material-icons">article</i>
                             <p class="teks-sidebar">Kelola Kegiatan</p>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{Request::path() ==='admin/kelolapenelitian'  ? 'active': ''}} || {{Request::path() ==='admin/kelolapengabdian'  ? 'active': ''}}">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">library_books</i>
                                     <p class="teks-sidebar">
@@ -92,7 +93,7 @@ The above copyright notice and this permission notice shall be included in all c
                                 </div> 
                     </li>
 
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{Request::path() ==='admin/proposalpenelitian' ? 'active': ''}} || {{Request::path() ==='admin/proposalpengabdian' ? 'active': ''}} " >
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">content_paste</i>
                                     <p class="teks-sidebar">
@@ -114,7 +115,7 @@ The above copyright notice and this permission notice shall be included in all c
             <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
-                        <a class="navbar-brand" href="javascript:;">Dashboard</a>
+                        <a class="navbar-brand" href="javascript:;"></a>
                         <ul>
                             <li class="nav-item" style="list-style:none">
 
@@ -394,6 +395,6 @@ The above copyright notice and this permission notice shall be included in all c
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
 </script>
-
+@livewireScripts
 </body>
 </html>

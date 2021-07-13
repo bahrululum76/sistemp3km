@@ -50,7 +50,9 @@ Route::middleware(['is_admin'])->prefix('/admin')->group(function () {
     Route::delete('kelolainformasi/delete{id}', [App\Http\Controllers\KelolaInformasiController::class, 'delete']);
 
     //proposal_penelitian
-    Route::get('proposalpenelitian', [App\Http\Controllers\ProposalController::class, 'index_adm'])->name('proposalpenelitian');
+    Route::get('proposalpenelitian', function(){
+        return view('admin.proposalpenelitian');
+    });
     Route::get('proposalpengabdian', [App\Http\Controllers\ProposalPengabdianController::class, 'index_adm'])->name('proposalpengabdian');
     
 
@@ -105,9 +107,14 @@ Route::middleware(['is_lppm'])->prefix('/lppm')->group(function () {
     Route::post('kelolaadmin/store', [App\Http\Controllers\UserController::class, 'store2'])->name('kelolaadmin/store');
     Route::post('kelolaadmin/edit{id}', [App\Http\Controllers\UserController::class, 'edit2'])->name('kelolaadmin/edit');
     Route::delete('kelolaadmin/delete{id}', [App\Http\Controllers\UserController::class, 'delete2']);
+  
+    Route::get('kelolareviewer', [App\Http\Controllers\UserController::class, 'index_rev'])->name('kelolareviewer');
+    Route::post('kelolareviewer/edit{id}', [App\Http\Controllers\UserController::class, 'edit3'])->name('kelolareviewer/edit');
+    Route::post('kelolareviewer/rev', [App\Http\Controllers\UserController::class, 'rev'])->name('kelolareviewer/rev');
+
     Route::get('dana', [App\Http\Controllers\DanaController::class, 'index1'])->name('dana');
     Route::get('dana_', [App\Http\Controllers\DanaController::class, 'index2'])->name('dana_');
-
+    
 });
 
 Route::middleware(['is_dosen'])->prefix('/dosen')->group(function () {

@@ -77,8 +77,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'email@es.com',
             'password' => Hash::make(123456),
             'alamat' => 'ok',
-            'no_hp' => 'ok',
-            'status_id'=> 2,
+            'no_hp' => '09767',
+           
             'roles_id' => 1,
             
         ]);
@@ -90,8 +90,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'email@mail.com',
             'password' => Hash::make(123456),
             'alamat' => 'ok',
-            'no_hp' => 'ok',
-            'status_id'=> 2,
+            'no_hp' => '86786',
+            
             'roles_id' => 2,
             
         ]);
@@ -103,8 +103,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'mochlucam@gmail.com',
             'password' => Hash::make(123456),
             'alamat' => 'ok',
-            'no_hp' => 'ok',
-            'status_id'=> 2,
+            'no_hp' => '77857',
+            
             'roles_id' => 3,
         ]);
         User::create([
@@ -115,8 +115,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'mochlucam3456@gmail.com',
             'password' => Hash::make(123456),
             'alamat' => 'ok',
-            'no_hp' => 'ok',
-            'status_id'=> 2,
+            'no_hp' => '765564',
+            
             'roles_id' => 4,
         ]);
 

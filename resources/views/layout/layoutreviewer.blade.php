@@ -54,15 +54,15 @@ The above copyright notice and this permission notice shall be included in all c
                 </a></div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item {{ (Route::current()->uri === 'Home') ? ' active' : 'Home' }}">
+                    <li class="nav-item {{ (Route::current()->uri === 'reviewer/Home') ? ' active' : '' }}">
                         <a class="nav-link" href="Home">
-                            <i class="fa fa-dashboard"></i>
+                            <i class="material-icons">dashboard</i>
                             <p class="teks-sidebar">Dashboard</p>
                         </a>
                     </li>
                     
 
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{ (Route::current()->uri === 'reviewer/verifikasi_proposal') ? ' active' : '' }} || {{ (Route::current()->uri === 'reviewer/verifikasi_proposal_pengabdian') ? ' active' : '' }} || {{ (Route::current()->uri === 'reviewer/reviewproposal/{id}') ? ' active' : '' }} || {{ (Route::current()->uri === 'reviewer/reviewproposalpengabdian/{id}') ? ' active' : '' }}  " >
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">book</i>
                                     <p class="teks-sidebar">
@@ -98,7 +98,7 @@ The above copyright notice and this permission notice shall be included in all c
             <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
-                        <a class="navbar-brand" href="javascript:;">Dashboard</a>
+                        <a class="navbar-brand" href="javascript:;"></a>
                         <ul>
                             <li class="nav-item" style="list-style:none">
 
@@ -141,7 +141,7 @@ The above copyright notice and this permission notice shall be included in all c
 
                             <li class="nav-item">
                                 <a class="nav-link" href="javascript:;">
-                                    <i class="material-icons">dashboard</i>
+                                    <i class="material-icons"></i>
 
                                     <p class="d-lg-none d-md-block">
                                         Stats

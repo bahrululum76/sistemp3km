@@ -18,7 +18,7 @@ class UserController extends Controller
         $user = User::where('roles_id','=',2)
         ->orwhere('roles_id','=',3)
         ->orwhere('roles_id','=',4)
-        ->orderBy('id','asc')->get();
+        ->orderBy('id','ASC')->get();
         //return view('admin.users', ['user' => $user]);
         return view("admin.users", compact('user'));
     }
@@ -30,13 +30,22 @@ class UserController extends Controller
         return view("lppm.kelolaadmin", compact('user'));
     }
 
+    public function index_rev(){
+        $user = User::where('roles_id','=',4)->get();
+        $user1 =User::all();
+        return view("lppm.kelolareviewer", compact('user','user1'));
+    }
+
     public function store(Request $request)
     {
         // insert data ke table user
         $rules = [
             'nidn'          => 'required|unique:users',
             'name'          => 'required',
-            'email'         => 'required|email|unique:users'
+            'email'         => 'required|email|unique:users',
+            'prodi'         => 'required',
+            'jabatan'         => 'required',
+            'roles_id'         => 'required'
         ];
         $messages = [
             'nidn.unique'            => 'Nidn sudah terdaftar.',
@@ -45,6 +54,9 @@ class UserController extends Controller
             'email.required'         => 'Email wajib diisi.',
             'email.email'            => 'Email tidak valid.',
             'email.unique'           => 'Email sudah terdaftar.',
+            'prodi.required'        =>  'prodi tidak boleh kosong',
+            'jabatan.required'       => 'jabatan tidak boleh kosong',
+            'roles_id.required'     =>  'hak akses tidak boleh kosong',
         ];
  
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -59,11 +71,10 @@ class UserController extends Controller
         $user->prodi = $request->prodi;
         $user->jabatan = $request->jabatan;
         $user->email = $request->email;
-        $user->password = bcrypt('12345');
+        $user->password = bcrypt(12345);
         $user->alamat = $request->alamat;
         $user->no_hp = $request->no_hp;
         $user->roles_id = $request->roles_id;
-        $user->status_id=2;
         $user->save();
         // 'name' => $request->nama,
         // 'email' => $request->email,
@@ -104,7 +115,6 @@ class UserController extends Controller
         $user->alamat = $request->alamat;
         $user->no_hp = $request->no_hp;
         $user->roles_id = 1;
-        $user->status_id=2;
         $user->save();
 
         return redirect('lppm/kelolaadmin')->with(['success' => 'Data Berhasil ditambahkan']);
@@ -144,13 +154,40 @@ class UserController extends Controller
         return redirect('lppm/kelolaadmin')->with(['success' => 'Data Berhasil Diubah']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+    public function edit3(Request $request, $id)
+    {
+        // update data dosen
+        $rules = [
+            'nidn'          => 'required|unique:users',
+            'name'          => 'required',
+            'email'         => 'required|email|unique:users'
+        ];
+ 
+        $messages = [
+            'nidn.unique'           => 'Nidn sudah terdaftar.',
+            'name.required'          => 'Nama wajib diisi.',
+            'email.required'         => 'Email wajib diisi.',
+            'email.email'            => 'Email tidak valid.',
+            'email.unique'           => 'Email sudah terdaftar.',
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+
+        $user1 = User::find($id);
+        
+       
+        $user1->name = $request->name;
+        $user1->prodi = $request->prodi;
+        $user1->email = $request->email;
+        $user1->password = bcrypt($request->password);
+        $user1->alamat = $request->alamat;
+        $user1->no_hp = $request->no_hp;
+        $user1->roles_id = $request->roles_id;
+        $user1->save();
+
+        return redirect('lppm/kelolareviewer')->with(['success' => 'Data Berhasil Diubah']);
+    }
 
     public function edit(Request $request, $id)
     {
@@ -170,6 +207,13 @@ class UserController extends Controller
         $user1->save();
 
         return redirect('admin/users')->with(['success' => 'Data Berhasil Diubah']);
+    }
+
+    public function rev(Request $request){
+        $user=User::where('id','=',$request->id)->update(['roles_id' => 4]);
+        
+    
+        return redirect('lppm/kelolareviewer')->with(['success' => 'Data Berhasil ditambah']);
     }
 
     public function delete2($id)

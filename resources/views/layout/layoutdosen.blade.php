@@ -54,7 +54,7 @@ The above copyright notice and this permission notice shall be included in all c
                 </a></div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item{{ (Route::current()->uri === 'Dashboard') ? ' active' : '' }}">
+                    <li class="nav-item{{ (Route::current()->uri === 'dosen/Home') ? ' active' : '' }}">
                         <a class="nav-link" href="Home">
                             <i class="material-icons">dashboard</i>
                             <p class="teks-sidebar">Dashboard</p>
@@ -73,7 +73,7 @@ The above copyright notice and this permission notice shall be included in all c
                             <p class="teks-sidebar">Pengajuan Proposal Pengabdian</p>
                         </a>
                     </li> -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{Request::path() ==='dosen/proposal'  ? 'active': ''}} || {{Request::path() ==='dosen/proposal_pengabdian'  ? 'active': ''}}">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">content_paste</i>
                                     <p class="teks-sidebar">
@@ -98,7 +98,7 @@ The above copyright notice and this permission notice shall be included in all c
                             <p class="teks-sidebar">Unggah Kemajuan pengabdian</p>
                         </a>
                     </li> -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{Request::path() ==='dosen/unggahkemajuanpenelitian'  ? 'active': ''}} || {{Request::path() ==='dosen/unggahkemajuanpengabdian'  ? 'active': ''}}" >
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">library_books</i>
                                     <p class="teks-sidebar">
@@ -119,7 +119,7 @@ The above copyright notice and this permission notice shall be included in all c
                     <li>
                         <a class="nav-link" href="pengabdian"><i class="fa fa-book"></i> Unggah Laporan Akhir pengabdian </a>
                     </li> -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{Request::path() ==='dosen/penelitian'  ? 'active': ''}} || {{Request::path() ==='dosen/pengabdian'  ? 'active': ''}}">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">library_books</i>
                                     <p class="teks-sidebar">

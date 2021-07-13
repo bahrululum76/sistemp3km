@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Mail;
 use App\Mail\InfoMail;
 use Storage;
+use Validator;
 
 class KelolaInformasiController extends Controller
 {   
@@ -51,7 +52,7 @@ class KelolaInformasiController extends Controller
         $user = DB::table('users')->pluck('email')->all();
         $detail =[
             'title'=>'Informasi Baru',
-            'body'=>'Informasi Penelitian dan pengabdian telah ada , silahkan cek website'
+            'body'=>'Informasi Penelitian dan pengabdian telah dibuka , silahkan cek website'
         ];
         
         Mail::to($user)->send(new InfoMail($detail));
@@ -69,7 +70,7 @@ class KelolaInformasiController extends Controller
         ];
  
         $messages = [
-            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx, Pdfdan Xls',
+            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx, Pdf dan Xls',
         ];
         $informasi = Informasi::find($id);
         

@@ -39,20 +39,46 @@
             
               <!-- <input type="text" class="form-control" id="exampleInputPassword1" name="file" value="{{$p->file}}" required="requaired"> -->
             </div>
+
+            <div class="form-group">
+                    <label >Pengajuan dana</label>
+                    <table class="table table-bordered"  width="100%" cellspacing="0">
+                     <thead class="thead">
+                        <th>Pelaksanaan</th>
+                        <th>Bahan</th>
+                        <th>Transport</th>
+                        <th>Sewa</th>
+                        <th>Total</th>
+                      </thead>
+                      @foreach($dana as $p)
+                      <tbody>
+                        <td>@currency($p->pelaksanaan)</td>
+                        <td>@currency($p->bahan)</td>
+                        <td>@currency($p->Transport)</td>
+                        <td>@currency($p->sewa)</td>
+                        <td>@currency($p->total)</td>
+                      </tbody>
+                      @endforeach
+                    </table>
+                        
+                       
+            </div>
+
             <div class="form-group">
                     <label >Reviewer</label>
-                    @foreach($user as $p)
+                    
                         <select class="custom-select" name="reviewer_id"  value="{{$p->name}}">
-                            <option selected>Pilih Reviewer</option>
-                                
+                          
+                        <option selected>Pilih Reviewer</option>
+                        @foreach($user as $p)   
                             <option value="{{$p->id}}">{{$p->name}}</option>
-                                
+                            @endforeach    
                         </select>
-                        @endforeach
+                       
             </div>
 
             
-            <button type="submit" class="btn btn-primary">Pilih Reviewer</button>
+            <button type="submit" class="btn btn-primary btn-sm">Pilih Reviewer</button>
 
             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#TolakProposal" >Tolak</button> 
 
@@ -86,7 +112,8 @@
 
                 <div class="form-group">
                     <label >Detail Revisi</label>
-                        <input type="text" class="form-control" name="detail_revisi" rows="3"  required="required" >
+                    <textarea class="ckeditor" name="detail_revisi" id="ckeditor" required="required"></textarea>
+                        <input type="text" class="form-control" name="detail_revisi" rows="3"   >
                 </div>
 
 

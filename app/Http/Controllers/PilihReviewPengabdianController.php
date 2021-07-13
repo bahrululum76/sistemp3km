@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Proposal;
-
+use App\Models\Dana;
 use Mail;
 use App\Mail\RevMail;
 
@@ -15,9 +15,13 @@ class PilihReviewPengabdianController extends Controller
     {
 
         $user = User::where('roles_id', '=', 4)->get();
+        
         $proposal = Proposal::where( 'category_id','=',2 )
+        ->where('reviewer_id','=', null )
         ->where('status_id','=',2)
         ->get();
+
+        
         return view("lppm.pilih_review_pengabdian", compact('proposal', 'user'));
     }
 
@@ -66,13 +70,15 @@ class PilihReviewPengabdianController extends Controller
         
         $user= User::
         where('roles_id','=',4)->get();
+
+        $dana=Dana::where('proposal_id','=',$proposal->id)->get();
         $proposal = Proposal::where('id','=',$id)
         ->where('category_id','=',2)
         ->where('status_id','=',2)
         
         ->get();
 
-        return view("lppm.detailpilihreviewproposal_", compact('proposal', 'user'));
+        return view("lppm.detailpilihreviewproposal_", compact('proposal', 'user','dana'));
 
     }
 }

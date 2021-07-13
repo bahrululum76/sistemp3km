@@ -15,6 +15,12 @@ class Dana extends Model
         'sewa',
     ];
 
+    protected $appends = ['total'];
+
+    public function getTotalAttribute()
+    {
+    return $this->pelaksanaan+$this->bahan+$this->Transport+$this->sewa;
+    }
     public function user()
     {
         return $this->belongsto(User::class);

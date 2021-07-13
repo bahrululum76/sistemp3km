@@ -20,6 +20,10 @@ class ProposalController extends Controller
         
         $proposal = Proposal::where('user_id', '=', Auth::User()->id)
             ->where('category_id', '=', 1)
+            ->where('status_id','=',1)
+            ->orWhere('status_id','=',2)
+            ->orWhere('status_id','=',3)
+            ->orWhere('status_id','=',4)
             ->get();
         $proposal_kosong = Proposal::where('user_id', '=', Auth::User()->id)
             ->where('category_id', '=', 1)

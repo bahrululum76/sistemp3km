@@ -54,7 +54,7 @@ The above copyright notice and this permission notice shall be included in all c
                 </a></div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item  {{  (Route::current()->uri === 'Home') ? 'active' : '' }}">
+                    <li class="nav-item  {{  (Route::current()->uri === 'lppm/Home') ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('lppm_home')}}">
                             <i class="material-icons">dashboard</i>
                             <p class="teks-sidebar">Dashboard</p>
@@ -73,7 +73,7 @@ The above copyright notice and this permission notice shall be included in all c
                             <p class="teks-sidebar">Pilih Reviewer Pengabdian</p>
                         </a>
                     </li> -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{Request::path() ==='lppm/pilih_review'  ? 'active': ''}} || {{Request::path() ==='lppm/pilih_review_pengabdian'  ? 'active': ''}} || {{  (Route::current()->uri === 'lppm/detailpilihreview_/{id}') ? 'active' : '' }} || {{  (Route::current()->uri === 'lppm/detailpilihreview/{id}') ? 'active' : '' }}  ">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">person</i>
                                     <p class="teks-sidebar">
@@ -86,7 +86,7 @@ The above copyright notice and this permission notice shall be included in all c
                                    
                                 </div> 
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{Request::path() ==='lppm/laporankemajuanpenelitian'  ? 'active': ''}} || {{Request::path() ==='lppm/laporankemajuanpengabdian'  ? 'active': ''}}">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">library_books</i>
                                     <p class="teks-sidebar">
@@ -107,7 +107,7 @@ The above copyright notice and this permission notice shall be included in all c
                         
                     </li> -->
                     
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{Request::path() ==='lppm/laporanakhirpenelitian'  ? 'active': ''}} || {{Request::path() ==='lppm/laporanakhirpengabdian'  ? 'active': ''}}">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">library_books</i>
                                     <p class="teks-sidebar">
@@ -121,7 +121,7 @@ The above copyright notice and this permission notice shall be included in all c
                                 </div> 
                     </li>                        
                    
-                    <li class="nav-item ">
+                    <li class="nav-item {{Request::path() ==='lppm/kelolaadmin'  ? 'active': ''}}  ">
                         <a class="nav-link" href="{{route('kelolaadmin')}}">
                             <i class="material-icons">person</i>
                             <p class="teks-sidebar"> Kelola Admin</p>
@@ -129,20 +129,14 @@ The above copyright notice and this permission notice shall be included in all c
                         
                     </li>
 
-
-                    <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">money</i>
-                                    <p class="teks-sidebar">
-                                   Pengajuan Dana
-                                    </p>
-                                </a>
-                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="{{route('dana')}}"><p class="teks-sidebar">Penelitian</p> </a>
-                                    <a class="dropdown-item" href="{{route('dana_')}}"><p class="teks-sidebar">Pengabdian</p> </a>
-                                    
-                                </div> 
-                    </li>                        
+                    <li class="nav-item {{Request::path() ==='lppm/kelolareviewer'  ? 'active': ''}}  ">
+                        <a class="nav-link" href="{{route('kelolareviewer')}}">
+                            <i class="material-icons">person</i>
+                            <p class="teks-sidebar"> Kelola Reiewer</p>
+                        </a>
+                        
+                    </li>
+                   
                    
 
                 </ul>
@@ -153,7 +147,7 @@ The above copyright notice and this permission notice shall be included in all c
             <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
-                        <a class="navbar-brand" href="javascript:;">Dashboard</a>
+                        <a class="navbar-brand" href="javascript:;"></a>
                         <ul>
                             <li class="nav-item" style="list-style:none">
 

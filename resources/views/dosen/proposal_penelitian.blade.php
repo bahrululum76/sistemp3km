@@ -106,22 +106,10 @@
             <div class="modal-body">
             <form action="#" method="POST" enctype="multipart/form-data">
                   @csrf
-                  <div class="table-responsive">
-        <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
-            <thead class="thead">
-                <tr class="tbody">
-                    <th>Detail Revisi</th>
-                    <!-- <th>Status</th> -->
-                </tr>
-            </thead>
-            <tbody class="tbody">               
-                <tr class="thead">
-                    <td >{!! $p->detail_revisi !!}</td>
-                    <!-- <td align="center">{{$p->category_id}}</td> -->
-                </tr>                
-            </tbody>
-        </table>
-      </div>
+                  <div class="form-group">
+                    <label >Detail Revisi</label>
+                    <textarea class="ckeditor" id="ckeditor" name="detail_revisi"  required="required" readonly >{!!$p->detail_revisi!!}</textarea>
+                </div>
 
             </form>
             </div>

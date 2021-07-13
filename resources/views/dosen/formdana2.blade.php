@@ -29,28 +29,61 @@
         <br>
         @endforeach
           
+        <div class="form-group">
+            <label for="exampleInputEmail1">Pelaksanaan</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Rp.</span>
+              </div>
+              <input type="number" class="form-control"  name="pelaksanaan"  aria-label="Amount (to the nearest dollar)" min="0" max="1050000" required>
+              <div class="input-group-append">
+                
+              </div>
+            </div>
+            </div>
+            
             <div class="form-group">
-              <label for="exampleInputEmail1">Pelaksanaan</label>
-              <input type="number"  class="form-control"  aria-describedby="emailHelp" name="pelaksanaan" placeholder="" required="requaired">
-              <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            <label for="exampleInputEmail1">Bahan Habis Pakai</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Rp.</span>
+              </div>
+              <input type="number" class="form-control"  name="bahan"  aria-label="Amount (to the nearest dollar)"  min="0" max="1000000" required>
+              <div class="input-group-append">
+                
+              </div>
+            </div>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Bahan Habis Pakai</label>
-              <input type="number"  class="form-control"  name="bahan" required="requaired">
+            <label for="exampleInputEmail1">Transport</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Rp.</span>
+              </div>
+              <input type="number" class="form-control"  name="Transport"  aria-label="Amount (to the nearest dollar)" min="0" max="1050000" required>
+              <div class="input-group-append">
+                
+              </div>
+            </div>
             </div>
             <div class="form-group">
-              <label for="exampleInputText">Transport</label>
-              <input type="number"    class="form-control"  name="Transport" required="requaired">
+            <label for="exampleInputEmail1">Sewa</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Rp.</span>
+              </div>
+              <input type="number" class="form-control"  name="sewa"  aria-label="Amount (to the nearest dollar)" min="0" max="1050000" required>
+              <div class="input-group-append">
+                
+              </div>
             </div>
-            <div class="form-group">
-              <label for="exampleInputText">Sewa Peralatan</label>
-              <input type="number"    class="form-control"  name="sewa" required="requaired">
             </div>
             
             <button type="submit" class="btn btn-primary">Simpan</button>
           </form>
         </div>
 </div>
+
 
 
 @endsection

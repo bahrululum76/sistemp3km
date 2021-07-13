@@ -65,7 +65,7 @@
                           <div class="card card-stats">
                             <div class="card-header card-header-info card-header-icon">
                               <div class="card-icon">
-                                <i class="fa fa-twitter"></i>
+                              <i class="material-icons">library_books</i>
                               </div>
                               <p class="card-category">Laporan Akhir Pengabdian</p>
                               <h3 class="card-title"><?php echo $pengabdian->count() ?></h3>
