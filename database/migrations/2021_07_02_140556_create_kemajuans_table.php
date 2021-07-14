@@ -18,6 +18,7 @@ class CreateKemajuansTable extends Migration
             $table->string('judul');
             $table->string('file');
             $table->string('progres',20);
+            $table->integer('periode');
             $table->foreignId('category_id')->references('id')->on('categories');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();

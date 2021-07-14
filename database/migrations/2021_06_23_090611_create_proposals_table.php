@@ -18,6 +18,7 @@ class CreateProposalsTable extends Migration
             $table->string('judul');
             $table->text('abstrak')->nullable();
             $table->string('file');
+            $table->integer('periode');
             $table->foreignId('category_id')->references('id')->on('categories');
             $table->foreignId('status_id')->references('id')->on('statuses');
             $table->string('detail_revisi')->nullable();

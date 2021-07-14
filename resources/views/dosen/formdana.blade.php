@@ -32,12 +32,16 @@
         @endforeach
         
         <div class="form-group">
+            <label for="exampleInputEmail1">Jumlah Maximal Pengajuan Rp. 3.500.000,00</label>
+           
+            </div>
+        <div class="form-group">
             <label for="exampleInputEmail1">Pelaksanaan</label>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text">Rp.</span>
               </div>
-              <input type="number" class="form-control"  name="pelaksanaan"  aria-label="Amount (to the nearest dollar)" min="0" max="1050000" required>
+              <input type="number" placeholder="Max Rp.350.000,00" class="form-control"  name="pelaksanaan"  aria-label="Amount (to the nearest dollar)" min="0" max="350000" required>
               <div class="input-group-append">
                 
               </div>
@@ -50,7 +54,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">Rp.</span>
               </div>
-              <input type="number" class="form-control"  name="bahan"  aria-label="Amount (to the nearest dollar)"  min="0" max="1000000" required>
+              <input type="number" placeholder="Max Rp.1.400.000,00" class="form-control"  name="bahan"  aria-label="Amount (to the nearest dollar)"  min="0" max="1400000" required>
               <div class="input-group-append">
                 
               </div>
@@ -62,7 +66,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">Rp.</span>
               </div>
-              <input type="number" class="form-control"  name="Transport"  aria-label="Amount (to the nearest dollar)" min="0" max="1050000" required>
+              <input type="number" placeholder="Max Rp.875.000,00" class="form-control"  name="Transport"  aria-label="Amount (to the nearest dollar)" min="0" max="875000" required>
               <div class="input-group-append">
                 
               </div>
@@ -74,12 +78,13 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">Rp.</span>
               </div>
-              <input type="number" class="form-control"  name="sewa"  aria-label="Amount (to the nearest dollar)" min="0" max="1050000" required>
+              <input type="number" placeholder="Max Rp.875.000,00" class="form-control"  name="sewa"  aria-label="Amount (to the nearest dollar)" min="0" max="8750000" required>
               <div class="input-group-append">
                 
               </div>
             </div>
             </div>
+            
         
             <button type="submit" class="btn btn-primary">Simpan</button>
           </form>
