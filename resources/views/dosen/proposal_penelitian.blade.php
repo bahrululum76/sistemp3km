@@ -54,9 +54,9 @@
                 <tr class="tbody">
                     <th>Judul</th>
                     <th>File</th>
-                    <!-- <th>Kategori</th> -->
+                    <th>Periode</th>
                     <th>Status</th>
-                    <th>Action</th> 
+                    <th>Action</th>
                 </tr>
             </thead>
 
@@ -65,8 +65,9 @@
                 <tr class="thead">
                     <td align="center">{{ $p->judul}}</td>
                     <td align="center">{{ $p->file }}</td>
+                    <td align="center">{{ $p->periode }}</td>
                     <!-- <td align="center">{{$p->category_id}}</td> -->
-					<td align="center">@if ($p->status_id == 1)
+				    	<td align="center">@if ($p->status_id == 1)
                         <span style="background-color:green;padding:5px;border-radius:5px;color:white;">{{'Diterima'}}</span>
                     @elseif ($p->status_id == 2)
                     <span style="background-color:yellow;padding:5px;border-radius:5px;">{{'Belum Diterima'}}</span>
@@ -148,7 +149,10 @@
                     <label for="exampleFormControlTextarea1">Abstrak</label>
                     <textarea class="ckeditor" id="ckeditor" name="abstrak" required="required"></textarea>
                   </div>
-
+                  <div class="form-group">
+                    <label >Periode</label>
+                        <input type="text" class="form-control" name="periode" required="required" >
+                  </div>
                   <div class="form-group">
                     <label for="file">File</label>
                     <input type="file" class="form-control" name="">
@@ -196,7 +200,10 @@
                     <label >Judul</label>
                         <input type="text" class="form-control" name="judul" required="required" >
                   </div>
-
+                  <div class="form-group">
+                    <label >Periode</label>
+                        <input type="text" class="form-control" name="periode" required="required" >
+                  </div>
                   <div class="form-group">
                     <label for="exampleFormControlTextarea1">Abstrak</label>
                     <textarea class="ckeditor" id="ckeditor" name="abstrak" required="required"></textarea>

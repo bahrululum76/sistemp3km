@@ -83,7 +83,7 @@ class UserController extends Controller
         // ]);
         return redirect('admin/users')->with(['success' => 'Data Berhasil ditambahkan']);
     }
-    public function store2(){
+    public function store2(Request $request){
 
         $rules = [
             'nidn'          => 'required|unique:users',
@@ -105,11 +105,12 @@ class UserController extends Controller
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
+
         $user = new User;
         $user->nidn = $request->nidn;
         $user->name = $request->name;
-        $user1->prodi = $request->prodi;
-        $user1->jabatan = 'admin';
+        $user->prodi = $request->prodi;
+        $user->jabatan = 'admin';
         $user->email = $request->email;
         $user->password = bcrypt('12345');
         $user->alamat = $request->alamat;
@@ -138,7 +139,9 @@ class UserController extends Controller
         ];
  
         $validator = Validator::make($request->all(), $rules, $messages);
-        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         $user1 = User::find($id);
         
@@ -172,7 +175,9 @@ class UserController extends Controller
         ];
  
         $validator = Validator::make($request->all(), $rules, $messages);
-        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         $user1 = User::find($id);
         

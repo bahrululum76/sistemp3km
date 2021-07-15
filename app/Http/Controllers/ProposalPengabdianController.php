@@ -89,6 +89,7 @@ class ProposalPengabdianController extends Controller
 
             $proposal->file = $filename;
         }
+        $proposal->periode=$request->periode;
         $proposal->category_id = '2';
         $proposal->status_id = '2';
         $proposal->user_id = Auth::User()->id;
@@ -137,6 +138,7 @@ class ProposalPengabdianController extends Controller
 
             $proposal->file = $filename;
         }
+        $proposal->periode=$request->periode;
         $proposal->category_id = '2';
         $proposal->status_id = '3';
         $proposal->user_id = Auth::User()->id;

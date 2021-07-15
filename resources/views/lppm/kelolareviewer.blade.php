@@ -83,7 +83,7 @@
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ubah data User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Reviewer</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -97,7 +97,7 @@
 
                 <div class="form-group">
                 <label >Nama</label>
-                    <select class="custom-select" name="id" id='id' value="{{$p->id}}">
+                    <select class="custom-select" name="id"    required="required">
                     <option value="">Pilih Dosen</option>    
                     @foreach($user1 as $p)
                     <option value="{{$p->id}}">{{$p->name}}

@@ -34,6 +34,7 @@ class UnggahKemajuanPenelitianController extends Controller
           
             $kemajuan->file=$filename;
         }
+        $kemajuan->periode=$request->periode;
         $kemajuan->progres=$request->progres;
 
         $kemajuan->category_id='1';

@@ -48,7 +48,7 @@
                 <tr class="tbody">
                     <th>Judul</th>
                     <th>File</th>
-                    <!-- <th>Kategori</th> -->
+                    <th>Periode</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -59,6 +59,7 @@
                 <tr class="thead">
                     <td align="center">{{ $p->judul}}</td>
                     <td align="center">{{ $p->file }}</td>
+                    <td align="center">{{ $p->periode }}</td>
                     <!-- <td align="center">{{$p->category_id}}</td> -->
 					<td align="center">@if ($p->status_id == 1)
                         <span style="background-color:green;padding:5px;border-radius:5px;color:white;">{{'Diterima'}}</span>
@@ -157,7 +158,10 @@
                     <label >Judul</label>
                         <input type="text" class="form-control" name="judul" required="required" >
                   </div>
-
+                  <div class="form-group">
+                    <label >Periode</label>
+                        <input type="text" class="form-control" name="periode" required="required" >
+                  </div>
                   <div class="form-group">
                     <label for="exampleFormControlTextarea1">Abstrak</label>
                     <textarea class="ckeditor" id="ckeditor" name="abstrak" required="required"></textarea>
@@ -208,7 +212,10 @@
                     <label >Judul</label>
                         <input type="text" class="form-control" name="judul" required="required" >
                   </div>
-
+                  <div class="form-group">
+                    <label >Periode</label>
+                        <input type="text" class="form-control" name="periode" required="required" >
+                  </div>
                   <div class="form-group">
                     <label for="exampleFormControlTextarea1">Abstrak</label>
                     <textarea class="ckeditor" id="ckeditor" name="abstrak" required="required"></textarea>

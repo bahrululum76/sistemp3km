@@ -55,7 +55,7 @@ The above copyright notice and this permission notice shall be included in all c
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="nav-item {{ (Route::current()->uri === 'reviewer/Home') ? ' active' : '' }}">
-                        <a class="nav-link" href="Home">
+                        <a class="nav-link" href="{{route('reviewer_home')}}">
                             <i class="material-icons">dashboard</i>
                             <p class="teks-sidebar">Dashboard</p>
                         </a>

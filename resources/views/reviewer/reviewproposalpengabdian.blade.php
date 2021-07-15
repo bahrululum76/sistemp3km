@@ -14,6 +14,17 @@
                     <strong>{{ $message }}</strong>
             </div>
         @endif
+
+        @if (count($errors) > 0)
+    <div class="alert alert-danger alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <div class="table-responsive">
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead class="thead">
@@ -120,7 +131,7 @@
 
                 <div class="form-group">
                     <label >Detail Revisi</label>
-                    <textarea class="ckeditor" id="ckeditor" name="detail_revisi"  required="required" ></textarea>
+                    <textarea class="ckeditor" id="ckeditor" name="detail_revisi"  required ></textarea>
                 </div>
 
                   <button type="submit" class="btn btn-primary">Simpan</button>

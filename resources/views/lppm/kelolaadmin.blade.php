@@ -97,7 +97,7 @@
             <form action="{{ route('kelolaadmin/store') }}" method="post">
                   @csrf
                   <div class="form-group">
-                    <label >Nidn</label>
+                    <label >Nik</label>
                         <input type="number" class="form-control" name="nidn" required="required" >
                   </div>
                   <div class="form-group">
@@ -107,7 +107,7 @@
                   <div class="form-group">
                     <label >Prodi</label>
                     <select class="custom-select" name="prodi"  required="required">
-                        <option selected>Prodi</option>
+                        <option value="" >Prodi</option>
                         <option value="Informatika">Informatika</option>
                         <option value="Industri">Industri</option>
                         <option value="Sipil">Sipil</option>
@@ -184,7 +184,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label >Nidn</label>
+                    <label >Nik</label>
                         <input type="text" class="form-control" name="nidn" value="{{$p->nidn}}" required="required">
                 </div>
 
@@ -275,6 +275,15 @@
                         <input type="text" class="form-control" name="name" value="{{$p->name}}" required="required">
                 </div>
 
+                <div class="form-group" hidden>
+                    <label >Prodi</label>
+                    <select class="custom-select" name="prodi"  required="required">
+                        <option value="{{$p->prodi}}">{{$p->prodi}}</option>
+                        <option value="Informatika">Informatika</option>
+                        <option value="Industri">Industri</option>
+                        <option value="Sipil">Sipil</option>
+                    </select>
+                 </div>
 
 
  
@@ -299,7 +308,7 @@
 
                 <div class="form-group" >
                     <label >Password</label>
-                        <input type="password" class="form-control form-control-user" name="password"  required="required" placeholder="password" >
+                        <input type="password" class="form-control "  name="password"  required="required" placeholder="password" >
                  </div>
 
                  <div class="form-group" hidden>

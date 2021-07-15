@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use Mail;
 use App\Mail\RevMail;
-
+use Validator;
 class VerifikasiProposalPengabdianController extends Controller
 {
     public function index()
@@ -52,6 +52,23 @@ class VerifikasiProposalPengabdianController extends Controller
         return redirect('reviewer/verifikasi_proposal_pengabdian');
     }
     public function revisi(Request $request, $id){
+
+        $rules = [
+            'detail_revisi'          => 'required',
+
+        ];
+ 
+        $messages = [
+            
+            'detail_revisi.required'          => 'Detail revisi wajib diisi.',
+            
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
         $proposal = Proposal::find($id);
         $user1 =DB::table('users')->where('id','=',$proposal->user_id)->pluck('name');
         $user =DB::table('users')->where('id','=',$proposal->user_id)->pluck('email');   

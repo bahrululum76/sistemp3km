@@ -8,7 +8,7 @@ use App\Mail\RevMail;
 use App\Models\User;
 use Mail;
 use Auth;
-
+use Validator;
 class VerifikasiController extends Controller
 {
     public function index()
@@ -66,6 +66,22 @@ class VerifikasiController extends Controller
     }
 
     public function revisi(Request $request, $id){
+        $rules = [
+            'detail_revisi'          => 'required',
+
+        ];
+ 
+        $messages = [
+            
+            'detail_revisi.required'          => 'Detail revisi wajib diisi.',
+            
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+ 
         $proposal = Proposal::find($id);
         
         

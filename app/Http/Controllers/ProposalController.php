@@ -51,7 +51,7 @@ class ProposalController extends Controller
     {
         $rules = [
             'judul'          => 'unique:proposals',
-            'file'          => 'required|mimes:docx,pdf'
+            'file'          => 'required|mimes:docx,pdf|max:2040'
         ];
  
         $messages = [
@@ -97,6 +97,7 @@ class ProposalController extends Controller
 
             $proposal->file = $filename;
         }
+        $proposal->periode=$request->periode;
         $proposal->category_id = '1';
         $proposal->status_id = '2';
         $proposal->user_id = Auth::User()->id;
@@ -150,6 +151,7 @@ class ProposalController extends Controller
 
             $proposal->file = $filename;
         }
+        $proposal->periode=$request->periode;
         $proposal->category_id = '1';
         $proposal->status_id = '3';
         $proposal->user_id = Auth::User()->id;

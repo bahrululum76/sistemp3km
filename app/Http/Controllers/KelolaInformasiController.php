@@ -21,14 +21,19 @@ class KelolaInformasiController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'file'          => 'required|mimes:docx,pdf,xls'
+            'file'          => 'required|mimes:docx,pdf|max:2040'
         ];
  
         $messages = [
-            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx, Pdfdan Xls',
+            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx dan Pdf',
+            'file.max'              => 'maximum size file 2mb',
         ];
  
         $validator = Validator::make($request->all(), $rules, $messages);
+         
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         // insert data ke table user
         $informasi = new Informasi;
@@ -66,7 +71,7 @@ class KelolaInformasiController extends Controller
     {
         // update data dosen
         $rules = [
-            'file'          => 'required|mimes:docx,pdf,xls'
+            'file'          => 'required|mimes:docx,pdf,xls|max:2048'
         ];
  
         $messages = [

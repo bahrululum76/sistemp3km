@@ -21,6 +21,7 @@
                 <tr class="tbody">
                     <th>Judul</th>
                     <th>File</th>
+                    <th>Periode</th>
                     <th>Progres</th>
                     
                   
@@ -32,6 +33,7 @@
                 <tr class="thead">
                     <td align="center">{{ $p->judul}}</td>
                     <td align="center">{{ $p->file }}</td>
+                    <td align="center">{{ $p->periode }}</td>
                     <td align="center" >{{ $p->progres }} %</td>
                     
 					
@@ -55,7 +57,7 @@
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Proposal</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Laporan Kemajuan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -68,6 +70,10 @@
                   <div class="form-group">
                     <label >Judul</label>
                         <input type="text" class="form-control" name="judul" required="required" >
+                  </div>
+                  <div class="form-group">
+                    <label >Periode</label>
+                        <input type="text" class="form-control" name="periode" required="required" >
                   </div>
                   
                   <div class="form-group">
