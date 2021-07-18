@@ -37,18 +37,28 @@ class VerifikasiProposalPengabdianController extends Controller
 
         }
         
-        $prop =DB::table('proposals')->where('id','=',$proposal->id)->pluck('judul');
-        $user2 =DB::table('users')->where('id','=',$proposal->user_id)->pluck('name');
-        $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('name');
-        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
+        $prop =DB::table('proposals')->where('id','=',$proposal->id)->Value('judul');
+        $user2 =DB::table('users')->where('id','=',$proposal->user_id)->Value('name');
+        $prop1 =pROPOSAL::where('id','=',$proposal->id)->get();
+        $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->Value('name');
+        $user =DB::table('users')->where('id','=',$proposal->user_id)->value('email');   
         // ->where('id','=',$proposal->user_id);
-        $detail =[
-            'title'=>'Review Proposal',
-            'body'=>  ' Proposal Pengabdian, atas nama'.$user2.' dengan judul'.$prop.'sudaah tersedia untuk di koreksi oleh anda , silahkan cek website'
-        ];
-        
-        Mail::to($user)->send(new RevMail($detail));
+       
 
+
+        $data["email"] = $user;
+        $data["title"] = "Proposal Diterima";
+        $data["body"] = ' Proposal Penelitian , atas nama '. $user2 . ' dengan judul ' .$prop. ' sudah diterima untuk direview oleh saudara , silahkan cek website';
+        $pdf = PDF::loadView('admin.surattugas',['prop1'=>$prop1]);
+  
+        Mail::send('admin.rev', $data, function($message)use($data, $pdf) {
+            $message->to($data["email"], $data["email"])
+                    ->subject($data["title"])
+                    ->attachData($pdf->output(), "SuratTugas.pdf");
+        });
+        // dd('success');
+        
+    
         return redirect('reviewer/verifikasi_proposal_pengabdian');
     }
     public function revisi(Request $request, $id){

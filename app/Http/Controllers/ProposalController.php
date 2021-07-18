@@ -51,7 +51,7 @@ class ProposalController extends Controller
     {
         $rules = [
             'judul'          => 'unique:proposals',
-            'file'          => 'required|mimes:docx,pdf|max:2040'
+            'file'          => 'required|mimes:docx,pdf'
         ];
  
         $messages = [
