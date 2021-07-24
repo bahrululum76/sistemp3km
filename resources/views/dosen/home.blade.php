@@ -69,17 +69,25 @@
 
             <div class="card-body">
               <p class="card-text" style="">
-              @php
+               @php
               $detail= strip_tags($p->detail);
               @endphp  
+              {{ Str::limit($detail, 100, '') }}
+              @if (strlen($detail) > 100)
+                <span id="dots">...</span>
+                <span id="more">{{ substr($detail, 100) }}</span>
+            @endif
+              <!-- @php
+              $detail= strip_tags($p->detail);
+              @endphp   -->
               <!-- {{ Str::limit($detail,50 ) }}  -->
                 
               {{$detail}}
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                <button class="btn btn-sm btn-outline-secondary" onclick="myFunction()" id="myBtn">Read more</button>
+                
                </div>
                 
               </div>
@@ -90,5 +98,22 @@
 
         @endforeach
 </div>
-      
+   
+<script>
+  function myFunction() {
+    var dots = document.getElementById("dots");
+    var moreText = document.getElementById("more");
+    var btnText = document.getElementById("myBtn");
+
+    if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+    } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+    }
+}
+</script>
 @endsection

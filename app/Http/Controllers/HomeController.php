@@ -45,8 +45,9 @@ class HomeController extends Controller
     {
         $informasi = Informasi::all();
         $kegiatan =Kegiatan::all();
-        return view('dosen.home',compact('informasi','kegiatan'));
+        return view('dosen.home', compact('informasi','kegiatan') );
     }
+
     public function HomeLppm()
     {   
         $kemajuan=Kemajuan::all();
