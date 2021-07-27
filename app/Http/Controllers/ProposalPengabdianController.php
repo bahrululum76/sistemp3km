@@ -17,6 +17,10 @@ class ProposalPengabdianController extends Controller
         // $proposal= DB::table('proposals')->where('user_id', '=',Auth::User()->id)->get();
         $proposal = Proposal::where('user_id', '=', Auth::User()->id)
             ->where('category_id', '=', 2)
+            ->where('status_id',1)
+            ->orWhere('status_id','=',2)
+            ->orWhere('status_id','=',3)
+            ->orWhere('status_id','=',4)
             ->get();
 
             $proposal_kosong = Proposal::where('user_id', '=', Auth::User()->id)
@@ -26,8 +30,10 @@ class ProposalPengabdianController extends Controller
             $proposal_kosong_1 = Proposal::where('user_id', '=', Auth::User()->id)
             ->where('category_id', '=', 2)->get()->count();
 
+            $proposalnonaktif= Proposal::where('status_id',8)
+            ->where('category_id',2)->value('status_id');
 
-        return view("dosen.proposal_pengabdian", compact('proposal','proposal_kosong', 'proposal_kosong_1'));
+        return view("dosen.proposal_pengabdian", compact('proposal','proposalnonaktif','proposal_kosong', 'proposal_kosong_1'));
     }
 
     public function index_adm()

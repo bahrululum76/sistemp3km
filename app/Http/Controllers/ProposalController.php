@@ -31,17 +31,23 @@ class ProposalController extends Controller
             ->get();
             $proposal_kosong_1 = Proposal::where('user_id', '=', Auth::User()->id)
             ->where('category_id', '=', 1)->get()->count();
-
+        $proposalnonaktif= Proposal::where('status_id',8)
+        ->where('category_id',1)->value('status_id');
            
-
-        return view("dosen.proposal_penelitian", compact('proposal',  'proposal_kosong', 'proposal_kosong_1'));
+        // dd($proposalnonaktif);
+        return view("dosen.proposal_penelitian", compact('proposal','proposalnonaktif',  'proposal_kosong', 'proposal_kosong_1'));
     }
     public function index_adm()
     {
         // $proposal= DB::table('proposals')->where('user_id', '=',Auth::User()->id)->get();
         
 
-        $proposal = Proposal::where('category_id','=',1)->get();
+        $proposal = Proposal::where('category_id','=',1)
+        ->where('status_id','=',1)
+        ->orWhere('status_id','=',2)
+        ->orWhere('status_id','=',3)
+        ->orWhere('status_id','=',4)
+        ->get();
         return view("admin.proposalpenelitian", compact('proposal'));
     }
 

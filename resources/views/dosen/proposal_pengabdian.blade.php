@@ -25,7 +25,11 @@
         </ul>
     </div>
 @endif
-
+@if($proposalnonaktif == 8)
+            
+            <button class="btn btn-sm btn-primary mt-4 mb-2 " id="createNewItem" data-toggle="modal" data-target="#ModalTambah" > Tambah Proposal </button>    
+            
+        @endif
 
         @if($proposal_kosong_1 == null)
             

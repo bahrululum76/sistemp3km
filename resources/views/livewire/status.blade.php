@@ -11,7 +11,7 @@
     <strong>{{ $message }}</strong>
 </div>
 @endif
-
+<button class="btn btn-danger btn-sm" wire:click="update()">NonAktif</button>
         <div class="table-responsive">
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead class="thead">
@@ -24,7 +24,7 @@
                     
                     <th>Reviewer</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <!-- <th>Action</th> -->
                 </tr>
             </thead>
 
@@ -41,8 +41,8 @@
 
                     <td align="center">@if($p->reviewer){{ $p->reviewer->name}}@endif</td>
 
-					<td align="center">{{$p->status_id}}
-                        <!-- @if ($p->status_id == 1)
+					<td align="center">
+                        @if ($p->status_id == 1)
                             <span style="background-color:green;padding:5px;border-radius:5px;color:white;">{{'Diterima'}}</span>
                         @elseif ($p->status_id == 2)
                             <span style="background-color:yellow;padding:5px;border-radius:5px;">{{'Belum Diterima'}}</span>
@@ -50,10 +50,10 @@
                             <span style="background-color:blue;padding:5px;border-radius:5px;color:white;">{{'Direvisi'}}</span>
                         @elseif ($p->status_id == 4)
                             <span style="background-color:red;padding:5px;border-radius:5px;color:white;">{{'Ditolak'}}</span>
-                        @endif -->
+                        @endif
                     </td>
 
-                    <td >
+                    <!-- <td >
                       @if ($p->status_id == 8)
                              <button class="btn btn-danger btn-sm" wire:click="update({{ $p->status_id }},{{ $p->id }})"><i
                                                 class="fa fa-fw fa-window-close"></i></button>
@@ -61,11 +61,11 @@
                                         <button class="btn btn-success btn-sm"
                                             wire:click="update({{ $p->status_id }},{{ $p->id }})"><i
                                                 class="fa fa-fw fa-check"></i></button>
-                                        {{-- {{ $p->id }} --}}
+                                        
                                     @endif
 
 
-                     </td>
+                     </td> -->
                 </tr>
 
                 @endforeach

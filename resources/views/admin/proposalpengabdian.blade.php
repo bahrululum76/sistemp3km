@@ -3,7 +3,9 @@
 <!-- <link href="{{url('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet"> -->
 @section('container-fluid')
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+@livewire('propen');
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 
 
 <div class="card shadow ">
@@ -55,7 +57,7 @@
                         @endif
                     </td>
 
-                    <td >
+                    <td > -->
                         <!-- <button   class="btn btn-primary btn-sm " data-toggle="modal" data-target="#PilihReviewer-{{$p->id}}" value="">Pilih Reviewer</button>
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#TolakProposal" >Tolak</button> -->
                         <!-- <form id="delete-obat-{{$p->id}}" action=" {{ url('lppm/pilih_review/tolak'.$p->id) }}" method="POST" style="display: inline" data-id="{{$p->id}}">
@@ -67,7 +69,7 @@
 
 
 
-                     </td>
+                     <!-- </td>
                 </tr>
 
                 @endforeach
@@ -78,14 +80,14 @@
 
       </div>
     </div>
-</div>
+</div> -->
 
 
 
 
 
 
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script> -->
 
 <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 

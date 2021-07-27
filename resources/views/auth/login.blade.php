@@ -12,12 +12,12 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- CSS Files -->
-        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/material-dashboard.css') }}"> --}}
-        {{-- <link href="{{ asset('assets/css/material-dashboard.css?v=2.1.2') }}"  rel="stylesheet" /> --}}
+        <!-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/material-dashboard.css') }}">  -->
+        <!-- <link href="{{ asset('assets/css/material-dashboard.css?v=2.1.2') }}"  rel="stylesheet" />  -->
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="{{ asset('assets/demo/demo.css') }}" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/dark-mode.css') }}">
+        <!-- <link rel="stylesheet" href="{{ asset('assets/css/dark-mode.css') }}"> -->
 
 	</head>
 
@@ -61,9 +61,13 @@
 									<a href="#">Forgot Password</a>
 								</div>
 	            </div>
-	            <div class="form-group">
-	            	<button type="submit" class="btn btn-primary rounded submit  p-3 px-5">Login</button>
-	            </div>
+              
+	            <div class="form-group ">
+               
+	            	<button type="submit" class="btn btn-primary  rounded submit  p-3 px-5  col-md-6 col-lg-6" >Login</button>
+                
+              </div>
+              
 	          </form>
 	        </div>
 				</div>
