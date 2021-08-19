@@ -13,20 +13,14 @@ use App\Mail\RevMail;
 use PDF;
 class PilihReviewController extends Controller
 {
-    // $proposal= DB::table('proposals')->where('user_id', '=',Auth::User()->id)->get();
-    // $proposal = Proposal::all();
-
     public function index()
     {
 
         $user = User::where('roles_id', '=', 4)->get();
-        $proposal = Proposal::where( 'category_id','=',1 )
-        ->where('reviewer_id','=', null )
-        ->where('status_id','=',2)
-        ->get();
-        // dd($proposal);
+        $proposal = Proposal::withUser()->Where('prodi','Informatika')->restore();
         return view("lppm.pilih_reviewer", compact('proposal', 'user'));
     }
+
 
 
     public function tolak(Request $request, $id)
@@ -70,9 +64,10 @@ class PilihReviewController extends Controller
         $data["email"] = $user;
         $data["title"] = "Review Proposal";
         $data["body"] = ' Proposal Penelitian , atas nama '. $user2 . ' dengan judul ' .$prop. ' sudah diterima untuk direview oleh saudara , silahkan cek website';
+        
         $pdf = PDF::loadView('admin.surattugas1',['prop1'=>$prop1,'user3'=>$user3]);
   
-        Mail::send('admin.rev', $data, function($message)use($data, $pdf) {
+        Mail::send('admin.pil', $data, function($message)use($data, $pdf) {
             $message->to($data["email"], $data["email"])
                     ->subject($data["title"])
                     ->attachData($pdf->output(), "SuratTugas.pdf");

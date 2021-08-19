@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Penelitian;
 use Illuminate\Http\Request;
+use App\Models\Periode;
+use App\Models\Proposal;
 use Auth;
 use Storage;
 class PenelitianController extends Controller
@@ -15,8 +17,17 @@ class PenelitianController extends Controller
      */
     public function index()
     {
+        $proposal = Proposal::where('user_id', '=', Auth::User()->id)
+        ->where('category_id', '=', 1)
+        ->where('periode',date("Y"))
+        ->where('status_id','=',1)
+        ->orWhere('status_id','=',2)
+        ->orWhere('status_id','=',3)
+        ->orWhere('status_id','=',4)
+        ->get();
         $penelitian = Penelitian::all();
-        return view("dosen.unggahlapakhirpenelitian", compact('penelitian'));
+        $value = Periode::where('tahun',date('Y'))->where('status',1)->exists();
+        return view("dosen.unggahlapakhirpenelitian", compact('penelitian','value','proposal'));
     }
 
     public function index_lap()

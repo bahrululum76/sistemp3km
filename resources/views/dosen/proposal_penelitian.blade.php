@@ -44,7 +44,7 @@
         @if ($data_kosong->status_id == 2 || $data_kosong->status_id == 4) 
         <button class="btn btn-sm btn-primary mt-4 mb-2 " id="createNewItem" data-toggle="modal" data-target="#ModalTambah"  > Tambah Proposal </button>
         @elseif ($data_kosong->status_id == 3 || $data_kosong->status_id == 1)
-        <button class="btn btn-sm btn-primary mt-4 mb-2" id="createNewItem" data-toggle="modal" data-target="#ModalTambah2" > Tambah Proposal </button>
+        <button class="btn btn-sm btn-primary mt-4 mb-2" id="createNewItem" data-toggle="modal" data-target="#ModalTambah2" > Revisi Proposal </button>
        
        
         @endif
@@ -58,6 +58,8 @@
             <thead class="thead">
                 <tr class="tbody">
                     <th>Judul</th>
+                    <th>Anggota 1</th>
+                    <th>Anggota 1</th>
                     <th>File</th>
                     <th>Periode</th>
                     <th>Status</th>
@@ -69,19 +71,34 @@
                 @foreach ( $proposal as $p )
                 <tr class="thead">
                     <td align="center">{{ $p->judul}}</td>
+                    <td align="center">{{ $p->anggota2}}</td>
+                    <td align="center">{{ $p->anggota2}}</td>
                     <td align="center">{{ $p->file }}</td>
                     <td align="center">{{ $p->periode }}</td>
                     <!-- <td align="center">{{$p->category_id}}</td> -->
 				    	<td align="center">@if ($p->status_id == 1)
-                        <span style="background-color:green;padding:5px;border-radius:5px;color:white;">{{'Diterima'}}</span>
+                        <span >{{'Belum diajukan'}}</span>
                     @elseif ($p->status_id == 2)
-                    <span style="background-color:yellow;padding:5px;border-radius:5px;">{{'Belum Diterima'}}</span>
+                    <span style="background-color:yellow;padding:5px;border-radius:5px;">{{'Mengajukan'}}</span>
                     @elseif ($p->status_id == 3)
-                    <span style="background-color:blue;padding:5px;border-radius:5px;color:white;">{{'Direvisi'}}</span>
+                    <span style="background-color:yellow;padding:5px;border-radius:5px;color:white;">{{'Direvisi'}}</span>
                     @elseif ($p->status_id == 4)
                     <span style="background-color:red;padding:5px;border-radius:5px;color:white;">{{'Ditolak'}}</span>
+                    @elseif ($p->status_id == 5)
+                    <span style="background-color:green;padding:5px;border-radius:5px;color:white;">{{'Diterima'}}</span>
                     @endif</td>
-                    <td><button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalRevisi-{{$p->id}}"> Revisi </button>
+                    <td>
+                    @if ($p->status_id == 3)
+                    <button class="btn btn-sm btn-primary " id="createNewItem" data-toggle="modal" data-target="#ModalTambah2-{{$p->id}}" > Revisi Proposal </button>
+                      <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalRevisi"> Revisi </button>
+                    @endif
+                      @if ($p->status_id == 1)
+                      <form action="{{url('dosen/proposal/ajukan/'.$p->id)}}" method="post" style="display:inline;">
+                      @csrf
+                      <button type="submit" class="btn btn-success btn-sm">Ajukan</button></form>
+                      <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#UbahProp-{{$p->id}}"> >Ubah</button>
+                      <button class="btn btn-danger btn-sm">Hapus</button>
+                      @endif
                     </td>
                 </tr>
 
@@ -96,8 +113,8 @@
 </div>
 
 <!-- Modal tambah -->
-@foreach ($proposal as $p)
-<div id="ModalRevisi-{{$p->id}}" class="modal fade" role="dialog">
+
+<div id="ModalRevisi" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- konten modal-->
         <div class="modal-content">
@@ -109,14 +126,16 @@
                 </button>
             </div>
             <!-- body modal -->
-            <div class="modal-body">
-            <form action="#" method="POST" enctype="multipart/form-data">
-                  @csrf
-                  <div class="form-group">
-                    <label >Detail Revisi</label>
-                    <textarea class="ckeditor" id="ckeditor" name="detail_revisi"  required="required" readonly >{!!$p->detail_revisi!!}</textarea>
-                </div>
-
+            <div class="form-group">
+            <table class="table" >
+              @foreach($revisi as $p)
+              <tbody>
+                <td class="ml-2 mr-2">{{$loop->iteration}} </td>
+                <td class="ml-2 mr-2">{!!$p->detail!!}</td>
+              </tbody>
+              @endforeach
+            </table>
+            </div>
             </form>
             </div>
             <!-- footer modal -->
@@ -125,7 +144,6 @@
         </div>
     </div>
 </div>
-@endforeach
 
 
 <!-- Modal tambah -->
@@ -151,13 +169,18 @@
                         <input type="text" class="form-control" name="judul" required="required" >
                   </div>
                   <div class="form-group">
+                    <label >Anggota 1</label>
+                        <input type="text" class="form-control" name="anggota1"  >
+                  </div>
+                  <div class="form-group">
+                    <label >Anggota 2</label>
+                        <input type="text" class="form-control" name="anggota2"  >
+                  </div>
+                  <div class="form-group">
                     <label for="exampleFormControlTextarea1">Abstrak</label>
                     <textarea class="ckeditor" id="ckeditor" name="abstrak" required="required"></textarea>
                   </div>
-                  <div class="form-group">
-                    <label >Periode</label>
-                        <input type="text" class="form-control" name="periode" required="required" >
-                  </div>
+               
                   <div class="form-group">
                     <label for="file">File</label>
                     <input type="file" class="form-control" name="">
@@ -182,15 +205,15 @@
     </div>
 </div>
 
-
+@foreach ($proposal as $p)
 <!-- Modal tambah2 -->
-<div id="ModalTambah2" class="modal fade" role="dialog">
+<div id="ModalTambah2-{{$p->id}}" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- konten modal-->
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Proposal</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Revisi Proposal</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -198,21 +221,21 @@
             <!-- body modal -->
             <div class="modal-body">
             
-            <form action="{{ url('dosen/proposal/store2') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('dosen/proposal/revisi/'.$p->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
 
-                  <div class="form-group">
-                    <label >Judul</label>
-                        <input type="text" class="form-control" name="judul" required="required" >
+                  <div class="form-group" hidden>
+                    <label >id</label>
+                        <input type="text" class="form-control" name="judul" value="{{$p->id}}" required="required" >
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label >Periode</label>
                         <input type="text" class="form-control" name="periode" required="required" >
-                  </div>
-                  <div class="form-group">
+                  </div> -->
+                  <!-- <div class="form-group">
                     <label for="exampleFormControlTextarea1">Abstrak</label>
                     <textarea class="ckeditor" id="ckeditor" name="abstrak" required="required"></textarea>
-                  </div>
+                  </div> -->
 
                   <div class="form-group">
                     <label for="file">File</label>
@@ -236,6 +259,7 @@
         </div>
     </div>
 </div>
+@endforeach
 
 
 

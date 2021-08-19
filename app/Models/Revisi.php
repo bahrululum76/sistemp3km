@@ -10,8 +10,7 @@ class Revisi extends Model
     use HasFactory;
 
     protected $fillable = [
-       'revisi',
        'detail',
-       'user_id',
+       'proposal_id',
     ];
 }

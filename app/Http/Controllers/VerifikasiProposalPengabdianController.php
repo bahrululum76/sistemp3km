@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use Mail;
+use PDF;
 use App\Mail\RevMail;
 use Validator;
 class VerifikasiProposalPengabdianController extends Controller
@@ -33,13 +34,14 @@ class VerifikasiProposalPengabdianController extends Controller
         if ($proposal->id= $id){
 
             $proposal1= Proposal::where('user_id','=',$proposal->user_id)
+            
             ->update(['status_id' => 1]);
 
         }
         
         $prop =DB::table('proposals')->where('id','=',$proposal->id)->Value('judul');
         $user2 =DB::table('users')->where('id','=',$proposal->user_id)->Value('name');
-        $prop1 =pROPOSAL::where('id','=',$proposal->id)->get();
+        $prop1 =Proposal::where('id','=',$proposal->id)->get();
         $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->Value('name');
         $user =DB::table('users')->where('id','=',$proposal->user_id)->value('email');   
         // ->where('id','=',$proposal->user_id);
@@ -51,15 +53,15 @@ class VerifikasiProposalPengabdianController extends Controller
         $data["body"] = ' Proposal Penelitian , atas nama '. $user2 . ' dengan judul ' .$prop. ' sudah diterima untuk direview oleh saudara , silahkan cek website';
         $pdf = PDF::loadView('admin.surattugas',['prop1'=>$prop1]);
   
-        Mail::send('admin.rev', $data, function($message)use($data, $pdf) {
+        Mail::send('admin.pil', $data, function($message)use($data, $pdf) {
             $message->to($data["email"], $data["email"])
                     ->subject($data["title"])
                     ->attachData($pdf->output(), "SuratTugas.pdf");
         });
-        // dd('success');
+        
         
     
-        return redirect('reviewer/verifikasi_proposal_pengabdian');
+        return redirect('reviewer/verifikasi_proposal_pengabdian')->with(['success' => 'Proposal Diterima']);
     }
     public function revisi(Request $request, $id){
 

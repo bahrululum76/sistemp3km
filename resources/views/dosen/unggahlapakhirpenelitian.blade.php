@@ -75,10 +75,12 @@
             <form action="{{ url ('dosen/penelitian/store') }}" method="POST" enctype="multipart/form-data">
                   @csrf
 
-                  <div class="form-group">
+                  @foreach ($proposal as $p)
+                  <div class="form-group" hidden>
                     <label >Judul</label>
-                        <input type="text" class="form-control" name="judul" required="required" >
+                        <input type="text" class="form-control" name="judul" value="{{$p->judul}}" required="required" >
                   </div>
+                @endforeach
 
                   <div class="form-group">
                     <label >Pendanaan</label>

@@ -75,7 +75,7 @@ class PilihReviewPengabdianController extends Controller
         $data["body"] = ' Proposal Pengabdian , atas nama '. $user2 . ' dengan judul ' .$prop. ' sudah diterima untuk direview oleh saudara , silahkan cek website';
         $pdf = PDF::loadView('admin.surattugas1',['prop1'=>$prop1,'user3'=>$user3]);
   
-        Mail::send('admin.rev', $data, function($message)use($data, $pdf) {
+        Mail::send('admin.pil', $data, function($message)use($data, $pdf) {
             $message->to($data["email"], $data["email"])
                     ->subject($data["title"])
                     ->attachData($pdf->output(), "SuratTugas.pdf");

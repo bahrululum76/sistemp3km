@@ -43,31 +43,32 @@
                     </td>
                 </tr>
             </table>
-
             <table width="500" >
-                @foreach($prop1 as $p)
+            @foreach($prop1 as $prop1)
+
                 <tr class="text2">
                     <td width="100" >Nama</td>
                     <td>:</td>
-                    <td width="400">{{$p->User->name}}</td>
+                    <td width="400">{{$prop1->User->name}}</td>
                 </tr>
                 <tr class="text2">
                     <td>NIDN</td>
                     <td>:</td>
-                    <td>{{$p->User->nidn}}</td>
+                    <td>{{$prop1->User->nidn}}</td>
                 </tr>
                 <tr>
                     <td>Unit Tugas</td>
                     <td>:</td>
-                    <td>{{$p->User->prodi}}</td>
+                    <td>{{$prop1->User->prodi}}</td>
                 </tr>
                 <tr>
                     <td>Judul Penelitian</td>
                     <td>:</td>
-                    <td>{{$p->judul}}</td>
+                    <td>{{$prop1->judul}}</td>
                 </tr>
                 @endforeach
             </table>
+            
             <br>
             <table width="500">
                 <tr>

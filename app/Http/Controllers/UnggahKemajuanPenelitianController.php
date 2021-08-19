@@ -4,13 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kemajuan;
+use App\Models\Periode;
+use App\Models\Proposal;
 use Auth;
 class UnggahKemajuanPenelitianController extends Controller
 {
     public function index(){
-        $kemajuan= Kemajuan:: where('category_id','=',1)->get();
-
-        return view("dosen.unggahkemajuanpenelitian", compact('kemajuan'));
+        $proposal = Proposal::where('user_id', '=', Auth::User()->id)
+        ->where('category_id', '=', 1)
+        ->where('periode',date("Y"))
+        ->where('status_id','=',1)
+        ->orWhere('status_id','=',2)
+        ->orWhere('status_id','=',3)
+        ->orWhere('status_id','=',4)
+        ->get();
+        $kemajuan= Kemajuan:: where('category_id','=',1)
+        ->where('periode',date("Y"))
+        ->get();
+        $value = Periode::where('tahun',date('Y'))->where('status',1)->exists();
+        return view("dosen.unggahkemajuanpenelitian", compact('kemajuan','value','proposal'));
         
     }
 
@@ -34,7 +46,7 @@ class UnggahKemajuanPenelitianController extends Controller
           
             $kemajuan->file=$filename;
         }
-        $kemajuan->periode=$request->periode;
+        $kemajuan->periode=date("Y");
         $kemajuan->progres=$request->progres;
 
         $kemajuan->category_id='1';

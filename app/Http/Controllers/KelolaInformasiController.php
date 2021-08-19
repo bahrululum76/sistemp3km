@@ -54,13 +54,13 @@ class KelolaInformasiController extends Controller
         
         $informasi->save();
 
-        $user = DB::table('users')->pluck('email')->all();
-        $detail =[
-            'title'=>'Informasi Baru',
-            'body'=>'Informasi Penelitian dan pengabdian telah dibuka , silahkan cek website'
-        ];
+        // $user = DB::table('users')->pluck('email')->all();
+        // $detail =[
+        //     'title'=>'Informasi Baru',
+        //     'body'=>'Informasi Penelitian dan pengabdian telah dibuka , silahkan cek website'
+        // ];
         
-        Mail::to($user)->send(new InfoMail($detail));
+        // Mail::to($user)->send(new InfoMail($detail));
        
 
 

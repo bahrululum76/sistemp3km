@@ -1,14 +1,4 @@
-<!--
-=========================================================
-Material Dashboard - v2.1.2
-=========================================================
 
-Product Page: https://www.creative-tim.com/product/material-dashboard
-Copyright 2020 Creative Tim (https://www.creative-tim.com)
-Coded by Creative Tim
-
-=========================================================
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,6 +30,13 @@ The above copyright notice and this permission notice shall be included in all c
     <link rel="stylesheet" href="{{ asset('assets/css/dark-mode.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+    <style>
+        .hidden{
+            display: none;
+            visibility: hidden"
+        }
+    </style>
 </head>
 <body id="main">
     <div class="wrapper ">
@@ -60,24 +57,14 @@ The above copyright notice and this permission notice shall be included in all c
                             <p class="teks-sidebar">Dashboard</p>
                         </a>
                     </li>
-                  
-                    <!-- <li class="nav-item{{ (Route::current()->uri === 'proposal') ? ' active' : 'proposal' }}">
-                        <a class="nav-link" href="{{route('proposal')}}">
-                            <i class="material-icons">content_paste</i>
-                            <p class="teks-sidebar">Pengajuan Proposal</p>
-                        </a>
-                    </li>
-                    <li class="nav-item{{ (Route::current()->uri === 'proposal') ? ' active' : 'proposal' }}">
-                        <a class="nav-link" href="{{route('proposal_pengabdian')}}">
-                            <i class="material-icons">content_paste</i>
-                            <p class="teks-sidebar">Pengajuan Proposal Pengabdian</p>
-                        </a>
-                    </li> -->
-                    <li class="nav-item dropdown {{Request::path() ==='dosen/proposal'  ? 'active': ''}} || {{Request::path() ==='dosen/proposal_pengabdian'  ? 'active': ''}}">
+                   
+                    
+<div id="exp" class="hidden">
+<li class="nav-item dropdown {{Request::path() ==='dosen/proposal'  ? 'active': ''}} || {{Request::path() ==='dosen/proposal_pengabdian'  ? 'active': ''}}">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">content_paste</i>
                                     <p class="teks-sidebar">
-                                    Pengajuan Proposal
+                                    Pengajuan Proposal 
                                     </p>
                                 </a>
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -85,20 +72,8 @@ The above copyright notice and this permission notice shall be included in all c
                                     <a class="dropdown-item" href="proposal_pengabdian">Pengabdian</a>
                                    
                                 </div> 
-                    </li>
-                    <!-- <li class="nav-item ">
-                        <a class="nav-link" href="unggahkemajuanpenelitian">
-                            <i class="material-icons">library_books</i>
-                            <p class="teks-sidebar">Unggah Laporan Kemajuan</p>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="unggahkemajuanpengabdian">
-                            <i class="material-icons">library_books</i>
-                            <p class="teks-sidebar">Unggah Kemajuan pengabdian</p>
-                        </a>
-                    </li> -->
-  
+                    </li>   
+
                     <li class="nav-item dropdown {{Request::path() ==='dosen/unggahkemajuanpenelitian'  ? 'active': ''}} || {{Request::path() ==='dosen/unggahkemajuanpengabdian'  ? 'active': ''}}" >
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">library_books</i>
@@ -112,15 +87,7 @@ The above copyright notice and this permission notice shall be included in all c
                                    
                                 </div> 
                     </li>
-                    
-                    <!-- <ul class="nav" id="side-menu"> -->
-                    <!-- <li class="nav-item " >
-                            <a class="nav-link" href="penelitian" ><i class="fa fa-book " aria-hidden="true"></i>Unggah Laporan Akhir penelitian</a>
-                    </li>
 
-                    <li>
-                        <a class="nav-link" href="pengabdian"><i class="fa fa-book"></i> Unggah Laporan Akhir pengabdian </a>
-                    </li> -->
                     <li class="nav-item dropdown {{Request::path() ==='dosen/penelitian'  ? 'active': ''}} || {{Request::path() ==='dosen/pengabdian'  ? 'active': ''}}">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">library_books</i>
@@ -133,10 +100,10 @@ The above copyright notice and this permission notice shall be included in all c
                                     <a class="dropdown-item" href="pengabdian">Pengabdian</a>
                                    
                                 </div> 
+                                
                     </li>
-                    
-                    <!-- </ul> -->
-
+                
+</div>
 
 
 
@@ -430,6 +397,8 @@ The above copyright notice and this permission notice shall be included in all c
     </script>
 
     <script>
+        
+
         // Add the following code if you want the name of the file appear on select
         $(".custom-file-input").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
@@ -438,8 +407,28 @@ The above copyright notice and this permission notice shall be included in all c
     </script>
         <script>
         $(document).ready(function() {
+     
     $('#myTable').DataTable();
 } );
+    </script>
+
+    <script>
+        $(function() {
+            $.ajax({
+        type: 'GET',
+        url: '/exp',
+        dataType: 'json',
+        success: function (result) {
+            if(result){
+            $("#exp").removeClass("hidden");
+            }
+            
+        },
+        error: function () {
+            console.log('false');
+        }
+    });
+});
     </script>
 </body>
 </html>

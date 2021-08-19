@@ -17,11 +17,12 @@ class CreateProposalsTable extends Migration
             $table->id();
             $table->string('judul');
             $table->text('abstrak')->nullable();
+            $table->string('anggota1')->nullable();
+            $table->string('anggota2')->nullable();
             $table->string('file');
             $table->integer('periode');
             $table->foreignId('category_id')->references('id')->on('categories');
             $table->foreignId('status_id')->references('id')->on('statuses');
-            $table->string('detail_revisi')->nullable();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->integer('reviewer_id')->nullable();
             $table->integer('pengaju_id')->nullable();

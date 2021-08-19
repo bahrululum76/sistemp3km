@@ -13,15 +13,16 @@ class Propen extends Component
 
         return view('livewire.propen',['proposal' =>Proposal::where('category_id','=',2)
         ->where('status_id','=',1)
-        ->orWhere('status_id','=',2)
-        ->orWhere('status_id','=',3)
-        ->orWhere('status_id','=',4)
+        ->where('periode',date("Y"))   
         ->get(), ] );
     }
-    public function update(){
-        Proposal::where('category_id', '=', 2)->update([
-                        'status_id' => 8,
-                    ]);
-    }
+    // public function update(){
+    //     Proposal::where('category_id', '=', 2)
+    //     ->where('status_id',1)
+    //     ->where('periode',now())     
+    //             ->update([
+    //                     'status_id' => 8,
+    //                 ]);
+    // }
 
 }

@@ -7,8 +7,8 @@
     <title>Info</title>
 </head>
 <body>
-<h1>{{ $title }}</h1>
-    <p>{{ $body }}</p>
+<h1>{{ $detail['title'] }}</h1>
+    <p>{{ $detail['body'] }}</p>
    
 </body>
 </html>

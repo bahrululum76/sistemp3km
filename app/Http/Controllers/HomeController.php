@@ -12,7 +12,10 @@ use App\Models\Penelitian;
 use App\Models\Pengabdian;
 use App\Models\Kemajuan;
 use App\Models\Kegiatan;
+use App\Models\Periode;
 use Auth;
+use Carbon\Carbon;
+use DateTime;
 
 class HomeController extends Controller
 {
@@ -33,6 +36,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+       
         $informasi = Informasi::all();
         $user =User::where('roles_id','=',2)
         ->where('roles_id','=',3)
@@ -41,11 +45,34 @@ class HomeController extends Controller
         $penelitian=Penelitian::all();
         return view('admin.home', compact('informasi','user','penelitian','pengabdian'));
     }
+
+    public function getexp(){
+        $pr=Periode::latest()->first();
+        $exp=strtotime($pr->expired);
+        $now=strtotime(Carbon::now()->toDateString());
+        $now>=$exp? $result = false : $result = true;
+        return response()->json($result);
+    }
     public function HomeDosen()
     {
+
+        
+        Periode::where('expired','=',date('Y-m-d'))
+        ->update([
+            'status' => 2
+        ]);
+        $proposal = Proposal::where('user_id', '=', Auth::User()->id)
+        ->where('category_id', '=', 1)
+        ->where('periode',date("Y"))
+        ->where('status_id','=',1)
+        ->orWhere('status_id','=',2)
+        ->orWhere('status_id','=',3)
+        ->orWhere('status_id','=',4)
+        ->get();
+        $value = Periode::where('tahun',date('Y'))->where('status',1)->exists();
         $informasi = Informasi::all();
         $kegiatan =Kegiatan::all();
-        return view('dosen.home', compact('informasi','kegiatan') );
+        return view('dosen.home', compact('informasi','kegiatan','value','proposal') );
     }
 
     public function HomeLppm()

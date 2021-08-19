@@ -10,19 +10,20 @@ class Status extends Component
     {
 
         // $proposal = Proposal::where('category_id','=',1)->get();
-
+        // dd(now());
         return view('livewire.status',['proposal' =>Proposal::where('category_id','=',1)
         ->where('status_id','=',1)
-        ->orWhere('status_id','=',2)
-        ->orWhere('status_id','=',3)
-        ->orWhere('status_id','=',4)
+        ->where('periode', date("Y"))
         ->get(), ] );
     }
 
-    public function update(){
-        Proposal::where('category_id', '=', 1)->update([
-                        'status_id' => 8,
-                    ]);
+    // public function update(){
+    //     Proposal::where('category_id', '=', 1)
+    //             ->where('status_id',1)
+    //             ->where('periode',now())        
+    //             ->update([
+    //                     'status_id' => 8,
+    //                 ]);
 
         //     if ($status_id == 8) {
         //     try {
@@ -54,5 +55,5 @@ class Status extends Component
         //         ]);
         //     }
         // }
-    }
+    // }
 }

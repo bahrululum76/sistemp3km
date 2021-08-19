@@ -5,26 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Proposal;
 use App\Models\Dana;
+use App\Models\Periode;
+use App\Models\Revisi;
 use Mail;
 use App\Mail\RevMail;
 
 use Auth;
 use Validator;
 use Illuminate\Support\Facades\DB;
-
+use Storage;
 class ProposalController extends Controller
 {
     public function index()
     {
         // $proposal= DB::table('proposals')->where('user_id', '=',Auth::User()->id)->get();
+
         
         $proposal = Proposal::where('user_id', '=', Auth::User()->id)
             ->where('category_id', '=', 1)
+            ->where('periode',date("Y"))
             ->where('status_id','=',1)
             ->orWhere('status_id','=',2)
             ->orWhere('status_id','=',3)
             ->orWhere('status_id','=',4)
             ->get();
+        $prop= Proposal::where('user_id', '=', Auth::User()->id)
+        ->where('category_id', '=', 1)
+        ->where('status_id','=',2)
+        ->orWhere('status_id','=',3)
+        ->orWhere('status_id','=',4)
+        ->value('id');
+        $revisi= Revisi::where('proposal_id',$prop)->get();
         $proposal_kosong = Proposal::where('user_id', '=', Auth::User()->id)
             ->where('category_id', '=', 1)
             ->limit(1)
@@ -34,20 +45,20 @@ class ProposalController extends Controller
         $proposalnonaktif= Proposal::where('status_id',8)
         ->where('category_id',1)->value('status_id');
            
-        // dd($proposalnonaktif);
-        return view("dosen.proposal_penelitian", compact('proposal','proposalnonaktif',  'proposal_kosong', 'proposal_kosong_1'));
+        $value = Periode::where('tahun',date('Y'))->where('status',1)->exists();
+        // dd($prop);
+        return view("dosen.proposal_penelitian", compact('proposal','proposalnonaktif',  'proposal_kosong', 'proposal_kosong_1','revisi','value'));
     }
     public function index_adm()
     {
         // $proposal= DB::table('proposals')->where('user_id', '=',Auth::User()->id)->get();
         
-
+        
         $proposal = Proposal::where('category_id','=',1)
         ->where('status_id','=',1)
-        ->orWhere('status_id','=',2)
-        ->orWhere('status_id','=',3)
-        ->orWhere('status_id','=',4)
+        ->where('periode',now())
         ->get();
+        
         return view("admin.proposalpenelitian", compact('proposal'));
     }
 
@@ -57,12 +68,13 @@ class ProposalController extends Controller
     {
         $rules = [
             'judul'          => 'unique:proposals',
-            'file'          => 'required|mimes:docx,pdf'
+            'file'          => 'required|mimes:docx,pdf|max:3000',
+            
         ];
  
         $messages = [
             'judul.unique'           => 'judul ini sudah ada sebelumnya.',
-            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx dan Pdf',
+            'file.mimes'             => 'Extensi yang di perbolehkan hanya Docx',
         ];
  
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -74,21 +86,10 @@ class ProposalController extends Controller
         $proposal = new Proposal;
         $proposal2 = Proposal::where('user_id','=',Auth::User()->id);
 
-        $prop1 =DB::table('proposals')->where('id','=',$proposal->id)->pluck('judul')->first();
-        $user2 =DB::table('users')->where('roles_id','=',2)->pluck('name');
-        $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('name');
-        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
-        // ->where('id','=',$proposal->user_id);
-        $detail =[
-            'title'=>'Pilih Reviewer',
-            'body'=>  $user.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop1.'sudah tersedia untuk di ditentukan reviewer oleh anda , silahkan cek website'
-        ];
-        
-        Mail::to($user)->send(new RevMail($detail));
-        
-
         $proposal->id;
         $proposal->judul = $request->get('judul');
+        $proposal->anggota1=$request->anggota1;
+        $proposal->anggota2=$request->anggota2;
         $proposal->abstrak=$request->abstrak;
 
         if ($request->hasFile('file')) {
@@ -103,13 +104,32 @@ class ProposalController extends Controller
 
             $proposal->file = $filename;
         }
-        $proposal->periode=$request->periode;
+        $proposal->periode=date("Y");
         $proposal->category_id = '1';
-        $proposal->status_id = '2';
+        $proposal->status_id = '1';
         $proposal->user_id = Auth::User()->id;
         $proposal->pengaju_id = Auth::User()->id;
-
         $proposal->save();
+        $user3=User::where('id',Auth::User()->id)
+        ->update(
+            [
+                'status'=> 1,
+            ]
+            );
+
+        $prop1 =DB::table('proposals')->where('user_id','=',$proposal->user_id)->pluck('judul')->first();
+        $user2 =DB::table('users')->where('roles_id','=',2)->pluck('email');
+        $user1 =DB::table('users')->where('id','=',$proposal->user_id)->pluck('name');
+        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
+        // ->where('id','=',$proposal->user_id);
+        $detail =[
+            'title'=>'Pilih Reviewer',
+            'body'=>  ' Proposal Penelitian , atas nama'.$user1.' dengan judul ' .$prop1. ' sudah tersedia untuk di ditentukan reviewer oleh anda , silahkan cek website'
+        ];
+        // dd($user1);
+        Mail::to($user2)->send(new RevMail($detail));
+        
+        
 
         // $proposal_user = new Proposal_user;
 
@@ -121,7 +141,7 @@ class ProposalController extends Controller
         return redirect('dosen/formdana');
     }
 
-    public function store2(Request $request)
+    public function revisi(Request $request, $id)
     {
         $rules = [
             
@@ -138,13 +158,12 @@ class ProposalController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
-        $prop=Proposal::Where('user_id','=',Auth::User()->id)->pluck('reviewer_id')->first();
-        $proposal = new Proposal;
+        // $prop=Proposal::Where('user_id','=',Auth::User()->id)->pluck('reviewer_id')->first();
+        $proposal = Proposal::find($id);
+
+        Storage::delete('public/proposal'.$proposal->file);
 
         $proposal->id ;
-        $proposal->judul = $request->get('judul');
-        $proposal->abstrak=$request->abstrak;
-
         if ($request->hasFile('file')) {
 
             $filename = $request->file('file')->getClientOriginalName();
@@ -157,32 +176,39 @@ class ProposalController extends Controller
 
             $proposal->file = $filename;
         }
-        $proposal->periode=$request->periode;
-        $proposal->category_id = '1';
-        $proposal->status_id = '3';
-        $proposal->user_id = Auth::User()->id;
-        $proposal->pengaju_id = Auth::User()->id;
-        $proposal->reviewer_id= $prop;
         $proposal->save();
+        
 
-        $prop1 =DB::table('proposals')->where('id','=',$proposal->id)->pluck('judul')->first();
-        $user2 =DB::table('users')->where('id','=',$proposal->user_id)->pluck('name');
-        $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('name');
-        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
+        $prop1 =DB::table('proposals')->where('id','=',$proposal->id)->value('judul');
+        $user2 =DB::table('users')->where('id','=',$proposal->user_id)->value('name');
+        $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->value('name');
+        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->value('email');   
         // ->where('id','=',$proposal->user_id);
         $detail =[
             'title'=>'Review Proposal',
-            'body'=>  $user1.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop1.'sudah tersedia untuk di koreksi oleh anda , silahkan cek website'
-        ];
-        
+            'body'=>  ' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop1.'sudah tersedia untuk di koreksi oleh anda , silahkan cek website'
+        ];    
         Mail::to($user)->send(new RevMail($detail));
-        // $proposal_user = new Proposal_user;
-
-        // $proposal_user->user_id= Auth::User()->id;
-        // $proposal_user->proposal_id = $proposal->id;
-        // $proposal_user->save();
         // dd($prop1);
         return redirect('dosen/proposal')->with(['success' => 'Data Berhasil ditambahkan']);
+    }
+    public function ajukan(Request $request, $id){
+        $proposal=Proposal::find($id);
+
+        $proposal=Proposal::where('id',$id)
+        ->update(
+            [
+                'status_id'=> 2,
+            ]
+            );
+            $user=User::where('id',Auth::User()->id)
+            ->update(
+                [
+                    'status'=> 2,
+                ]
+                );
+        
+        return redirect('dosen/proposal')->with(['success' => 'Proposal Berhasil ditajukan']);
     }
 
     public function dana_index(){
@@ -191,8 +217,10 @@ class ProposalController extends Controller
         ->where('category_id','=',1)
         ->limit(1)
         ->get();
+        $value = Periode::where('tahun',date('Y'))->where('status',1)->exists();
+        $dana= Dana::where('category_id','=',1)->get();
         
-        return view('dosen.formdana', compact('proposal'));
+        return view('dosen.formdana', compact('proposal','value'));
     }
 
     public function dana_store(Request $request){

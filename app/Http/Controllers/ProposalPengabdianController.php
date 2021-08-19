@@ -17,12 +17,11 @@ class ProposalPengabdianController extends Controller
         // $proposal= DB::table('proposals')->where('user_id', '=',Auth::User()->id)->get();
         $proposal = Proposal::where('user_id', '=', Auth::User()->id)
             ->where('category_id', '=', 2)
-            ->where('status_id',1)
-            ->orWhere('status_id','=',2)
+            ->where('status_id',2)
             ->orWhere('status_id','=',3)
             ->orWhere('status_id','=',4)
             ->get();
-
+// ->orWhere('status_id','=',4)
             $proposal_kosong = Proposal::where('user_id', '=', Auth::User()->id)
             ->where('category_id', '=', 2)
             ->limit(1)
@@ -41,7 +40,11 @@ class ProposalPengabdianController extends Controller
         // $proposal= DB::table('proposals')->where('user_id', '=',Auth::User()->id)->get();
         
 
-        $proposal = Proposal::where('category_id', '=', 2)->get();
+        $proposal = Proposal::where('category_id', '=', 2)
+        ->where('periode',now())
+        ->Where('status_id','=',1)
+        ->get();
+        // dd($proposal);
         return view("admin.proposalpengabdian", compact('proposal'));
     }
 
@@ -67,17 +70,7 @@ class ProposalPengabdianController extends Controller
 
         $proposal = new Proposal;
 
-        $prop1 =DB::table('proposals')->where('id','=',$proposal->id)->pluck('judul')->first();
-        $user2 =DB::table('users')->where('roles_id','=',2)->pluck('name');
-        $user1 =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('name');
-        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
-        // ->where('id','=',$proposal->user_id);
-        $detail =[
-            'title'=>'Pilih Reviewer',
-            'body'=>  $user.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop1.'sudah tersedia untuk di ditentukan reviewer oleh anda , silahkan cek website'
-        ];
         
-        Mail::to($user)->send(new RevMail($detail));
 
         
         $proposal->judul = $request->get('judul');
@@ -101,6 +94,18 @@ class ProposalPengabdianController extends Controller
         $proposal->user_id = Auth::User()->id;
         $proposal->pengaju_id = Auth::User()->id;
         $proposal->save();
+
+        $prop1 =DB::table('proposals')->where('user_id','=',$proposal->user_id)->pluck('judul')->first();
+        $user2 =DB::table('users')->where('roles_id','=',2)->pluck('email');
+        $user1 =DB::table('users')->where('id','=',$proposal->user_id)->pluck('name');
+        $user =DB::table('users')->where('id','=',$proposal->reviewer_id)->pluck('email');   
+        // ->where('id','=',$proposal->user_id);
+        $detail =[
+            'title'=>'Pilih Reviewer',
+            'body'=>  ' Proposal Penelitian , atas nama '.$user1.' dengan judul ' .$prop1. ' sudah tersedia untuk di ditentukan reviewer oleh anda , silahkan cek website'
+        ];
+        // dd($user1);
+        Mail::to($user2)->send(new RevMail($detail));
 
 
 
@@ -159,7 +164,7 @@ class ProposalPengabdianController extends Controller
         // ->where('id','=',$proposal->user_id);
         $detail =[
             'title'=>'Review Proposal',
-            'body'=>  $user1.' Proposal Penelitian , atas nama'.$user2.' dengan judul'.$prop1.'sudah tersedia untuk di koreksi oleh anda , silahkan cek website'
+            'body'=>  ' Proposal Penelitian , atas nama'.$user2.' dengan judul '.$prop1.' sudah tersedia untuk di koreksi oleh anda , silahkan cek website'
         ];
         
         Mail::to($user)->send(new RevMail($detail));

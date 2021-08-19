@@ -81,11 +81,26 @@ The above copyright notice and this permission notice shall be included in all c
                                     </p>
                                 </a>
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="{{route('pilih_review')}}"><p class="teks-sidebar"> Penelitian </p> </a>
+                                    <a class="dropdown-item" href="{{url('lppm/pilihprodi')}}"><p class="teks-sidebar"> Penelitian </p> </a>
                                     <a class="dropdown-item" href="{{route('pilih_review_pengabdian')}}"><p class="teks-sidebar"> Pengabdian</p> </a>
                                    
                                 </div> 
                     </li>
+
+                    <li class="nav-item dropdown {{Request::path() ==='lppm/proposalpenelitian' ? 'active': ''}} || {{Request::path() ==='lppm/proposalpengabdian' ? 'active': ''}} " >
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">content_paste</i>
+                                    <p class="teks-sidebar">
+                                    Proposal
+                                    </p>
+                                </a>
+                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="proposalpenelitian">Penelitian</a>
+                                    <a class="dropdown-item" href="proposalpengabdian">Pengabdian</a>
+                                   
+                                </div> 
+                    </li>
+
                     <li class="nav-item dropdown {{Request::path() ==='lppm/laporankemajuanpenelitian'  ? 'active': ''}} || {{Request::path() ==='lppm/laporankemajuanpengabdian'  ? 'active': ''}}">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">library_books</i>

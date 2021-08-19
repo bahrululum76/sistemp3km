@@ -11,7 +11,7 @@
     <strong>{{ $message }}</strong>
 </div>
 @endif
-<button class="btn btn-danger btn-sm" wire:click="update()">NonAktif</button>
+<!-- <button class="btn btn-danger btn-sm" wire:click="update()">NonAktif</button> -->
         <div class="table-responsive">
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead class="thead">

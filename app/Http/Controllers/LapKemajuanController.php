@@ -9,7 +9,7 @@ class LapKemajuanController extends Controller
 {
     public function index_penelitian(){
         $kemajuan= Kemajuan:: where('category_id','=',1)->get();
-
+        
         return view("lppm.kemajuanpenelitian", compact('kemajuan'));
         
     }

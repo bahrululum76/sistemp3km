@@ -49,10 +49,7 @@ Route::middleware(['is_admin'])->prefix('/admin')->group(function () {
     Route::post('kelolainformasi/edit{id}', [App\Http\Controllers\KelolaInformasiController::class, 'edit'])->name('kelolainformasi/edit');
     Route::delete('kelolainformasi/delete{id}', [App\Http\Controllers\KelolaInformasiController::class, 'delete']);
 
-    //proposal_penelitian
-    Route::get('proposalpenelitian', function(){
-        return view('admin.proposalpenelitian');
-    });
+
     Route::get('proposalpengabdian', [App\Http\Controllers\ProposalPengabdianController::class, 'index_adm'])->name('proposalpengabdian');
     
 
@@ -76,10 +73,22 @@ Route::middleware(['is_lppm'])->prefix('/lppm')->group(function () {
     Route::get('/Home', [App\Http\Controllers\HomeController::class, 'HomeLppm'])->name('lppm_home');
 
     //pilih_review
+    Route::get('/pilihprodi', function () {
+        return view('lppm/pil_prodi_pen');
+    });
     Route::get('pilih_review', [App\Http\Controllers\PilihReviewController::class, 'index'])->name('pilih_review');
 
     Route::post('pilih_review/tolak{id}', [App\Http\Controllers\PilihReviewController::class, 'tolak'])->name('pilih_review/tolak');
     Route::post('pilih{id}', [App\Http\Controllers\PilihReviewController::class, 'pilih'])->name('pilih');
+
+    //proposal_penelitian
+    Route::get('proposalpenelitian', function(){
+        return view('lppm.proposalpenelitian');
+    });
+
+    Route::get('proposalpengabdian', function(){
+        return view('lppm.proposalpengabdian');
+    });
 
     //pilihreviewpengabdian
     Route::get('pilih_review_pengabdian', [App\Http\Controllers\PilihReviewPengabdianController::class, 'index'])->name('pilih_review_pengabdian');
@@ -123,7 +132,8 @@ Route::middleware(['is_dosen'])->prefix('/dosen')->group(function () {
     //proposal_penelitian
     Route::get('proposal', [App\Http\Controllers\ProposalController::class, 'index'])->name('proposal');
     Route::post('proposal/store', [App\Http\Controllers\ProposalController::class, 'store'])->name('proposal/store');
-    Route::post('proposal/store2', [App\Http\Controllers\ProposalController::class, 'store2'])->name('proposal/store2');
+    Route::post('proposal/ajukan/{id}', [App\Http\Controllers\ProposalController::class, 'ajukan'])->name('proposal/ajukan'); 
+    Route::post('proposal/revisi/{id}', [App\Http\Controllers\ProposalController::class, 'revisi'])->name('proposal/revisi');
     
     //proposal_pengabdian
     Route::get('proposal_pengabdian', [App\Http\Controllers\ProposalPengabdianController::class, 'index'])->name('proposal_pengabdian');
@@ -175,7 +185,7 @@ Route::middleware(['is_reviewer'])->prefix('/reviewer')->group(function () {
     Route::get('/Home', [App\Http\Controllers\HomeController::class, 'HomeReviewer'])->name('reviewer_home');
     Route::get('verifikasi_proposal', [App\Http\Controllers\VerifikasiController::class, 'index'])->name('verifikasi_proposal');
     Route::post('verifikasi_proposal/terima{id}', [App\Http\Controllers\VerifikasiController::class, 'terima'])->name('verifikasi_proposal/terima');
-    Route::post('verifikasi_proposal/revisi{id}', [App\Http\Controllers\VerifikasiController::class, 'revisi'])->name('verifikasi_proposal/revisi');
+    Route::post('verifikasi_proposal/revisi', [App\Http\Controllers\VerifikasiController::class, 'revisi'])->name('verifikasi_proposal/revisi');
     
 
     //verifikasi proposal pengabdian
@@ -188,3 +198,5 @@ Route::middleware(['is_reviewer'])->prefix('/reviewer')->group(function () {
     Route::get('reviewproposalpengabdian/{id}', [App\Http\Controllers\VerifikasiProposalPengabdianController::class, 'detail'])->name('reviewproposalpengabdian');
     
 });
+
+Route::get('/exp', [App\Http\Controllers\HomeController::class, 'getexp']);

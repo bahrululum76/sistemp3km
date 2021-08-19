@@ -31,10 +31,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Status::create([
-            'nama' => 'diterima',
+            'nama' => 'belum diajukan',
         ]);
         Status::create([
-            'nama' => 'belum diterima',
+            'nama' => 'mengajukan',
         ]);
         Status::create([
             'nama' => 'revisi',
@@ -43,11 +43,9 @@ class DatabaseSeeder extends Seeder
             'nama' => 'ditolak',
         ]);
         Status::create([
-            'nama' => 'sedang revisi',
+            'nama' => 'diterima',
         ]);
-        Status::create([
-            'nama' => 'selesai',
-        ]);
+        
         Status::create([
             'nama' => 'aktif',
         ]);
@@ -69,56 +67,56 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Reviewer',
         ]);
 
-        User::create([
-            'nidn' => '12354',
-            'name' => 'Johty charge',
-            'prodi'=> 'industri',
-            'jabatan'=> 'wd 1',
-            'email' => 'email@es.com',
-            'password' => Hash::make(123456),
-            'alamat' => 'ok',
-            'no_hp' => '09767',
+        // User::create([
+        //     'nidn' => '12354',
+        //     'name' => 'Johty charge',
+        //     'prodi'=> 'industri',
+        //     'jabatan'=> 'wd 1',
+        //     'email' => 'email@es.com',
+        //     'password' => Hash::make(123456),
+        //     'alamat' => 'ok',
+        //     'no_hp' => '09767',
            
-            'roles_id' => 1,
+        //     'roles_id' => 1,
             
-        ]);
-        User::create([
-            'nidn' => '12667',
-            'name' => 'rose way',
-            'prodi'=> 'sipil',
-            'jabatan'=> 'wd 1',
-            'email' => 'email@mail.com',
-            'password' => Hash::make(123456),
-            'alamat' => 'ok',
-            'no_hp' => '86786',
+        // ]);
+        // User::create([
+        //     'nidn' => '12667',
+        //     'name' => 'rose way',
+        //     'prodi'=> 'sipil',
+        //     'jabatan'=> 'wd 1',
+        //     'email' => 'email@mail.com',
+        //     'password' => Hash::make(123456),
+        //     'alamat' => 'ok',
+        //     'no_hp' => '86786',
             
-            'roles_id' => 2,
+        //     'roles_id' => 2,
             
-        ]);
-        User::create([
-            'nidn' => '128444',
-            'name' => 'lucam',
-            'prodi'=> 'informatika',
-            'jabatan'=> 'wd 2',
-            'email' => 'mochlucam@gmail.com',
-            'password' => Hash::make(123456),
-            'alamat' => 'ok',
-            'no_hp' => '77857',
+        // ]);
+        // User::create([
+        //     'nidn' => '128444',
+        //     'name' => 'lucam',
+        //     'prodi'=> 'informatika',
+        //     'jabatan'=> 'wd 2',
+        //     'email' => 'mochlucam@gmail.com',
+        //     'password' => Hash::make(123456),
+        //     'alamat' => 'ok',
+        //     'no_hp' => '77857',
             
-            'roles_id' => 3,
-        ]);
-        User::create([
-            'nidn' => '12844',
-            'name' => 'lucam234',
-            'prodi'=> 'informatika',
-            'jabatan'=> 'wd 3',
-            'email' => 'mochlucam3456@gmail.com',
-            'password' => Hash::make(123456),
-            'alamat' => 'ok',
-            'no_hp' => '765564',
+        //     'roles_id' => 3,
+        // ]);
+        // User::create([
+        //     'nidn' => '12844',
+        //     'name' => 'lucam234',
+        //     'prodi'=> 'informatika',
+        //     'jabatan'=> 'wd 3',
+        //     'email' => 'mochlucam3456@gmail.com',
+        //     'password' => Hash::make(123456),
+        //     'alamat' => 'ok',
+        //     'no_hp' => '765564',
             
-            'roles_id' => 4,
-        ]);
+        //     'roles_id' => 4,
+        // ]);
 
         // Proposal::create([
         //     'judul' => 'Proposal 1',

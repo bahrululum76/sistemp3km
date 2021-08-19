@@ -92,7 +92,7 @@
             <!-- body modal -->
             <div class="modal-body">
 
-            <form action="{{ url('reviewer/verifikasi_proposal/revisi'.$p->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('reviewer/verifikasi_proposal/revisi') }}" method="POST" enctype="multipart/form-data">
                   @csrf
 
                 <div class="form-group">
@@ -121,7 +121,11 @@
 
                 <div class="form-group">
                     <label >Detail Revisi</label>
-                    <textarea class="ckeditor" id="ckeditor" name="detail_revisi"  required="required" ></textarea>
+                    <textarea class="ckeditor" id="ckeditor" name="detail"  required="required" ></textarea>
+                </div>
+                <div class="form-group" hidden>
+                    <label >id</label>
+                        <input type="text" class="form-control" value="{{$p->id}}"  required="required" name="proposal_id" >
                 </div>
 
 

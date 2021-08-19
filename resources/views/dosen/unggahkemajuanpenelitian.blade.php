@@ -66,15 +66,13 @@
             <div class="modal-body">
             <form action="{{ url ('dosen/unggahkemajuanpenelitian/store') }}" method="POST" enctype="multipart/form-data">
                   @csrf
-
-                  <div class="form-group">
+                @foreach ($proposal as $p)
+                  <div class="form-group" hidden>
                     <label >Judul</label>
-                        <input type="text" class="form-control" name="judul" required="required" >
+                        <input type="text" class="form-control" name="judul" value="{{$p->judul}}" required="required" >
                   </div>
-                  <div class="form-group">
-                    <label >Periode</label>
-                        <input type="text" class="form-control" name="periode" required="required" >
-                  </div>
+                @endforeach
+                 
                   
                   <div class="form-group">
                     <label >Progres</label>

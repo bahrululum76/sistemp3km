@@ -65,32 +65,33 @@
   <div class="col-md-4 ">
   <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" > </svg> -->
           <div class="card  card-columns-fluid mb-4 shadow-sm">
-            <img src="{{ asset('storage/kegiatan/'.$p->foto) }}" repeat>
+            <img src="{{ asset('storage/kegiatan/'.$p->foto) }}" repeat style="width:300 px; height:300px; ">
 
             <div class="card-body">
               <p class="card-text" style="">
-               @php
+                <h4>{!!$p->nama!!}</h4>
+               <!-- @php
               $detail= strip_tags($p->detail);
               @endphp  
               {{ Str::limit($detail, 100, '') }}
               @if (strlen($detail) > 100)
                 <span id="dots">...</span>
                 <span id="more">{{ substr($detail, 100) }}</span>
-            @endif
+            @endif -->
               <!-- @php
               $detail= strip_tags($p->detail);
               @endphp   -->
               <!-- {{ Str::limit($detail,50 ) }}  -->
                 
-              {{$detail}}
+              <!-- {{$detail}} -->
               </p>
-              <div class="d-flex justify-content-between align-items-center">
+              <!-- <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                 <button class="btn btn-sm btn-outline-secondary" onclick="myFunction()" id="myBtn">Read more</button>
                 
-               </div>
+               </div> -->
                 
-              </div>
+              <!-- </div> -->
             </div>
           </div>
   </div> 
