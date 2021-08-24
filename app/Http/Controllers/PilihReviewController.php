@@ -22,12 +22,11 @@ class PilihReviewController extends Controller
         dd($data);
     }
 
-
     public function index()
     {
 
         $user = User::where('roles_id', '=', 4)->get();
-        $proposal = Proposal::withUser()->Where('prodi','Informatika')->restore();
+        $proposal = Proposal::all();
         return view("lppm.pilih_reviewer", compact('proposal', 'user'));
     }
 
