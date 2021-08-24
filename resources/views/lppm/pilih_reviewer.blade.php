@@ -31,7 +31,7 @@
                 <tr class="thead">
                     
                     
-                    <td align="center"><a href="detailpilihreview/{{$proposal->id}}">{{$proposal->user->name}}</a></td>
+                    <td align="center"><a href="{{url('lppm/detailpilihreview/'.$proposal->id)}}">{{$proposal->user->name}}</a></td>
                     <td align="center">{{$proposal->status_id}}</td>
                     
                     
