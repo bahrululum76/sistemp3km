@@ -19,7 +19,7 @@ class PilihReviewController extends Controller
         $data=Proposal::where('status_id',2)->whereHas('user', function ($q) use ($keyword){
             $q->where('prodi',$keyword);
         })->get();
-        dd($data);
+        return view("lppm.pilih_reviewer", compact('data'));
     }
 
     public function index()

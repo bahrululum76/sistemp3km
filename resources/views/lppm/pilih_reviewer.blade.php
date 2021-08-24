@@ -25,12 +25,14 @@
             </thead>
 
             <tbody class="tbody">
-               
+               @foreach ($data as $proposal)
+                   
+               @endforeach
                 <tr class="thead">
                     
                     
-                    <td align="center"><a href=""></a></td>
-                    <td align="center"></td>
+                    <td align="center">{{$proposal->user->name}}</td>
+                    <td align="center">{{$proposal->status_id}}</td>
                     
                     
                 </tr>

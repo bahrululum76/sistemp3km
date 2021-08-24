@@ -29,10 +29,10 @@
                     
                 </tr>
                 <tr>
-                <td align="center"><a href=""> Industri </a></td>
+                <td align="center"><a href="proposalperprodi/?data=industri"> Industri </a></td>
                 </tr>
                 <tr>
-                <td align="center"><a href=""> Sipil </a></td>
+                <td align="center"><a href="proposalperprodi/?data=sipil"> Sipil </a></td>
                 </tr>
 
                
