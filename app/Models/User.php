@@ -48,4 +48,10 @@ class User extends Authenticatable
     ];
 
 
+
+    public function proposal(){
+        return $this->HasMany(Proposal::class);
+    }
+
+
 }

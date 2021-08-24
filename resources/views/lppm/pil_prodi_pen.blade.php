@@ -25,7 +25,7 @@
 
             <tbody class="tbody">
                 <tr>
-                    <td align="center"><a href="{{route('pilih_review')}}"> Informatika </a></td>
+                    <td align="center"><a href="proposalperprodi/?data=informatika"> Informatika </a></td>
                     
                 </tr>
                 <tr>

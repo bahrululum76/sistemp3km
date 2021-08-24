@@ -50,7 +50,7 @@ class LoginController extends Controller
                 return redirect('/')
                     ->with(['error' => 'Username atau Password salah !']);
             }
-        } catch (Exception) {
+        } catch (Exception $exception) {
             return redirect()->route('login')
                 ->with(['error' => 'Username atau Password salah !']);
         }

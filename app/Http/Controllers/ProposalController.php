@@ -9,7 +9,7 @@ use App\Models\Periode;
 use App\Models\Revisi;
 use Mail;
 use App\Mail\RevMail;
-
+use App\Models\User;
 use Auth;
 use Validator;
 use Illuminate\Support\Facades\DB;

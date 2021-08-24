@@ -13,6 +13,16 @@ use App\Mail\RevMail;
 use PDF;
 class PilihReviewController extends Controller
 {
+
+    public function proposalperprodi(Request $request){
+        $keyword = $request->data;
+        $data=Proposal::where('status_id',2)->whereHas('user', function ($q) use ($keyword){
+            $q->where('prodi',$keyword);
+        })->get();
+        dd($data);
+    }
+
+
     public function index()
     {
 

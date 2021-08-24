@@ -21,7 +21,7 @@ class Proposal extends Model
     protected $appends = ['pengaju', 'reviewer','name'];
     public function user()
     {
-        return $this->belongsto(User::class);
+        return $this->belongsto(User::class,'user_id','id');
     }
 
 

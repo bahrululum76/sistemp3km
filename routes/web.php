@@ -71,7 +71,7 @@ Route::middleware(['is_admin'])->prefix('/admin')->group(function () {
 
 Route::middleware(['is_lppm'])->prefix('/lppm')->group(function () {
     Route::get('/Home', [App\Http\Controllers\HomeController::class, 'HomeLppm'])->name('lppm_home');
-
+    Route::get('/proposalperprodi', [App\Http\Controllers\PilihReviewController::class, 'proposalperprodi']);
     //pilih_review
     Route::get('/pilihprodi', function () {
         return view('lppm/pil_prodi_pen');
