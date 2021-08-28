@@ -68,9 +68,14 @@
                     
                         <select class="custom-select" name="reviewer_id"  value="{{$p->name}}" requaired>
                             <option Value="">Pilih Reviewer</option>
-                            @foreach($user as $p)
-                            <option value="{{$p->id}}">{{$p->name}}</option>
+                            
+                             
+                            
+                            @foreach($user as $user)
+
+                            <option value="{{$user->id}}">{{$user->name}}</option>
                             @endforeach 
+                            
                         </select>
                         
             </div>

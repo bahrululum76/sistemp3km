@@ -11,6 +11,14 @@ use App\Mail\RevMail;
 
 class PilihReviewPengabdianController extends Controller
 {
+    public function proposalperprodi(Request $request){
+        $user = User::where('roles_id', '=', 4)->get();
+        $keyword = $request->data;
+        $proposal=Proposal::where('category_id',2)->where('status_id',2)->whereHas('user', function ($q) use ($keyword){
+            $q->where('prodi',$keyword);
+        })->get();
+        return view("lppm.pilih_review_pengabdian", compact('proposal','user'));
+    }
     public function index()
     {
 

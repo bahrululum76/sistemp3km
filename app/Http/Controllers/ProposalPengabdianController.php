@@ -41,11 +41,10 @@ class ProposalPengabdianController extends Controller
         
 
         $proposal = Proposal::where('category_id', '=', 2)
-        ->where('periode',now())
-        ->Where('status_id','=',1)
+        ->where('periode',date("Y"))
         ->get();
         // dd($proposal);
-        return view("admin.proposalpengabdian", compact('proposal'));
+        return view("lppm.proposalpengabdian", compact('proposal'));
     }
 
 

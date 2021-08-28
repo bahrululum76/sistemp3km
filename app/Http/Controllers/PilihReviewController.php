@@ -15,11 +15,19 @@ class PilihReviewController extends Controller
 {
 
     public function proposalperprodi(Request $request){
+        $user = User::where('roles_id', 4)->value('id');
+        
         $keyword = $request->data;
-        $data=Proposal::where('status_id',2)->whereHas('user', function ($q) use ($keyword){
+        $proposal=Proposal::where('category_id',1)->where('status_id',2)->whereHas('user', function ($q) use ($keyword){
             $q->where('prodi',$keyword);
         })->get();
-        return view("lppm.pilih_reviewer", compact('data'));
+        
+        $prop = Proposal:: where('user_id',$user)->get();
+
+        // $prop1 = $prop->user_id = $user;
+        // dd($prop);
+
+        return view("lppm.pilih_reviewer", compact('proposal','user'));
     }
 
     public function index()
@@ -27,6 +35,7 @@ class PilihReviewController extends Controller
 
         $user = User::where('roles_id', '=', 4)->get();
         $proposal = Proposal::all();
+        
         return view("lppm.pilih_reviewer", compact('proposal', 'user'));
     }
 
@@ -97,16 +106,17 @@ class PilihReviewController extends Controller
 
     public function detailpilihreview (Request $request, $id){
         $proposal = Proposal::find($id);
-        
-        $user= User::
-        where('roles_id','=',4)->get();
+        // $user1= User::where('roles_id','=',4)->pluck('id');
+        // $prop = Proposal::where('id',$id)
+        // ->where('user_id','!=',4)
+        // ->get();
+        $user= User::where('roles_id','=',4)->get();
         $dana=Dana::where('proposal_id','=',$proposal->id)->get();
         $proposal = Proposal::where('id','=',$id)
         ->where('category_id','=',1)
         ->where('status_id','=',2)
-        
         ->get();
-
+        // dd($prop);
         return view("lppm.detailpilihreviewproposal", compact('proposal', 'user','dana'));
 
     }

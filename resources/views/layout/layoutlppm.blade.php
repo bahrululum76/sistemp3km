@@ -82,7 +82,7 @@ The above copyright notice and this permission notice shall be included in all c
                                 </a>
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="{{url('lppm/pilihprodi')}}"><p class="teks-sidebar"> Penelitian </p> </a>
-                                    <a class="dropdown-item" href="{{route('pilih_review_pengabdian')}}"><p class="teks-sidebar"> Pengabdian</p> </a>
+                                    <a class="dropdown-item" href="{{url('lppm/pilihprodi2')}}"><p class="teks-sidebar"> Pengabdian</p> </a>
                                    
                                 </div> 
                     </li>
@@ -95,8 +95,8 @@ The above copyright notice and this permission notice shall be included in all c
                                     </p>
                                 </a>
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="proposalpenelitian">Penelitian</a>
-                                    <a class="dropdown-item" href="proposalpengabdian">Pengabdian</a>
+                                    <a class="dropdown-item" href="{{url('lppm/proposalpenelitian')}}">Penelitian</a>
+                                    <a class="dropdown-item" href="{{url('lppm/proposalpengabdian')}}">Pengabdian</a>
                                    
                                 </div> 
                     </li>

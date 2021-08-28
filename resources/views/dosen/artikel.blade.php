@@ -1,6 +1,5 @@
 @extends('layout.layoutdosen')
 
-{{-- <link href="{{url('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet"> --}}
 @section('container-fluid')
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
@@ -16,43 +15,35 @@
         @endif
         <button class="btn btn-sm btn-primary mt-4 mb-2" id="createNewItem" data-toggle="modal" data-target="#ModalTambah"  >Tambah</button>
       <div class="table-responsive">
-      <table class="table table-bordered"  width="100%" cellspacing="0">
+        <table class="table table-bordered"  width="100%" cellspacing="0">
             <thead class="thead">
                 <tr class="tbody">
                     <th>Judul</th>
-                    <th>Pendanaan</th>
-                    <th>Publikasi</th>
                     <th>Tahun</th>
-                    <th>Url</th>
                     <th>File</th>
                     <th>Action</th>
+                    
+                  
                 </tr>
             </thead>
 
             <tbody class="tbody">
-                @foreach ( $penelitian as $p )
+                @foreach ( $artikel as $p )
                 <tr class="thead">
                     <td align="center">{{ $p->judul}}</td>
-                    <td align="center">{{ $p->pendanaan}}</td>
-                    <td align="center" >{{ $p->publikasi}} </td>
-                    <td align="center" >{{ $p->tahun }} </td>
-                    <td align="center">{{ $p->url}}</td>
-                    <td align="center" >{{ $p->file }} </td>
+                    <td align="center">{{ $p->tahun }}</td>
+                    <td align="center">{{ $p->file }}</td>
                     <td align="center">
-                    <a href="{{route('artikel')}}"><button class="btn btn-primary btn-sm ">
+                      <button class="btn btn-primary btn-sm ">
                         <i class="fa fa-edit"></i>
-                      </button ></a>
+                      </button >
                       <button class="btn btn-danger btn-sm "><i class="fa fa-trash"></i></button>
                     </td>
-                    
-                    
-					
                 </tr>
                 @endforeach
             </tbody>
 
         </table>
-
 
 
       </div>
@@ -68,49 +59,31 @@
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Unggah Laporan Penelitian</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Artikel</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <!-- body modal -->
             <div class="modal-body">
-            <form action="{{ url ('dosen/penelitian/store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url ('dosen/artikel/store') }}" method="POST" enctype="multipart/form-data">
                   @csrf
-
-                  @foreach ($proposal as $p)
+               
                   <div class="form-group" hidden>
+                    <label >Id Penelitian</label>
+                        <input type="text" class="form-control" name="id_penelitian" value="{{$penelitian->id}}" required="required" >
+                  </div>
+                
+                <div class="form-group" hidden>
                     <label >Judul</label>
-                        <input type="text" class="form-control" name="judul" value="{{$p->judul}}" required="required" >
+                        <input type="text" class="form-control" name="judul" value="{{$penelitian->judul}}"  required="required" >
                   </div>
-                @endforeach
-
-                  <div class="form-group">
-                    <label >Pendanaan</label>
-                    <select class="custom-select" name="pendanaan"  required="required">
-                        <option selected>Pendanaan</option>
-                        <option value="Hibah">Hibah</option>
-                        <option value="Non Hibah">Non Hibah</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label >Publikasi</label>
-                        <input type="text" class="form-control" name="publikasi" required="required" >
-                  </div>
-                  <div class="form-group">
-                    <label >Tahun</label>
-                        <input type="text" class="form-control" name="tahun" required="required" >
-                  </div>
+                 
                   
-                  <div class="form-group">
-                    <label >Url</label>
-                        <input type="text" class="form-control" name="url" required="required" >
-                  </div>
 
                   <div class="form-group">
                     <label for="file">File</label>
-                    <input type="file" class="form-control" name="file">
+                    <!-- <input type="file" class="form-control" name=""> -->
                   </div>
                   <div class="input-group">
                     <div class="custom-file">
@@ -130,9 +103,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
 

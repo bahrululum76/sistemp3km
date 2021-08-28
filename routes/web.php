@@ -72,10 +72,15 @@ Route::middleware(['is_admin'])->prefix('/admin')->group(function () {
 Route::middleware(['is_lppm'])->prefix('/lppm')->group(function () {
     Route::get('/Home', [App\Http\Controllers\HomeController::class, 'HomeLppm'])->name('lppm_home');
     Route::get('/proposalperprodi', [App\Http\Controllers\PilihReviewController::class, 'proposalperprodi']);
+    Route::get('/proposalperprodi2', [App\Http\Controllers\PilihReviewPengabdianController::class, 'proposalperprodi']);
 
     //pilih_review
     Route::get('/pilihprodi', function () {
         return view('lppm/pil_prodi_pen');
+    });
+
+    Route::get('/pilihprodi2', function () {
+        return view('lppm/pil_prodi_peng');
     });
     Route::get('pilih_review', [App\Http\Controllers\PilihReviewController::class, 'index'])->name('pilih_review');
 
@@ -83,13 +88,14 @@ Route::middleware(['is_lppm'])->prefix('/lppm')->group(function () {
     Route::post('pilih{id}', [App\Http\Controllers\PilihReviewController::class, 'pilih'])->name('pilih');
 
     //proposal_penelitian
-    Route::get('proposalpenelitian', function(){
-        return view('lppm.proposalpenelitian');
-    });
+    Route::get('proposalpenelitian', [App\Http\Controllers\ProposalController::class, 'index_adm'])->name('proposalpenelitian');
+    Route::get('proposalpengabdian', [App\Http\Controllers\ProposalPengabdianController::class, 'index_adm'])->name('proposalpengabdian');
 
-    Route::get('proposalpengabdian', function(){
-        return view('lppm.proposalpengabdian');
-    });
+  
+
+    // Route::get('/proposalpengabdian', function(){
+    //     return view('lppm.proposalpengabdian');
+    // });
 
     //pilihreviewpengabdian
     Route::get('pilih_review_pengabdian', [App\Http\Controllers\PilihReviewPengabdianController::class, 'index'])->name('pilih_review_pengabdian');
@@ -149,6 +155,13 @@ Route::middleware(['is_dosen'])->prefix('/dosen')->group(function () {
     // kemajuanpengabdian
     Route::get('unggahkemajuanpengabdian', [App\Http\Controllers\UnggahKemajuanPengabdianController::class, 'index'])->name('unggahkemajuanpengabdian');
     Route::post('store', [App\Http\Controllers\UnggahKemajuanPengabdianController::class, 'store'])->name('unggahkemajuanpengabdian/store');
+    //kegiatandosen
+    Route::get('kegiatandosen', [App\Http\Controllers\KegiatanDosen::class, 'index'])->name('kegiatandosen');
+    Route::post('kegiatandosen/store', [App\Http\Controllers\KegiatanDosen::class, 'store'])->name('kegiatandosen/store');
+
+    //artikel
+    Route::get('artikel', [App\Http\Controllers\ArtikelController::class, 'index'])->name('artikel');
+    Route::post('artikel/store', [App\Http\Controllers\ArtikelController::class, 'store'])->name('artikel/store');
 
     //unggahlapakhirpenelitian
     Route::get('penelitian', [App\Http\Controllers\PenelitianController::class, 'index'])->name('penelitian');

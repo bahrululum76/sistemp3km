@@ -18,13 +18,12 @@
         <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead class="thead">
                 <tr class="tbody">
-                    <!-- <th>Judul</th>
-                    <th>File</th> -->
+                   
                     <th>Pengaju</th>
                     
-                    <!-- <th>Reviewer</th>
+                   
                     <th>Status</th>
-                    <th>Action</th> -->
+                   
                 </tr>
             </thead>
 
@@ -32,12 +31,10 @@
 
                 @foreach ( $proposal as $p )
                 <tr class="thead">
-                    <!-- <td align="center">{{ $p->judul}}</td>
-                    <td align="center">{{ $p->file }}</td> -->
+                  
                     <td align="center"><a href="{{url('lppm/detailpilihreview_/'.$p->id)}}">@if($p->pengaju){{ $p->pengaju->name }}@endif</td>
                     
 
-                    <!-- <td align="center">@if($p->reviewer){{ $p->reviewer->name}}@endif</td>
 
 					<td align="center">
                         @if ($p->status_id == 1)
@@ -51,19 +48,6 @@
                         @endif
                     </td>
 
-                    <td >
-                        <button   class="btn btn-primary btn-sm " data-toggle="modal" data-target="#PilihReviewer-{{$p->id}}" value="">Pilih Reviewer</button>
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#TolakProposal" >Tolak</button>
-                       <form id="delete-obat-{{$p->id}}" action=" {{ url('lppm/pilih_review/tolak'.$p->id) }}" method="POST" style="display: inline" data-id="{{$p->id}}">
-                            @csrf
-
-                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('delete-obat-{{$p->id}}')">Tolak</button>
-                        </form> -->
-                        <!-- <a  href="{{url ('lppm/pilih_review/tolak'.$p->id) }}" class="btn btn-danger btn-sm">Tolak </a>  --> 
-
-
-
-                     <!-- </td> -->
                 </tr>
 
                 @endforeach
@@ -78,100 +62,6 @@
 
 
 
-
-<!-- Modal pilih_review -->
-@foreach ( $proposal as $p )
-
-<div id="PilihReviewer-{{$p->id}}" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- konten modal-->
-        <div class="modal-content">
-            <!-- heading modal -->
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Pilih Reviewer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <!-- body modal -->
-            <div class="modal-body">
-            <form action="{{ url('lppm/pilih_review_pengabdian/pilih_'.$p->id) }}"method="POST" enctype="multipart/form-data">
-                  @csrf
-
-                <div class="form-group" hidden>
-                    <label >id</label>
-                   
-                        <input type="text" class="form-control" name="id" value="{{$p->id}}" required="required" >
-                   
-                </div>
-
-                <div class="form-group">
-                    <label >Reviewer</label>
-
-                        <select class="custom-select" name="reviewer_id" >
-                            <option selected>Pilih Reviewer</option>
-                                @foreach($user as $p)
-                            <option value="{{$p->id}}">{{$p->name}} </option>
-                                @endforeach
-                        </select>
-
-                </div>
-
-                  <button type="submit" class="btn btn-primary">Simpan</button>
-            </form>
-            </div>
-            <!-- footer modal -->
-            <div class="modal-footer">
-                 </div>
-        </div>
-    </div>
-</div>
-@endforeach
-
-@foreach ($proposal as $p)
-<div id="TolakProposal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- konten modal-->
-        <div class="modal-content">
-            <!-- heading modal -->
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Penolakan</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <!-- body modal -->
-            <div class="modal-body">
-
-            <form action="{{ url('lppm/pilih_review_pengabdian/tolak'.$p->id) }}" method="POST" enctype="multipart/form-data">
-                  @csrf
-
-                <div class="form-group">
-                    <label >Revisi</label>
-                        <input type="text" class="form-control" name="revisi"  required="required" >
-                </div>
-
-                <div class="form-group">
-                    <label >Detail</label>
-                        <input type="text" class="form-control" name="detail"  required="required" >
-                </div>
-
-
-                  <button type="submit" class="btn btn-primary">Simpan</button>
-            </form>
-
-            </div>
-            <!-- footer modal -->
-            <div class="modal-footer">
-                 </div>
-        </div>
-    </div>
-</div>
-@endforeach
-
-
-
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
 
 

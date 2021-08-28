@@ -18,9 +18,9 @@
         <table class="table table-bordered"  width="100%" cellspacing="0">
             <thead class="thead">
                 <tr class="tbody">
-                    <th>Judul</th>
-                    <th>File</th>
-                    <th>Periode</th>
+                    <th>Nama</th>
+                    <th>Tanggal Kegiatan</th>
+                    <th>Bukti Kegiatan</th>
                     <th>Progres</th>
                     <th>Action</th>
                     
@@ -29,17 +29,17 @@
             </thead>
 
             <tbody class="tbody">
-                @foreach ( $kemajuan as $p )
+                @foreach ( $kegiatan as $p )
                 <tr class="thead">
-                    <td align="center">{{ $p->judul}}</td>
-                    <td align="center">{{ $p->file }}</td>
-                    <td align="center">{{ $p->periode }}</td>
+                    <td align="center">{{ $p->nama}}</td>
+                    <td align="center">{{ $p->tanggal_kegiatan }}</td>
+                    <td align="center">{{ $p->bukti_kegiatan }}</td>
                     <td align="center" >{{ $p->progres }} %</td>
                     <td align="center">
-                      <a href="{{route('kegiatandosen')}}">
                       <button class="btn btn-primary btn-sm ">
                         <i class="fa fa-edit"></i>
-                      </button></a>
+                      </button >
+                      <button class="btn btn-danger btn-sm "><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
                 @endforeach
@@ -68,16 +68,22 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
-            <form action="{{ url ('dosen/unggahkemajuanpenelitian/store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url ('dosen/kegiatandosen/store') }}" method="POST" enctype="multipart/form-data">
                   @csrf
-                @foreach ($proposal as $p)
+               
                   <div class="form-group" hidden>
-                    <label >Judul</label>
-                        <input type="text" class="form-control" name="judul" value="{{$p->judul}}" required="required" >
+                    <label >Id Kemajuan</label>
+                        <input type="text" class="form-control" name="id_kemajuan" value="{{$kemajuan->id}}" required="required" >
                   </div>
-                @endforeach
-                 
-                  
+               
+                <div class="form-group">
+                    <label >Nama Kegiatan</label>
+                        <input type="text" class="form-control" name="nama"  required="required" >
+                  </div>
+                  <div class="form-group">
+                    <label >Nama Kegiatan</label>
+                        <input type="date" class="form-control" name="tanggal_kegiatan"  required="required" >
+                  </div>
                   <div class="form-group">
                     <label >Progres</label>
         
@@ -91,12 +97,12 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="file">File</label>
+                    <label for="file">Bukti Kegiatan</label>
                     <!-- <input type="file" class="form-control" name=""> -->
                   </div>
                   <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="bukti_kegiatan">
                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                     </div>
                     </div>
@@ -112,9 +118,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
 

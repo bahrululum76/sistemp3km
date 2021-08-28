@@ -24,10 +24,8 @@ class ProposalController extends Controller
         $proposal = Proposal::where('user_id', '=', Auth::User()->id)
             ->where('category_id', '=', 1)
             ->where('periode',date("Y"))
-            ->where('status_id','=',1)
-            ->orWhere('status_id','=',2)
-            ->orWhere('status_id','=',3)
-            ->orWhere('status_id','=',4)
+            ->where('status_id','<',6)
+            // ->Where('status_id','=',2)
             ->get();
         $prop= Proposal::where('user_id', '=', Auth::User()->id)
         ->where('category_id', '=', 1)
@@ -46,7 +44,7 @@ class ProposalController extends Controller
         ->where('category_id',1)->value('status_id');
            
         $value = Periode::where('tahun',date('Y'))->where('status',1)->exists();
-        // dd($prop);
+        // dd($proposal);
         return view("dosen.proposal_penelitian", compact('proposal','proposalnonaktif',  'proposal_kosong', 'proposal_kosong_1','revisi','value'));
     }
     public function index_adm()
@@ -55,11 +53,10 @@ class ProposalController extends Controller
         
         
         $proposal = Proposal::where('category_id','=',1)
-        ->where('status_id','=',1)
-        ->where('periode',now())
+        ->where('periode',date("Y"))
         ->get();
         
-        return view("admin.proposalpenelitian", compact('proposal'));
+        return view("lppm.proposalpenelitian", compact('proposal'));
     }
 
 

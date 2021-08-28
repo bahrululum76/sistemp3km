@@ -25,17 +25,28 @@
             </thead>
 
             <tbody class="tbody">
-               @foreach ($data as $proposal)
+            @foreach ( $proposal as $p )
                    
-               @endforeach
+               
                 <tr class="thead">
                     
                     
-                    <td align="center"><a href="{{url('lppm/detailpilihreview/'.$proposal->id)}}">{{$proposal->user->name}}</a></td>
-                    <td align="center">{{$proposal->status_id}}</td>
+                    <td align="center"><a href="{{url('lppm/detailpilihreview/'.$p->id)}}">{{$p->user->name}}</a></td>
+                    <td align="center">
+                        @if ($p->status_id == 1)
+                            <span style="background-color:green;padding:5px;border-radius:5px;color:white;">{{'Diterima'}}</span>
+                        @elseif ($p->status_id == 2)
+                            <span style="background-color:yellow;padding:5px;border-radius:5px;">{{'Belum Diterima'}}</span>
+                        @elseif ($p->status_id == 3)
+                            <span style="background-color:blue;padding:5px;border-radius:5px;color:white;">{{'Direvisi'}}</span>
+                        @elseif ($p->status_id == 4)
+                            <span style="background-color:red;padding:5px;border-radius:5px;color:white;">{{'Ditolak'}}</span>
+                        @endif
+                    </td>
                     
                     
                 </tr>
+                @endforeach
 
                
             </tbody>
